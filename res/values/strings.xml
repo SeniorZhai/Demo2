@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">gkong</string>
+    <!-- 上拉下拉 -->
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载...</string>
+    <string name="xlistview_header_last_time">上次更新时间：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
+    <string name="press_again_exit">再按一次退出</string>
+    <!-- 侧边栏菜单 -->
+    <string name="menuGood">社区精选</string>
+    <string name="menuNews">新闻资讯</string>
+    <string name="menuStudio">学习教程</string>
+    <string name="menuBlog">社区博客</string>
+    <!-- 提示语 -->
+    <string name="user_username">输入用户名</string>
+    <string name="user_pwd">输入密码</string>
+    <string name="user_enter">立即登录</string>
+    <string name="user_unlogin">注  销</string>
+    <!--  -->
+    <string name="detail_prompt">写评论</string>
+    <string name="detail_enter">发表</string>
+
+</resources>

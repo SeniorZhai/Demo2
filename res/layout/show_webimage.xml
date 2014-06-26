@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <!-- TODO 默认占位图 -->
+
+    <include
+        android:layout_gravity="top"
+        layout="@layout/show_title" />
+
+    <com.polites.android.GestureImageView
+        android:id="@+id/web_image"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center" />
+
+</LinearLayout>

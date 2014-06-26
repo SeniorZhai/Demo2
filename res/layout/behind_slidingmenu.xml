@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#dadada"
+    android:orientation="vertical" >
+
+    <include layout="@layout/behind_title" />
+
+    <ListView
+        android:id="@+id/behind_list_show"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:scrollbars="none"
+        android:layout_marginBottom="@dimen/list_margin_height"
+        android:layout_marginTop="@dimen/title_height"
+        android:cacheColorHint="#0000"
+        android:divider="@drawable/dis_behind_side"
+        android:listSelector="#0fff" >
+    </ListView>
+
+</FrameLayout>
