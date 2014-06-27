@@ -37,27 +37,34 @@ import com.gkong.app.data.ApiParams;
 import com.gkong.app.data.RequestManager;
 import com.gkong.app.model.Archive;
 import com.gkong.app.model.PageInfo;
+import com.gkong.app.model.RepayInfo;
 import com.gkong.app.model.TopicInfo;
 import com.gkong.app.ui.base.BaseActivity;
 import com.gkong.app.utils.ToastUtil;
 import com.google.gson.Gson;
 
 public class DetailsActivity extends BaseActivity implements OnClickListener {
+	// Context
 	private MyApplication mApplication;
+	private Activity mActivity;
+	// Value
+	private int currentPage = 1, pageCout;
+	private String url;
+	private String detailId;
+	// View
 	private ImageView imgGoHome;
 	private EditText editText;
-	private Activity mActivity;
-	private PageInfo pageInfo;
-	private TopicInfo topicInfo;
 	private ListView mlistView;
 	private View mFooter;
-	private ArrayList<Archive> mList;
-	private DetailsArrayAdapter mAdapter;
 	private TextView title;
 	private Button lastBn, nextBn, repayBn;
 	private TextView pageInfoView;
-	private int currentPage = 1, pageCout;
-	private String detailId;
+	// Adpter
+	private DetailsArrayAdapter mAdapter;
+	// Data
+	private PageInfo pageInfo;
+	private TopicInfo topicInfo;
+	private ArrayList<Archive> mList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -97,9 +104,8 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 	}
 
 	private void netWork() {
-		Intent intent = getIntent();
-		detailId = intent.getStringExtra("url");
-		String url = Api.Archive(detailId, currentPage);
+		detailId = getIntent().getStringExtra("url");
+		url = Api.Archive(detailId, currentPage);
 		executeRequest(new StringRequest(Method.GET, url, responseListener(),
 				errorListener()));
 	}
@@ -140,7 +146,23 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 			}
 		};
 	}
-
+	private Response.Listener<String> repayResponseListener() {
+		return new Response.Listener<String>() {
+			@Override
+			public void onResponse(String response) {
+				Gson gson = new Gson();
+				RepayInfo info = gson.fromJson(response, RepayInfo.class);
+				currentPage = pageCout;
+				if (info.isIsSuccess()) {
+					String url = Api.Archive(detailId,currentPage);
+					executeRequest(new StringRequest(Method.GET, url,
+							responseListener(), errorListener()));
+				}else {
+					Log.d("---", info.getMessage());
+				}
+			}
+		};
+	}
 	// [end]Õ¯¬Á«Î«Û∑¥¿°
 	// [start]Õ¯¬Á«Î«Û¥ÌŒÛ
 	protected Response.ErrorListener errorListener() {
@@ -158,21 +180,14 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 		RequestManager.addRequest(request, this);
 	}
 
-	private Response.Listener<String> responseListener1() {
-		return new Response.Listener<String>() {
-			@Override
-			public void onResponse(String response) {
-				ToastUtil.show(mActivity, response);
-			}
-		};
-	}
+	
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.lastPage:
 			if (currentPage > 1) {
-				String url = Api.Archive(detailId, --currentPage);
+				url = Api.Archive(detailId, --currentPage);
 				executeRequest(new StringRequest(Method.GET, url,
 						responseListener(), errorListener()));
 			} else {
@@ -196,18 +211,20 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 				startActivity(intent);
 			} else if (editText.getText().length() > 0) {
 				executeRequest(new StringRequest(Method.POST, Api.RepayTopic,
-						responseListener1(), errorListener()) {
+						repayResponseListener(), errorListener()) {
 					@Override
 					protected Map<String, String> getParams() {
-						Log.d("msg", detailId);
-						Log.d("msg", mApplication.loginInfo.getData());
-						Log.i("msg", mList.get(0).getAnnounceID());
-						Log.v("msg", editText.getText().toString());
-						return new ApiParams()
-								.with("UID", mApplication.loginInfo.getData())
-								.with("Body", editText.getText().toString())
-								.with("AnnounceId",
-										mList.get(0).getAnnounceID());
+						JSONObject ClientKey = new JSONObject();
+						try {
+							ClientKey.put("UID", mApplication.loginInfo.getData());
+							ClientKey.put("AnnounceId", mList.get(0).getAnnounceID());
+							ClientKey.put("Body", editText.getText().toString());
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+						String content = String.valueOf(ClientKey);
+						return new ApiParams().with("d",
+								content);
 					}
 				});
 			}
@@ -304,6 +321,6 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 				finish();
 			}
 		}
-
 	}
 }
+

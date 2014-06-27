@@ -14,7 +14,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -49,19 +48,18 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		OnClickListener, IXListViewListener {
 	private Context mContext = MainActivity.this;
 
+	// Value
 	private final String LIST_TEXT = "text";
 	private final String LIST_URL = "url";
 	private int mTag = 1;
-	private SlidingMenu sm;
 
-	//
 	private int page = 1;
 	private String url = 114 + "";
-	//
+	// Data
 	private ArrayList<Map<String, Object>> list;
 	private ArrayList<BBSBoard> BBSList;
-	// above title
-
+	// View
+	private SlidingMenu sm;
 	private ImageView aboveImgQuery;
 	private ImageView aboveImgMore;
 	private LinearLayout aboveGoHome;
@@ -71,9 +69,8 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	private LinearLayout aboveLoadFaillayout;
 	private ImageButton imgLogin;
 	private ListView lvTitle;
-
+	// Adapter
 	private SimpleAdapter lvAdapter;
-	// private SimpleAdapter listAdapter;
 	private MyArrayAdapter listAdapter;
 
 	@Override
@@ -204,16 +201,17 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	// [start]µã»÷¼àÌý
 	@Override
 	public void onClick(View v) {
+		Intent intent;
 		switch (v.getId()) {
 		case R.id.imageview_above_more:
+
 			ToastUtil.show(this, "more");
 			break;
 		case R.id.imageview_above_query:
 			ToastUtil.show(this, "query");
 			break;
 		case R.id.login_login:
-			Intent intent = new Intent(MainActivity.this,
-					UserLoginUidActivity.class);
+			intent = new Intent(MainActivity.this, UserLoginUidActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.linear_above_to_Home:
