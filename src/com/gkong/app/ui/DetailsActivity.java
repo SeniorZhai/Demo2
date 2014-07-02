@@ -2,11 +2,10 @@ package com.gkong.app.ui;
 
 import java.util.ArrayList;
 import java.util.Map;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
@@ -43,7 +41,7 @@ import com.gkong.app.ui.base.BaseActivity;
 import com.gkong.app.utils.ToastUtil;
 import com.google.gson.Gson;
 
-public class DetailsActivity extends BaseActivity implements OnClickListener {
+@SuppressLint("SetJavaScriptEnabled") public class DetailsActivity extends BaseActivity implements OnClickListener {
 	// Context
 	private MyApplication mApplication;
 	private Activity mActivity;
@@ -105,7 +103,9 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 
 	private void netWork() {
 		detailId = getIntent().getStringExtra("url");
+		Log.d("---", detailId);
 		url = Api.Archive(detailId, currentPage);
+		Log.d("---", url);
 		executeRequest(new StringRequest(Method.GET, url, responseListener(),
 				errorListener()));
 	}
@@ -157,8 +157,9 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 					String url = Api.Archive(detailId,currentPage);
 					executeRequest(new StringRequest(Method.GET, url,
 							responseListener(), errorListener()));
+					editText.setText("");
 				}else {
-					Log.d("---", info.getMessage());
+					Log.d("DetailsActivity", info.getMessage());
 				}
 			}
 		};
@@ -169,8 +170,7 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 		return new Response.ErrorListener() {
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				Toast.makeText(DetailsActivity.this, error.getMessage(),
-						Toast.LENGTH_LONG).show();
+				ToastUtil.show(mActivity, "ÍøÂç´íÎó");
 			}
 		};
 	}
@@ -214,15 +214,15 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 						repayResponseListener(), errorListener()) {
 					@Override
 					protected Map<String, String> getParams() {
-						JSONObject ClientKey = new JSONObject();
+						JSONObject json = new JSONObject();
 						try {
-							ClientKey.put("UID", mApplication.loginInfo.getData());
-							ClientKey.put("AnnounceId", mList.get(0).getAnnounceID());
-							ClientKey.put("Body", editText.getText().toString());
+							json.put("UID", mApplication.loginInfo.getData());
+							json.put("AnnounceId", mList.get(0).getAnnounceID());
+							json.put("Body", editText.getText().toString());
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}
-						String content = String.valueOf(ClientKey);
+						String content = String.valueOf(json);
 						return new ApiParams().with("d",
 								content);
 					}

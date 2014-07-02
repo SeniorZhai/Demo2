@@ -23,5 +23,10 @@
     <!--  -->
     <string name="detail_prompt">写评论</string>
     <string name="detail_enter">发表</string>
+    <string name="new_topic_enter">发送</string>
+    <string name="new_topic">发贴</string>
+    <string name="new_topic_prompt_title">标题不少于5个字</string>
+    <string name="new_topic_prompt">内容不少于10个字</string>
+    
 
 </resources>

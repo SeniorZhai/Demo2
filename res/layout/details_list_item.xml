@@ -25,6 +25,7 @@
 
     <WebView
         android:id="@+id/item_webView"
+        android:scrollbars="none"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="13dp" />

@@ -47,6 +47,12 @@
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             android:theme="@style/Transparent" />
+        <activity
+            android:name=".ui.NewTopicActivity"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Transparent"
+            />
     </application>
 
 </manifest>

@@ -1,19 +1,20 @@
 package com.gkong.app.ui;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,7 +28,6 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -44,17 +44,19 @@ import com.gkong.app.widget.XListView;
 import com.gkong.app.widget.XListView.IXListViewListener;
 import com.google.gson.Gson;
 
-public class MainActivity extends BaseSlidingFragmentActivity implements
+@SuppressLint("SimpleDateFormat") public class MainActivity extends BaseSlidingFragmentActivity implements
 		OnClickListener, IXListViewListener {
 	private Context mContext = MainActivity.this;
 
 	// Value
 	private final String LIST_TEXT = "text";
 	private final String LIST_URL = "url";
-	private int mTag = 1;
-
+	private int mTag = 0;
 	private int page = 1;
-	private String url = 114 + "";
+	private String boardID = "93";
+	private boolean flag = false;
+	private String Type = "tech";
+	// private String boardID = "114";
 	// Data
 	private ArrayList<Map<String, Object>> list;
 	private ArrayList<BBSBoard> BBSList;
@@ -109,7 +111,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		aboveGoHome = (LinearLayout) findViewById(R.id.linear_above_to_Home);
 		aboveGoHome.setOnClickListener(this);
 		aboveTitle = (TextView) findViewById(R.id.tv_above_title);
-		aboveTitle.setText("产品体验综合讨论区");
+		aboveTitle.setText("技术区最新动态");
 		aboveLoadLayout = (LinearLayout) findViewById(R.id.view_loading);
 		aboveLoadFaillayout = (LinearLayout) findViewById(R.id.view_loading_fail);
 		mListView = (XListView) findViewById(R.id.list_view);
@@ -123,7 +125,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 
 		listAdapter = new MyArrayAdapter(mContext, BBSList);
 		mListView.setPullLoadEnable(true);
-		mListView.setPullRefreshEnable(false);
+		mListView.setPullRefreshEnable(true);
 		mListView.setAdapter(listAdapter);
 		mListView.setXListViewListener(this);
 
@@ -137,8 +139,8 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			}
 		});
 		aboveLoadLayout.setVisibility(View.VISIBLE);
-		getList(url, 1);
-
+//		getList(boardID, 1);
+		getNewBoard(Type, "date", page);
 		lvAdapter = new SimpleAdapter(this, list, R.layout.behind_list_show,
 				new String[] { LIST_TEXT },
 				new int[] { R.id.textview_behind_title }) {
@@ -174,10 +176,25 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 				view.setBackgroundResource(R.drawable.back_behind_list);
 				MainActivity.this.showContent();
 				aboveTitle.setText(list.get(position).get(LIST_TEXT) + "");
-				url = "" + list.get(position).get(LIST_URL);
+				boardID = "" + list.get(position).get(LIST_URL);
 				page = 1;
 				aboveLoadLayout.setVisibility(View.VISIBLE);
-				getList(url, page);
+				switch (position) {
+				case 0:
+					flag = false;
+					Type = "tech";
+					getNewBoard("tech", "date", 1);
+					break;
+				case 1:
+					flag = false;
+					Type = "notech";
+					getNewBoard("notech", "date", 1);
+					break;
+				default:
+					flag  =true;
+					getList(boardID, page);
+					break;
+				}
 			}
 		});
 	}
@@ -188,12 +205,17 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	private void getList(String boardID, int page) {
 
 		executeRequest(new StringRequest(Method.GET, Api.List(boardID, page),
-				responseListener1(), errorListener()));
+				BBSResponseListener(), errorListener()));
 	}
 
 	private void getBoard() {
 		executeRequest(new StringRequest(Method.GET, Api.Board,
-				responseListener(), errorListener()));
+				ClassResponseListener(), errorListener()));
+	}
+
+	private void getNewBoard(String Type,String Sort,int Page) {
+		executeRequest(new StringRequest(Method.GET, Api.NewBoard(Type,
+				Sort, Page), BBSResponseListener(), errorListener()));
 	}
 
 	// [end]数据请求
@@ -204,8 +226,9 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.imageview_above_more:
-
-			ToastUtil.show(this, "more");
+			intent = new Intent(mContext, NewTopicActivity.class);
+			intent.putExtra("BoardID", boardID);
+			startActivity(intent);
 			break;
 		case R.id.imageview_above_query:
 			ToastUtil.show(this, "query");
@@ -222,7 +245,11 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		}
 	}
 
-	private Response.Listener<String> responseListener1() {
+	// [end]点击监听
+
+	// [start]网络请求反馈
+
+	private Response.Listener<String> BBSResponseListener() {
 		return new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {
@@ -234,6 +261,10 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 					Gson gson = new Gson();
 					if (page == 1) {
 						BBSList.clear();
+						SimpleDateFormat sDateFormat = new SimpleDateFormat(
+								"MM-dd hh:mm:ss");
+						String date = sDateFormat.format(new java.util.Date());
+						mListView.setRefreshTime(date);
 					}
 					for (int i = 0; i < array.length(); i++) {
 						BBSBoard obj = gson.fromJson(array.getString(i),
@@ -241,6 +272,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 						BBSList.add(obj);
 					}
 					listAdapter.notifyDataSetChanged();
+					mListView.stopRefresh();
 					mListView.stopLoadMore();
 					if (aboveLoadLayout.getVisibility() == View.VISIBLE) {
 						aboveLoadLayout.setVisibility(View.GONE);
@@ -253,10 +285,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		};
 	}
 
-	// [end]点击监听
-
-	// [start]网络请求反馈
-	private Response.Listener<String> responseListener() {
+	private Response.Listener<String> ClassResponseListener() {
 		return new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {
@@ -267,6 +296,14 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 					JSONArray array = obj2.getJSONArray("Head");
 					Gson gson = new Gson();
 					list.clear();
+					Map<String, Object> map0 = new HashMap<String, Object>();
+					map0.put(LIST_TEXT, "技术区最新动态");
+					map0.put(LIST_URL, "0000");
+					list.add(map0);
+					Map<String, Object> map1 = new HashMap<String, Object>();
+					map1.put(LIST_TEXT, "非技术区最新动态");
+					map1.put(LIST_URL, "0000");
+					list.add(map1);
 					for (int i = 0; i < array.length(); i++) {
 						ClassBoard obj = gson.fromJson(array.getString(i),
 								ClassBoard.class);
@@ -344,14 +381,22 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	// [start]XList监听
 	@Override
 	public void onRefresh() {
-		mListView.stopRefresh();
-		ToastUtil.show(mContext, "Refresh");
+		page = 1;
+		if (flag) {
+			getList(boardID, page);
+		}else{
+			getNewBoard(Type, "date", page);
+		}
 	}
 
 	@Override
 	public void onLoadMore() {
 		page++;
-		getList(url, page);
+		if (flag) {
+			getList(boardID, page);
+		}else{
+			getNewBoard(Type, "date", page);
+		}
 	}
 	// [start]XList监听
 }
