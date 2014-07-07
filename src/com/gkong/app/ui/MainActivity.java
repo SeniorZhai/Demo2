@@ -118,6 +118,8 @@ import com.google.gson.Gson;
 		imgLogin = (ImageButton) findViewById(R.id.login_login);
 		imgLogin.setOnClickListener(this);
 		lvTitle = (ListView) findViewById(R.id.behind_list_show);
+		aboveImgMore.setVisibility(View.GONE);
+		aboveImgQuery.setVisibility(View.GONE);
 	}
 
 	// ≥ı ºªØListView
@@ -184,15 +186,21 @@ import com.google.gson.Gson;
 					flag = false;
 					Type = "tech";
 					getNewBoard("tech", "date", 1);
+					aboveImgMore.setVisibility(View.GONE);
+					aboveImgQuery.setVisibility(View.GONE);
 					break;
 				case 1:
 					flag = false;
 					Type = "notech";
 					getNewBoard("notech", "date", 1);
+					aboveImgMore.setVisibility(View.GONE);
+					aboveImgQuery.setVisibility(View.GONE);
 					break;
 				default:
 					flag  =true;
 					getList(boardID, page);
+					aboveImgMore.setVisibility(View.VISIBLE);
+					aboveImgQuery.setVisibility(View.VISIBLE);
 					break;
 				}
 			}
