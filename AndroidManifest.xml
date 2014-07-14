@@ -8,6 +8,12 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
 
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -31,28 +37,41 @@
         </activity>
         <activity
             android:name=".ui.MainActivity"
-            android:hardwareAccelerated="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.DetailsActivity"
-            android:hardwareAccelerated="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.ShowWebImageActivity"
-            android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             android:theme="@style/Transparent" />
         <activity
             android:name=".ui.UserLoginUidActivity"
-            android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             android:theme="@style/Transparent" />
         <activity
             android:name=".ui.NewTopicActivity"
-            android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Transparent"
-            />
+            android:theme="@style/Transparent" />
+        <activity
+            android:name=".ui.PublishedActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".ui.BucketActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".ui.ImageGridActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".ui.PhotoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+
+        <service android:name=".service.UploadService" />
     </application>
 
 </manifest>

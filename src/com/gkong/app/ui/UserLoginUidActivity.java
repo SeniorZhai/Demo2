@@ -2,6 +2,7 @@ package com.gkong.app.ui;
 
 import java.util.Map;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -47,7 +48,7 @@ public class UserLoginUidActivity extends BaseActivity implements
 	private Button btnUnLogin;
 	private View unloginLinear;
 	private SharedPreferences share;
-
+	private ProgressDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,7 @@ public class UserLoginUidActivity extends BaseActivity implements
 	}
 
 	private void initControl() {
+		dialog = new ProgressDialog(this);
 		unloginLinear = (View)findViewById(R.id.unlogin_linear);
 		if (application.loginInfo != null) {
 			unloginLinear.setVisibility(View.VISIBLE);
@@ -110,6 +112,7 @@ public class UserLoginUidActivity extends BaseActivity implements
 			showLongToast("Ã»ÓÐÍøÂç");
 			return ;
 		}
+		dialog.show();
 		executeRequest(new StringRequest(Method.POST, Api.Login, responseListener(),
 				errorListener()) {
 			protected Map<String, String> getParams() {
@@ -127,6 +130,7 @@ public class UserLoginUidActivity extends BaseActivity implements
 			@Override
 			public void onResponse(String response) {
 				Gson gson = new Gson();
+				dialog.dismiss();
 				application.loginInfo = gson.fromJson(response, LoginInfo.class);
 				if (application.loginInfo.isSuccess()) {
 					Editor edit = share.edit();

@@ -234,7 +234,7 @@ import com.google.gson.Gson;
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.imageview_above_more:
-			intent = new Intent(mContext, NewTopicActivity.class);
+			intent = new Intent(mContext, PublishedActivity.class);
 			intent.putExtra("BoardID", boardID);
 			startActivity(intent);
 			break;
