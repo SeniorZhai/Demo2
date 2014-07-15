@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_gravity="top"
     android:layout_height="@dimen/title_height"
-    android:background="#2477ab" >
+    android:background="@drawable/back_title" >
 
     <ImageView
         android:id="@+id/details_imageview_gohome"
@@ -17,6 +18,7 @@
         android:layout_height="30dip"
         android:singleLine="true"
         android:layout_gravity="center"
+        android:gravity="center"
         android:textColor="#fff"
         android:textSize="20sp" />
 

@@ -3,9 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <include
-        android:layout_gravity="top"
-        layout="@layout/details_title" />
+    <include layout="@layout/details_title" />
 
     <ListView
         android:id="@+id/details_listview_show"
@@ -30,8 +28,8 @@
             android:layout_width="0px"
             android:layout_height="0px"
             android:focusable="true"
-            android:orientation="horizontal"
-            android:focusableInTouchMode="true" />
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal" />
 
         <EditText
             android:id="@+id/details_edittext_discuss"

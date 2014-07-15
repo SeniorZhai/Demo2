@@ -19,18 +19,16 @@ import com.gkong.app.R;
 import com.gkong.app.data.Bimp;
 import com.gkong.app.utils.FileUtils;
 
-public class PhotoActivity extends Activity{
+public class PhotoActivity extends Activity {
 	private ArrayList<View> listViews = null;
 	private ViewPager pager;
 	private MyPageAdapter adapter;
 	private int count;
 
-
 	public List<Bitmap> bmp = new ArrayList<Bitmap>();
 	public List<String> drr = new ArrayList<String>();
 	public List<String> del = new ArrayList<String>();
 	public int max;
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +57,7 @@ public class PhotoActivity extends Activity{
 					FileUtils.deleteDir();
 					finish();
 				} else {
-					String newStr = drr.get(count).substring( 
+					String newStr = drr.get(count).substring(
 							drr.get(count).lastIndexOf("/") + 1,
 							drr.get(count).lastIndexOf("."));
 					bmp.remove(count);
@@ -79,8 +77,8 @@ public class PhotoActivity extends Activity{
 				Bimp.bmp = bmp;
 				Bimp.drr = drr;
 				Bimp.max = max;
-				for(int i=0;i<del.size();i++){				
-					FileUtils.delFile(del.get(i)+".JPEG"); 
+				for (int i = 0; i < del.size(); i++) {
+					FileUtils.delFile(del.get(i) + ".JPEG");
 				}
 				finish();
 			}
@@ -97,16 +95,18 @@ public class PhotoActivity extends Activity{
 		int id = intent.getIntExtra("ID", 0);
 		pager.setCurrentItem(id);
 	}
+
 	private void initListViews(Bitmap bm) {
 		if (listViews == null)
 			listViews = new ArrayList<View>();
 		ImageView img = new ImageView(this);// 构造textView对象
 		img.setBackgroundColor(0xff000000);
 		img.setImageBitmap(bm);
-		img.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-				LayoutParams.FILL_PARENT));
+		img.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+				LayoutParams.MATCH_PARENT));
 		listViews.add(img);// 添加view
 	}
+
 	private OnPageChangeListener pageChangeListener = new OnPageChangeListener() {
 
 		public void onPageSelected(int arg0) {// 页面选择响应函数
