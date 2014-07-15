@@ -116,15 +116,15 @@ public class PublishedActivity extends Activity {
 		activity_selectimg_send.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				if (mApplication.loginInfo == null) {
-					ToastUtil.show(mActivity, "ÇëµÇÈë");
+					ToastUtil.show(mActivity, "è¯·ç™»å…¥");
 					Intent intent = new Intent(mActivity, UserLoginUidActivity.class);
 					startActivity(intent);
 //				} else if (title.getText().length() <= 5) {
-//					ToastUtil.show(mActivity, "±êÌâ¹ı¶Ì");
+//					ToastUtil.show(mActivity, "æ ‡é¢˜è¿‡çŸ­");
 //				} else if (content.getText().length() <= 10) {
-//					ToastUtil.show(mActivity, "ÄÚÈİ¹ı¶Ì");
+//					ToastUtil.show(mActivity, "å†…å®¹è¿‡çŸ­");
 				} else {
-					ToastUtil.show(mActivity, "·¢ÌûÖĞ¡£¡£¡£");
+					ToastUtil.show(mActivity, "å‘å¸–ä¸­ã€‚ã€‚ã€‚");
 					Intent intent = new Intent(mActivity,UploadService.class);
 //					intent.putExtra(UploadService.CONTENT, title.getText().toString());
 //					intent.putExtra(UploadService.TITLE, content.getText().toString());
@@ -266,7 +266,7 @@ public class PublishedActivity extends Activity {
 			ll_popup.startAnimation(AnimationUtils.loadAnimation(mContext,
 					R.anim.push_bottom_in));
 			 window = new PopupWindow(view,LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
-			
+
 			Button bt1 = (Button) view
 					.findViewById(R.id.item_popupwindows_camera);
 			Button bt2 = (Button) view
@@ -305,9 +305,9 @@ public class PublishedActivity extends Activity {
 	private String path = "";
 
 	public void photo() {
-		// ´ÓÏÖÓĞµÄÏà»úÓ¦ÓÃÖĞÇëÇóÒ»ÕÅÍ¼Æ¬
+		// ä»ç°æœ‰çš„ç›¸æœºåº”ç”¨ä¸­è¯·æ±‚ä¸€å¼ å›¾ç‰‡
 		Intent intent = new Intent();
-		// Ö¸¶¨¿ªÆôÏµÍ³Ïà»úµÄAction
+		// æŒ‡å®šå¼€å¯ç³»ç»Ÿç›¸æœºçš„Action
 		intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
 		intent.addCategory(Intent.CATEGORY_DEFAULT);
 
@@ -333,13 +333,13 @@ public class PublishedActivity extends Activity {
 
 	private void enter() {
 		if (mApplication.loginInfo == null) {
-			ToastUtil.show(mActivity, "ÇëµÇÈë");
+			ToastUtil.show(mActivity, "è¯·ç™»å…¥");
 			Intent intent = new Intent(mActivity, UserLoginUidActivity.class);
 			startActivity(intent);
 		} else if (title.getText().length() <= 5) {
-			ToastUtil.show(mActivity, "±êÌâ¹ı¶Ì");
+			ToastUtil.show(mActivity, "æ ‡é¢˜è¿‡çŸ­");
 		} else if (content.getText().length() <= 10) {
-			ToastUtil.show(mActivity, "ÄÚÈİ¹ı¶Ì");
+			ToastUtil.show(mActivity, "å†…å®¹è¿‡çŸ­");
 		} else {
 			dialog.show();
 			executeRequest(new StringRequest(Method.POST, Api.NewTopic,
@@ -362,7 +362,7 @@ public class PublishedActivity extends Activity {
 		}
 	}
 
-	// [start]ÍøÂçÇëÇó
+	// [start]ç½‘ç»œè¯·æ±‚
 	protected void executeRequest(Request<?> request) {
 		RequestManager.addRequest(request, this);
 	}
@@ -378,7 +378,7 @@ public class PublishedActivity extends Activity {
 					Intent intent = new Intent(mActivity, DetailsActivity.class);
 					intent.putExtra("url", info.getTopicId() + "");
 					startActivity(intent);
-					ToastUtil.show(mActivity, "·¢ËÍ³É¹¦");
+					ToastUtil.show(mActivity, "å‘é€æˆåŠŸ");
 					mActivity.finish();
 				} else {
 					ToastUtil.show(mActivity, info.getMessage());
@@ -388,7 +388,7 @@ public class PublishedActivity extends Activity {
 		};
 	}
 
-	// [start]ÍøÂçÇëÇó´íÎó
+	// [start]ç½‘ç»œè¯·æ±‚é”™è¯¯
 	protected Response.ErrorListener errorListener() {
 		return new Response.ErrorListener() {
 			@Override
@@ -399,7 +399,7 @@ public class PublishedActivity extends Activity {
 		};
 	}
 
-	// [end]ÍøÂçÇëÇó
+	// [end]ç½‘ç»œè¯·æ±‚
 	@Override
 	protected void onDestroy() {
 		FileUtils.deleteDir();

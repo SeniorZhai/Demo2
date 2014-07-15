@@ -14,9 +14,9 @@ public class CommonUtil {
 	private final static String TAG = "CommonUtil";
 
 	/**
-	 * ¼ì²ésdcardÊÇ·ñ¿ÉÓÃ
+	 * æ£€æŸ¥sdcardæ˜¯å¦å¯ç”¨
 	 * 
-	 * @return trueÎª¿ÉÓÃ£¬·ñÔòÎª²»¿ÉÓÃ
+	 * @return trueä¸ºå¯ç”¨ï¼Œå¦åˆ™ä¸ºä¸å¯ç”¨
 	 */
 	public static boolean sdCardIsAvailable() {
 		String status = Environment.getExternalStorageState();
@@ -27,9 +27,9 @@ public class CommonUtil {
 	}
 
 	/**
-	 * ¼ì²ésdcardÊÇ·ñÓĞ×ã¹»µÄ¿Õ¼ä
+	 * æ£€æŸ¥sdcardæ˜¯å¦æœ‰è¶³å¤Ÿçš„ç©ºé—´
 	 * 
-	 * @return trueÎªÓĞ£¬·ñÔòÎªÎŞ
+	 * @return trueä¸ºæœ‰ï¼Œå¦åˆ™ä¸ºæ— 
 	 */
 	public static boolean enoughSpaceOnSdCard(long updateSize) {
 		String status = Environment.getExternalStorageState();
@@ -40,7 +40,7 @@ public class CommonUtil {
 	}
 
 	/**
-	 * »ñÈ¡sdcard¿ÉÓÃ¿Õ¼ä´óĞ¡
+	 * è·å–sdcardå¯ç”¨ç©ºé—´å¤§å°
 	 */
 	public static long getRealSizeOnSdcard() {
 		File path = new File(Environment.getExternalStorageDirectory()
@@ -52,16 +52,16 @@ public class CommonUtil {
 	}
 
 	/**
-	 * ¼ì²éPhoneÊÇ·ñÓĞ×ã¹»µÄ¿Õ¼ä
+	 * æ£€æŸ¥Phoneæ˜¯å¦æœ‰è¶³å¤Ÿçš„ç©ºé—´
 	 * 
-	 * @return trueÎªÓĞ£¬·ñÔòÎªÎŞ
+	 * @return trueä¸ºæœ‰ï¼Œå¦åˆ™ä¸ºæ— 
 	 */
 	public static boolean enoughSpaceOnPhone(long updateSize) {
 		return getRealSizeOnPhone() > updateSize;
 	}
 
 	/**
-	 * »ñÈ¡PhoneµÄ¿ÉÓÃ¿Õ¼ä´óĞ¡
+	 * è·å–Phoneçš„å¯ç”¨ç©ºé—´å¤§å°
 	 */
 	public static long getRealSizeOnPhone() {
 		File path = Environment.getDataDirectory();
@@ -73,7 +73,7 @@ public class CommonUtil {
 	}
 
 	/**
-	 * ¸ù¾İÊÖ»ú·Ö±æÂÊ´Ódp×ª³Épx
+	 * æ ¹æ®æ‰‹æœºåˆ†è¾¨ç‡ä»dpè½¬æˆpx
 	 * 
 	 * @param context
 	 * @param dpValue
@@ -85,7 +85,7 @@ public class CommonUtil {
 	}
 
 	/**
-	 * ¸ù¾İÊÖ»úµÄ·Ö±æÂÊ´Ó px(ÏñËØ) µÄµ¥Î» ×ª³ÉÎª dp
+	 * æ ¹æ®æ‰‹æœºçš„åˆ†è¾¨ç‡ä» px(åƒç´ ) çš„å•ä½ è½¬æˆä¸º dp
 	 */
 	public static int px2dip(Context context, float pxValue) {
 		final float scale = context.getResources().getDisplayMetrics().density;
@@ -93,7 +93,7 @@ public class CommonUtil {
 	}
 
 	/**
-	 * ÅĞ¶ÏÊÇ·ñÓĞÍøÂçÁ¬½Ó
+	 * åˆ¤æ–­æ˜¯å¦æœ‰ç½‘ç»œè¿æ¥
 	 */
 	public static boolean isNetworkAvailable(Context context) {
 		ConnectivityManager connectivity = (ConnectivityManager) context
@@ -135,7 +135,7 @@ public class CommonUtil {
 	}
 
 	/**
-	 * ÅĞ¶ÏÍøÂçÊÇ·ñÎªÂşÓÎ
+	 * åˆ¤æ–­ç½‘ç»œæ˜¯å¦ä¸ºæ¼«æ¸¸
 	 */
 	public static boolean isNetworkRoaming(Context context) {
 		ConnectivityManager connectivity = (ConnectivityManager) context
@@ -162,7 +162,7 @@ public class CommonUtil {
 	}
 
 	/**
-	 * ÅĞ¶ÏMOBILEÍøÂçÊÇ·ñ¿ÉÓÃ
+	 * åˆ¤æ–­MOBILEç½‘ç»œæ˜¯å¦å¯ç”¨
 	 * 
 	 * @param context
 	 * @return
@@ -180,7 +180,7 @@ public class CommonUtil {
 	}
 
 	/**
-	 * ÅĞ¶Ïwifi ÊÇ·ñ¿ÉÓÃ
+	 * åˆ¤æ–­wifi æ˜¯å¦å¯ç”¨
 	 * 
 	 * @param context
 	 * @return

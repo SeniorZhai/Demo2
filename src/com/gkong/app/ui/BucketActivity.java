@@ -30,7 +30,7 @@ public class BucketActivity extends Activity {
 	private TextView exit;
 	private GridView gridView;
 	private AlbumHelper helper;
-	private ImageBucketAdapter adapter;// ×Ô¶¨ÒåµÄÊÊÅäÆ÷
+	private ImageBucketAdapter adapter;// è‡ªå®šä¹‰çš„é€‚é…å™¨
 	public static final String EXTRA_IMAGE_LIST = "imagelist";
 	public static Bitmap bitmap;
 	@Override
@@ -44,7 +44,7 @@ public class BucketActivity extends Activity {
 		initView();
 	}
 	/**
-	 * ³õÊ¼»¯Êı¾İ
+	 * åˆå§‹åŒ–æ•°æ®
 	 */
 	private void initData() {
 		dataList = helper.getImagesBucketList(false);	
@@ -53,7 +53,7 @@ public class BucketActivity extends Activity {
 				R.drawable.icon_addpic_unfocused);
 	}
 	/**
-	 * ³õÊ¼»¯viewÊÓÍ¼
+	 * åˆå§‹åŒ–viewè§†å›¾
 	 */
 	private void initView() {
 		exit = (TextView)findViewById(R.id.bucket_exit);
@@ -87,7 +87,7 @@ class ImageBucketAdapter extends BaseAdapter {
 
 	Activity act;
 	/**
-	 * Í¼Æ¬¼¯ÁĞ±í
+	 * å›¾ç‰‡é›†åˆ—è¡¨
 	 */
 	List<ImageBucket> dataList;
 	BitmapCache cache;
@@ -171,4 +171,3 @@ class ImageBucketAdapter extends BaseAdapter {
 	}
 
 }
-

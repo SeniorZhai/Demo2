@@ -12,7 +12,7 @@ public class BaseFragmentActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 	}
-	
+
 	public void finish()
 	{
 		super.finish();

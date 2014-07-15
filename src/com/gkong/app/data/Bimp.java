@@ -11,13 +11,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 public class Bimp {
-	
+
 	public static int max = 0;
 	public static boolean act_bool = true;
-	// 保存Bitmap
+	// 淇濆瓨Bitmap
 	public static List<Bitmap> bmp = new ArrayList<Bitmap>();
 
-	// 图片sd地址，上传服务器时把图片调用方法压缩后，保存到临时文件夹，图片压缩后小于100K
+	// 鍥剧墖sd鍦板潃锛屼笂浼犳湇鍔″櫒鏃舵妸鍥剧墖璋冪敤鏂规硶鍘嬬缉鍚庯紝淇濆瓨鍒颁复鏃舵枃浠跺す锛屽浘鐗囧帇缂╁悗灏忎簬100K
 	public static List<String> drr = new ArrayList<String>();
 
 	public static Bitmap revitionImageSize(String path) throws IOException {

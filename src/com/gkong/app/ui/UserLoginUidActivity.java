@@ -36,11 +36,11 @@ public class UserLoginUidActivity extends BaseActivity implements
 	private final static String TAG = "UserLoginUidActivity";
 
 	public static String SharedName = "login";
-	public static String UID = "uid";// ÓÃ»§Ãû
-	public static String PWD = "pwd";// ÃÜÂë
+	public static String UID = "uid";// ç”¨æˆ·å
+	public static String PWD = "pwd";// å¯†ç 
 
 	private MyApplication application;
-	
+
 	private ImageView goHome;
 	private EditText editUserID;
 	private EditText editPwd;
@@ -109,7 +109,7 @@ public class UserLoginUidActivity extends BaseActivity implements
 			showShortToast(getResources().getString(R.string.user_pwd));
 			return;
 		} else if (!CommonUtil.checkNetState(this)) {
-			showLongToast("Ã»ÓĞÍøÂç");
+			showLongToast("æ²¡æœ‰ç½‘ç»œ");
 			return ;
 		}
 		dialog.show();
@@ -137,11 +137,11 @@ public class UserLoginUidActivity extends BaseActivity implements
 					edit.putString(UID, editUserID.getText().toString());
 					edit.putString(PWD, editPwd.getText().toString());
 					edit.commit();
-					showLongToast("µÇÈë³É¹¦");
+					showLongToast("ç™»å…¥æˆåŠŸ");
 					finish();
 				}else {
 					editPwd.setText("");
-					showLongToast("ÕË»§Ãû»òÃÜÂë´íÎó");
+					showLongToast("è´¦æˆ·åæˆ–å¯†ç é”™è¯¯");
 				}
 			}
 		};

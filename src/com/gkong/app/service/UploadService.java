@@ -52,9 +52,9 @@ public class UploadService extends Service {
 			uploadFile(Api.Upload + UIDStr, value);
 		}
 
-		// ¸ßÇåµÄÑ¹ËõÍ¼Æ¬È«²¿¾ÍÔÚ list Â·¾¶ÀïÃæÁË
-		// ¸ßÇåµÄÑ¹Ëõ¹ıµÄ bmp ¶ÔÏó ¶¼ÔÚ Bimp.bmpÀïÃæ
-		// Íê³ÉÉÏ´«·şÎñÆ÷ºó .........
+		// é«˜æ¸…çš„å‹ç¼©å›¾ç‰‡å…¨éƒ¨å°±åœ¨ list è·¯å¾„é‡Œé¢äº†
+		// é«˜æ¸…çš„å‹ç¼©è¿‡çš„ bmp å¯¹è±¡ éƒ½åœ¨ Bimp.bmpé‡Œé¢
+		// å®Œæˆä¸Šä¼ æœåŠ¡å™¨å .........
 		FileUtils.deleteDir();
 		return super.onStartCommand(intent, flags, startId);
 	}
@@ -77,7 +77,7 @@ public class UploadService extends Service {
 			url = new URL(uploadUrl);
 			HttpURLConnection httpURLConnection = (HttpURLConnection) url
 					.openConnection();
-			// ÉèÖÃ¿é´óĞ¡128K
+			// è®¾ç½®å—å¤§å°128K
 			httpURLConnection.setChunkedStreamingMode(128 * 1024);
 			httpURLConnection.setDoInput(true);
 			httpURLConnection.setDoOutput(true);
@@ -104,7 +104,7 @@ public class UploadService extends Service {
 			 dos.close();
 			 is.close();
 		} catch (Exception e) {
-			Log.d("---", "´íÁË´íÁË");
+			Log.d("---", "é”™äº†é”™äº†");
 		}
 	}
 }

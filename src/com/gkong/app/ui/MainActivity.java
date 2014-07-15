@@ -91,7 +91,7 @@ import com.google.gson.Gson;
 		super.onDestroy();
 	}
 
-	// [start]³õÊ¼»¯º¯Êı
+	// [start]åˆå§‹åŒ–å‡½æ•°
 
 	private void initSlidingMenu() {
 		setBehindContentView(R.layout.behind_slidingmenu);
@@ -111,7 +111,7 @@ import com.google.gson.Gson;
 		aboveGoHome = (LinearLayout) findViewById(R.id.linear_above_to_Home);
 		aboveGoHome.setOnClickListener(this);
 		aboveTitle = (TextView) findViewById(R.id.tv_above_title);
-		aboveTitle.setText("¼¼ÊõÇø×îĞÂ¶¯Ì¬");
+		aboveTitle.setText("æŠ€æœ¯åŒºæœ€æ–°åŠ¨æ€");
 		aboveLoadLayout = (LinearLayout) findViewById(R.id.view_loading);
 		aboveLoadFaillayout = (LinearLayout) findViewById(R.id.view_loading_fail);
 		mListView = (XListView) findViewById(R.id.list_view);
@@ -122,7 +122,7 @@ import com.google.gson.Gson;
 		aboveImgQuery.setVisibility(View.GONE);
 	}
 
-	// ³õÊ¼»¯ListView
+	// åˆå§‹åŒ–ListView
 	private void initListView() {
 
 		listAdapter = new MyArrayAdapter(mContext, BBSList);
@@ -207,9 +207,9 @@ import com.google.gson.Gson;
 		});
 	}
 
-	// [end]³õÊ¼»¯º¯Êı
+	// [end]åˆå§‹åŒ–å‡½æ•°
 
-	// [start]Êı¾İÇëÇó
+	// [start]æ•°æ®è¯·æ±‚
 	private void getList(String boardID, int page) {
 
 		executeRequest(new StringRequest(Method.GET, Api.List(boardID, page),
@@ -226,9 +226,9 @@ import com.google.gson.Gson;
 				Sort, Page), BBSResponseListener(), errorListener()));
 	}
 
-	// [end]Êı¾İÇëÇó
+	// [end]æ•°æ®è¯·æ±‚
 
-	// [start]µã»÷¼àÌı
+	// [start]ç‚¹å‡»ç›‘å¬
 	@Override
 	public void onClick(View v) {
 		Intent intent;
@@ -253,9 +253,9 @@ import com.google.gson.Gson;
 		}
 	}
 
-	// [end]µã»÷¼àÌı
+	// [end]ç‚¹å‡»ç›‘å¬
 
-	// [start]ÍøÂçÇëÇó·´À¡
+	// [start]ç½‘ç»œè¯·æ±‚åé¦ˆ
 
 	private Response.Listener<String> BBSResponseListener() {
 		return new Response.Listener<String>() {
@@ -305,11 +305,11 @@ import com.google.gson.Gson;
 					Gson gson = new Gson();
 					list.clear();
 					Map<String, Object> map0 = new HashMap<String, Object>();
-					map0.put(LIST_TEXT, "¼¼ÊõÇø×îĞÂ¶¯Ì¬");
+					map0.put(LIST_TEXT, "æŠ€æœ¯åŒºæœ€æ–°åŠ¨æ€");
 					map0.put(LIST_URL, "0000");
 					list.add(map0);
 					Map<String, Object> map1 = new HashMap<String, Object>();
-					map1.put(LIST_TEXT, "·Ç¼¼ÊõÇø×îĞÂ¶¯Ì¬");
+					map1.put(LIST_TEXT, "éæŠ€æœ¯åŒºæœ€æ–°åŠ¨æ€");
 					map1.put(LIST_URL, "0000");
 					list.add(map1);
 					for (int i = 0; i < array.length(); i++) {
@@ -330,9 +330,9 @@ import com.google.gson.Gson;
 		};
 	}
 
-	// [end]ÍøÂçÇëÇó·´À¡
+	// [end]ç½‘ç»œè¯·æ±‚åé¦ˆ
 
-	// [start]ÍøÂçÇëÇó´íÎó
+	// [start]ç½‘ç»œè¯·æ±‚é”™è¯¯
 	protected Response.ErrorListener errorListener() {
 		return new Response.ErrorListener() {
 			@Override
@@ -343,9 +343,9 @@ import com.google.gson.Gson;
 		};
 	}
 
-	// [end]ÍøÂçÇëÇó´íÎó
+	// [end]ç½‘ç»œè¯·æ±‚é”™è¯¯
 
-	// [start]Á¬ĞøÁ½´Î·µ»Ø¾ÍÍË³ö
+	// [start]è¿ç»­ä¸¤æ¬¡è¿”å›å°±é€€å‡º
 	private int keyBackClickCount = 0;
 
 	@Override
@@ -384,9 +384,9 @@ import com.google.gson.Gson;
 		return super.onKeyDown(keyCode, event);
 	}
 
-	// [end]Á¬ĞøÁ½´Î·µ»Ø¾ÍÍË³ö
+	// [end]è¿ç»­ä¸¤æ¬¡è¿”å›å°±é€€å‡º
 
-	// [start]XList¼àÌı
+	// [start]XListç›‘å¬
 	@Override
 	public void onRefresh() {
 		page = 1;
@@ -406,5 +406,5 @@ import com.google.gson.Gson;
 			getNewBoard(Type, "date", page);
 		}
 	}
-	// [start]XList¼àÌı
+	// [start]XListç›‘å¬
 }

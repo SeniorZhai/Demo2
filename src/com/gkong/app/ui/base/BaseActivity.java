@@ -24,26 +24,26 @@ public class BaseActivity extends Activity{
 	protected AlertDialog mAlertDialog;
 	protected AsyncTask mRunningTask;
 
-	/******************************** ¡¾Activity LifeCycle For Debug¡¿ *******************************************/
+	/******************************** ã€Activity LifeCycle For Debugã€‘ *******************************************/
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		LogUtil.d(TAG, this.getClass().getSimpleName()
 				+ " onCreate() invoked!!");
 		super.onCreate(savedInstanceState);
 		/**
-		 * requestWindowFeature¿ÉÒÔÉèÖÃµÄÖµÓĞ£º
- 		 * 1.DEFAULT_FEATURES£ºÏµÍ³Ä¬ÈÏ×´Ì¬£¬Ò»°ã²»ĞèÒªÖ¸¶¨
-         * 2.FEATURE_CONTEXT_MENU£ºÆôÓÃContextMenu£¬Ä¬ÈÏ¸ÃÏîÒÑÆôÓÃ£¬Ò»°ãÎŞĞèÖ¸¶¨
-         * 3.FEATURE_CUSTOM_TITLE£º×Ô¶¨Òå±êÌâ¡£µ±ĞèÒª×Ô¶¨Òå±êÌâÊ±±ØĞëÖ¸¶¨¡£Èç£º±êÌâÊÇÒ»¸ö°´Å¥Ê±
-         * 4.FEATURE_INDETERMINATE_PROGRESS£º²»È·¶¨µÄ½ø¶È
-         * 5.FEATURE_LEFT_ICON£º±êÌâÀ¸×ó²àµÄÍ¼±ê
-         * 6.FEATURE_NO_TITLE£ºÎŞ±êÌâ
-         * 7.FEATURE_OPTIONS_PANEL£ºÆôÓÃ¡°Ñ¡ÏîÃæ°å¡±¹¦ÄÜ£¬Ä¬ÈÏÒÑÆôÓÃ¡£
-         * 8.FEATURE_PROGRESS£º½ø¶ÈÖ¸Ê¾Æ÷¹¦ÄÜ
-         * 9.FEATURE_RIGHT_ICON:±êÌâÀ¸ÓÒ²àµÄÍ¼±ê
+		 * requestWindowFeatureå¯ä»¥è®¾ç½®çš„å€¼æœ‰ï¼š
+ 		 * 1.DEFAULT_FEATURESï¼šç³»ç»Ÿé»˜è®¤çŠ¶æ€ï¼Œä¸€èˆ¬ä¸éœ€è¦æŒ‡å®š
+         * 2.FEATURE_CONTEXT_MENUï¼šå¯ç”¨ContextMenuï¼Œé»˜è®¤è¯¥é¡¹å·²å¯ç”¨ï¼Œä¸€èˆ¬æ— éœ€æŒ‡å®š
+         * 3.FEATURE_CUSTOM_TITLEï¼šè‡ªå®šä¹‰æ ‡é¢˜ã€‚å½“éœ€è¦è‡ªå®šä¹‰æ ‡é¢˜æ—¶å¿…é¡»æŒ‡å®šã€‚å¦‚ï¼šæ ‡é¢˜æ˜¯ä¸€ä¸ªæŒ‰é’®æ—¶
+         * 4.FEATURE_INDETERMINATE_PROGRESSï¼šä¸ç¡®å®šçš„è¿›åº¦
+         * 5.FEATURE_LEFT_ICONï¼šæ ‡é¢˜æ å·¦ä¾§çš„å›¾æ ‡
+         * 6.FEATURE_NO_TITLEï¼šæ— æ ‡é¢˜
+         * 7.FEATURE_OPTIONS_PANELï¼šå¯ç”¨â€œé€‰é¡¹é¢æ¿â€åŠŸèƒ½ï¼Œé»˜è®¤å·²å¯ç”¨ã€‚
+         * 8.FEATURE_PROGRESSï¼šè¿›åº¦æŒ‡ç¤ºå™¨åŠŸèƒ½
+         * 9.FEATURE_RIGHT_ICON:æ ‡é¢˜æ å³ä¾§çš„å›¾æ ‡
 		 */
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		
+
 
 	}
 
@@ -65,7 +65,7 @@ public class BaseActivity extends Activity{
 		LogUtil.d(TAG, this.getClass().getSimpleName()
 				+ " onResume() invoked!!");
 		super.onResume();
-		
+
 	}
 
 	@Override
@@ -101,11 +101,11 @@ public class BaseActivity extends Activity{
 		intent.setType("text/plain");
 		intent.putExtra(Intent.EXTRA_TEXT, shareTitle + "   " + url);
 
-		Intent itn = Intent.createChooser(intent, "·ÖÏí");
+		Intent itn = Intent.createChooser(intent, "åˆ†äº«");
 		startActivity(itn);
 	}
 
-	/******************************** ¡¾Activity LifeCycle For Debug¡¿ *******************************************/
+	/******************************** ã€Activity LifeCycle For Debugã€‘ *******************************************/
 
 	protected void showShortToast(int pResId) {
 		showShortToast(getString(pResId));
@@ -151,8 +151,8 @@ public class BaseActivity extends Activity{
 	}
 
 	/**
-	 * Í¨¹ı·´ÉäÀ´ÉèÖÃ¶Ô»°¿òÊÇ·ñÒª¹Ø±Õ£¬ÔÚ±íµ¥Ğ£ÑéÊ±ºÜ¹ÜÓÃ£¬ ÒòÎªÔÚÓÃ»§ÌîĞ´³ö´íÊ±µãÈ·¶¨Ê±Ä¬ÈÏDialog»áÏûÊ§£¬ ËùÒÔ´ï²»µ½Ğ£ÑéµÄĞ§¹û
-	 * ¶ømShowing×Ö¶Î¾ÍÊÇÓÃÀ´¿ØÖÆÊÇ·ñÒªÏûÊ§µÄ£¬¶øËüÔÚDialogÖĞÊÇË½ÓĞ±äÁ¿£¬ ËùÓĞÖ»ÓĞÍ¨¹ı·´ÉäÈ¥½â¾ö´ËÎÊÌâ
+	 * é€šè¿‡åå°„æ¥è®¾ç½®å¯¹è¯æ¡†æ˜¯å¦è¦å…³é—­ï¼Œåœ¨è¡¨å•æ ¡éªŒæ—¶å¾ˆç®¡ç”¨ï¼Œ å› ä¸ºåœ¨ç”¨æˆ·å¡«å†™å‡ºé”™æ—¶ç‚¹ç¡®å®šæ—¶é»˜è®¤Dialogä¼šæ¶ˆå¤±ï¼Œ æ‰€ä»¥è¾¾ä¸åˆ°æ ¡éªŒçš„æ•ˆæœ
+	 * è€ŒmShowingå­—æ®µå°±æ˜¯ç”¨æ¥æ§åˆ¶æ˜¯å¦è¦æ¶ˆå¤±çš„ï¼Œè€Œå®ƒåœ¨Dialogä¸­æ˜¯ç§æœ‰å˜é‡ï¼Œ æ‰€æœ‰åªæœ‰é€šè¿‡åå°„å»è§£å†³æ­¤é—®é¢˜
 	 * 
 	 * @param pDialog
 	 * @param pIsClose
@@ -237,7 +237,7 @@ public class BaseActivity extends Activity{
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				Toast.makeText(BaseActivity.this, "ÄÚ´æ¿Õ¼ä²»×ã£¡", Toast.LENGTH_SHORT)
+				Toast.makeText(BaseActivity.this, "å†…å­˜ç©ºé—´ä¸è¶³ï¼", Toast.LENGTH_SHORT)
 						.show();
 				// finish();
 			}
@@ -248,18 +248,18 @@ public class BaseActivity extends Activity{
 
 	protected void handleNetworkError() {
 		network_err_count++;
-		// runOnUiThread()¸üĞÂUI
+		// runOnUiThread()æ›´æ–°UI
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				if (network_err_count < 3) {
-					Toast.makeText(BaseActivity.this, "ÍøËÙºÃÏñ²»ÔõÃ´¸øÁ¦°¡£¡",
+					Toast.makeText(BaseActivity.this, "ç½‘é€Ÿå¥½åƒä¸æ€ä¹ˆç»™åŠ›å•Šï¼",
 							Toast.LENGTH_SHORT).show();
 				} else if (network_err_count < 5) {
-					Toast.makeText(BaseActivity.this, "ÍøËÙÕæµÄ²»¸øÁ¦£¡",
+					Toast.makeText(BaseActivity.this, "ç½‘é€ŸçœŸçš„ä¸ç»™åŠ›ï¼",
 							Toast.LENGTH_SHORT).show();
 				} else {
-					Toast.makeText(BaseActivity.this, "°¦£¬½ñÌìµÄÍøÂçÔõÃ´ÕâÃ´²î¾¢£¡",
+					Toast.makeText(BaseActivity.this, "å”‰ï¼Œä»Šå¤©çš„ç½‘ç»œæ€ä¹ˆè¿™ä¹ˆå·®åŠ²ï¼",
 							Toast.LENGTH_SHORT).show();
 				}
 				// finish();
@@ -271,7 +271,7 @@ public class BaseActivity extends Activity{
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				Toast.makeText(BaseActivity.this, "Êı¾İ¸ñÊ½´íÎó£¡", Toast.LENGTH_SHORT)
+				Toast.makeText(BaseActivity.this, "æ•°æ®æ ¼å¼é”™è¯¯ï¼", Toast.LENGTH_SHORT)
 						.show();
 				// finish();
 			}
@@ -282,7 +282,7 @@ public class BaseActivity extends Activity{
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				Toast.makeText(BaseActivity.this, "·¢ÉúÁËÒ»µãÒâÍâ£¬³ÌĞòÖÕÖ¹£¡",
+				Toast.makeText(BaseActivity.this, "å‘ç”Ÿäº†ä¸€ç‚¹æ„å¤–ï¼Œç¨‹åºç»ˆæ­¢ï¼",
 						Toast.LENGTH_SHORT).show();
 				finish();
 			}

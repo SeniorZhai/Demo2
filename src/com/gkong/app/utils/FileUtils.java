@@ -13,7 +13,7 @@ public class FileUtils {
 	public static String SDPATH = Environment.getExternalStorageDirectory()
 			+ "/formats/";
 	public static void saveBitmap(Bitmap bm, String picName) {
-		Log.e("---", "±£´æÍ¼Æ¬");
+		Log.e("---", "ä¿å­˜å›¾ç‰‡");
 		try {
 			if (!isFileExist("")) {
 				File tempf = createSDDir("");
@@ -26,7 +26,7 @@ public class FileUtils {
 			bm.compress(Bitmap.CompressFormat.JPEG, 90, out);
 			out.flush();
 			out.close();
-			Log.e("---", "ÒÑ¾­±£´æ");
+			Log.e("---", "å·²ç»ä¿å­˜");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -50,7 +50,7 @@ public class FileUtils {
 		file.isFile();
 		return file.exists();
 	}
-	
+
 	public static void delFile(String fileName){
 		File file = new File(SDPATH + fileName);
 		if(file.isFile()){
@@ -63,14 +63,14 @@ public class FileUtils {
 		File dir = new File(SDPATH);
 		if (dir == null || !dir.exists() || !dir.isDirectory())
 			return;
-		
+
 		for (File file : dir.listFiles()) {
 			if (file.isFile())
-				file.delete(); // É¾³ıËùÓĞÎÄ¼ş
+				file.delete(); // åˆ é™¤æ‰€æœ‰æ–‡ä»¶
 			else if (file.isDirectory())
-				deleteDir(); // µİ¹æµÄ·½Ê½É¾³ıÎÄ¼ş¼Ğ
+				deleteDir(); // é€’è§„çš„æ–¹å¼åˆ é™¤æ–‡ä»¶å¤¹
 		}
-		dir.delete();// É¾³ıÄ¿Â¼±¾Éí
+		dir.delete();// åˆ é™¤ç›®å½•æœ¬èº«
 	}
 
 	public static boolean fileIsExists(String path) {

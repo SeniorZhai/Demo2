@@ -77,13 +77,13 @@ public class NewTopicActivity extends Activity implements OnClickListener {
 
 	private void enter() {
 		if (mApplication.loginInfo == null) {
-			ToastUtil.show(mActivity, "ÇëµÇÈë");
+			ToastUtil.show(mActivity, "è¯·ç™»å…¥");
 			Intent intent = new Intent(mActivity, UserLoginUidActivity.class);
 			startActivity(intent);
 			 } else if (title.getText().length() <= 5) {
-			 ToastUtil.show(mActivity, "±êÌâ¹ı¶Ì");
+			 ToastUtil.show(mActivity, "æ ‡é¢˜è¿‡çŸ­");
 			 } else if (content.getText().length() <= 10) {
-			 ToastUtil.show(mActivity, "ÄÚÈİ¹ı¶Ì");
+			 ToastUtil.show(mActivity, "å†…å®¹è¿‡çŸ­");
 		} else {
 			dialog.show();
 			executeRequest(new StringRequest(Method.POST, Api.NewTopic,
@@ -106,7 +106,7 @@ public class NewTopicActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	// [start]ÍøÂçÇëÇó
+	// [start]ç½‘ç»œè¯·æ±‚
 	protected void executeRequest(Request<?> request) {
 		RequestManager.addRequest(request, this);
 	}
@@ -122,17 +122,17 @@ public class NewTopicActivity extends Activity implements OnClickListener {
 					Intent intent = new Intent(mActivity, DetailsActivity.class);
 					intent.putExtra("url", info.getTopicId()+"");
 					startActivity(intent);
-					ToastUtil.show(mActivity, "·¢ËÍ³É¹¦");
+					ToastUtil.show(mActivity, "å‘é€æˆåŠŸ");
 					mActivity.finish();
 				}else {
 					ToastUtil.show(mActivity, info.getMessage());
 				}
-				
+
 			}
 		};
 	}
 
-	// [start]ÍøÂçÇëÇó´íÎó
+	// [start]ç½‘ç»œè¯·æ±‚é”™è¯¯
 	protected Response.ErrorListener errorListener() {
 		return new Response.ErrorListener() {
 			@Override
@@ -142,6 +142,6 @@ public class NewTopicActivity extends Activity implements OnClickListener {
 			}
 		};
 	}
-	// [end]ÍøÂçÇëÇó
+	// [end]ç½‘ç»œè¯·æ±‚
 
 }

@@ -35,10 +35,10 @@ public class BaseSlidingFragmentActivity extends BaseFragmentActivity {
 		super.onStop();
 		RequestManager.cancelAll(this);
 	}
-	
-	
-	
-	
+
+
+
+
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onPostCreate(android.os.Bundle)
 	 */

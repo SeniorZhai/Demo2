@@ -48,7 +48,7 @@ public class ImageGridActivity extends Activity {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case 0:
-				Toast.makeText(ImageGridActivity.this, "最多选择9张图片", 400).show();
+				Toast.makeText(ImageGridActivity.this, "脳卯露脿脩隆脭帽9脮脜脥录脝卢", 400).show();
 				break;
 
 			default:
@@ -102,7 +102,7 @@ public class ImageGridActivity extends Activity {
 
 			@Override
 			public void onListen(int count) {
-				bt.setText("完成" + "(" + count + ")");
+				bt.setText("脥锚鲁脡" + "(" + count + ")");
 			}
 		});
 		gridView.setOnItemClickListener(new OnItemClickListener() {

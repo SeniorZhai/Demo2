@@ -66,7 +66,7 @@ public class Utility {
 	}
 
 	/**
-	 * &â€¦â?¦â?¦â?¦â?¦â?¦â?¦â?¦â?¦â??
+	 * &â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦
 	 * 
 	 * @param key
 	 * @return
@@ -78,7 +78,7 @@ public class Utility {
 			long timestamp = getTimestamp();
 			String nonce = getNonce();
 			String api_sign = getAPIsig(key, timestamp, nonce, temp[1]);
-			
+
 			StringBuilder builder = new StringBuilder();
 
 			synchronized (result) {

@@ -24,14 +24,14 @@ public class PhotoActivity extends Activity{
 	private ViewPager pager;
 	private MyPageAdapter adapter;
 	private int count;
-	
-	
+
+
 	public List<Bitmap> bmp = new ArrayList<Bitmap>();
 	public List<String> drr = new ArrayList<String>();
 	public List<String> del = new ArrayList<String>();
 	public int max;
-	
-	
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -90,9 +90,9 @@ public class PhotoActivity extends Activity{
 		for (int i = 0; i < bmp.size(); i++) {
 			initListViews(bmp.get(i));//
 		}
-		
-		adapter = new MyPageAdapter(listViews);// ¹¹Ôìadapter
-		pager.setAdapter(adapter);// ÉèÖÃÊÊÅäÆ÷
+
+		adapter = new MyPageAdapter(listViews);// æ„é€ adapter
+		pager.setAdapter(adapter);// è®¾ç½®é€‚é…å™¨
 		Intent intent = getIntent();
 		int id = intent.getIntExtra("ID", 0);
 		pager.setCurrentItem(id);
@@ -100,24 +100,24 @@ public class PhotoActivity extends Activity{
 	private void initListViews(Bitmap bm) {
 		if (listViews == null)
 			listViews = new ArrayList<View>();
-		ImageView img = new ImageView(this);// ¹¹ÔìtextView¶ÔÏó
+		ImageView img = new ImageView(this);// æ„é€ textViewå¯¹è±¡
 		img.setBackgroundColor(0xff000000);
 		img.setImageBitmap(bm);
 		img.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
 				LayoutParams.FILL_PARENT));
-		listViews.add(img);// Ìí¼Óview
+		listViews.add(img);// æ·»åŠ view
 	}
 	private OnPageChangeListener pageChangeListener = new OnPageChangeListener() {
 
-		public void onPageSelected(int arg0) {// Ò³ÃæÑ¡ÔñÏìÓ¦º¯Êı
+		public void onPageSelected(int arg0) {// é¡µé¢é€‰æ‹©å“åº”å‡½æ•°
 			count = arg0;
 		}
 
-		public void onPageScrolled(int arg0, float arg1, int arg2) {// »¬¶¯ÖĞ¡£¡£¡£
+		public void onPageScrolled(int arg0, float arg1, int arg2) {// æ»‘åŠ¨ä¸­ã€‚ã€‚ã€‚
 
 		}
 
-		public void onPageScrollStateChanged(int arg0) {// »¬¶¯×´Ì¬¸Ä±ä
+		public void onPageScrollStateChanged(int arg0) {// æ»‘åŠ¨çŠ¶æ€æ”¹å˜
 
 		}
 	};
@@ -126,20 +126,20 @@ public class PhotoActivity extends Activity{
 
 		private ArrayList<View> listViews;// content
 
-		private int size;// Ò³Êı
+		private int size;// é¡µæ•°
 
-		public MyPageAdapter(ArrayList<View> listViews) {// ¹¹Ôìº¯Êı
-															// ³õÊ¼»¯viewpagerµÄÊ±ºò¸øµÄÒ»¸öÒ³Ãæ
+		public MyPageAdapter(ArrayList<View> listViews) {// æ„é€ å‡½æ•°
+															// åˆå§‹åŒ–viewpagerçš„æ—¶å€™ç»™çš„ä¸€ä¸ªé¡µé¢
 			this.listViews = listViews;
 			size = listViews == null ? 0 : listViews.size();
 		}
 
-		public void setListViews(ArrayList<View> listViews) {// ×Ô¼ºĞ´µÄÒ»¸ö·½·¨ÓÃÀ´Ìí¼ÓÊı¾İ
+		public void setListViews(ArrayList<View> listViews) {// è‡ªå·±å†™çš„ä¸€ä¸ªæ–¹æ³•ç”¨æ¥æ·»åŠ æ•°æ®
 			this.listViews = listViews;
 			size = listViews == null ? 0 : listViews.size();
 		}
 
-		public int getCount() {// ·µ»ØÊıÁ¿
+		public int getCount() {// è¿”å›æ•°é‡
 			return size;
 		}
 
@@ -147,14 +147,14 @@ public class PhotoActivity extends Activity{
 			return POSITION_NONE;
 		}
 
-		public void destroyItem(View arg0, int arg1, Object arg2) {// Ïú»Ùview¶ÔÏó
+		public void destroyItem(View arg0, int arg1, Object arg2) {// é”€æ¯viewå¯¹è±¡
 			((ViewPager) arg0).removeView(listViews.get(arg1 % size));
 		}
 
 		public void finishUpdate(View arg0) {
 		}
 
-		public Object instantiateItem(View arg0, int arg1) {// ·µ»Øview¶ÔÏó
+		public Object instantiateItem(View arg0, int arg1) {// è¿”å›viewå¯¹è±¡
 			try {
 				((ViewPager) arg0).addView(listViews.get(arg1 % size), 0);
 

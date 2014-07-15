@@ -110,7 +110,7 @@ import com.google.gson.Gson;
 				errorListener()));
 	}
 
-	// [start]ÍøÂçÇëÇó·´À¡
+	// [start]ç½‘ç»œè¯·æ±‚åé¦ˆ
 	private Response.Listener<String> responseListener() {
 		return new Response.Listener<String>() {
 			@Override
@@ -164,23 +164,23 @@ import com.google.gson.Gson;
 			}
 		};
 	}
-	// [end]ÍøÂçÇëÇó·´À¡
-	// [start]ÍøÂçÇëÇó´íÎó
+	// [end]ç½‘ç»œè¯·æ±‚åé¦ˆ
+	// [start]ç½‘ç»œè¯·æ±‚é”™è¯¯
 	protected Response.ErrorListener errorListener() {
 		return new Response.ErrorListener() {
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				ToastUtil.show(mActivity, "ÍøÂç´íÎó");
+				ToastUtil.show(mActivity, "ç½‘ç»œé”™è¯¯");
 			}
 		};
 	}
 
-	// [end]ÍøÂçÇëÇó
+	// [end]ç½‘ç»œè¯·æ±‚
 	protected void executeRequest(Request<?> request) {
 		RequestManager.addRequest(request, this);
 	}
 
-	
+
 
 	@Override
 	public void onClick(View v) {
@@ -191,7 +191,7 @@ import com.google.gson.Gson;
 				executeRequest(new StringRequest(Method.GET, url,
 						responseListener(), errorListener()));
 			} else {
-				ToastUtil.show(mActivity, "Ã»ÓĞÉÏÒ»Ò³");
+				ToastUtil.show(mActivity, "æ²¡æœ‰ä¸Šä¸€é¡µ");
 			}
 			break;
 		case R.id.nextPage:
@@ -200,12 +200,12 @@ import com.google.gson.Gson;
 				executeRequest(new StringRequest(Method.GET, url,
 						responseListener(), errorListener()));
 			} else {
-				ToastUtil.show(mActivity, "Ã»ÓĞÏÂÒ»Ò³");
+				ToastUtil.show(mActivity, "æ²¡æœ‰ä¸‹ä¸€é¡µ");
 			}
 			break;
 		case R.id.details_button_enter:
 			if (mApplication.loginInfo == null) {
-				ToastUtil.show(mActivity, "ÇëµÇÈë");
+				ToastUtil.show(mActivity, "è¯·ç™»å…¥");
 				Intent intent = new Intent(mActivity,
 						UserLoginUidActivity.class);
 				startActivity(intent);
@@ -323,4 +323,3 @@ import com.google.gson.Gson;
 		}
 	}
 }
-

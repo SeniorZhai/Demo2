@@ -18,16 +18,15 @@ import android.util.Log;
 import com.gkong.app.model.ImageBucket;
 import com.gkong.app.model.ImageItem;
 
-
-// ×¨¼­°ïÖúÀà
+// ä¸“è¾‘å¸®åŠ©ç±»
 public class AlbumHelper {
 	private final String TAG = getClass().getSimpleName();
 	private Context context;
 	private ContentResolver cr;
 
-	// ËõÂÔÍ¼ÁĞ±í
+	// ç¼©ç•¥å›¾åˆ—è¡¨
 	public HashMap<String, String> thumbnailList = new HashMap<String, String>();
-	// ×¨¼­ÁĞ±í
+	// ä¸“è¾‘åˆ—è¡¨
 	private List<HashMap<String, String>> albumList = new ArrayList<HashMap<String, String>>();
 	private HashMap<String, ImageBucket> bucketList = new HashMap<String, ImageBucket>();
 
@@ -44,7 +43,7 @@ public class AlbumHelper {
 	}
 
 	/**
-	 * ³õÊ¼»¯
+	 * åˆå§‹åŒ–
 	 * 
 	 * @param context
 	 */
@@ -56,7 +55,7 @@ public class AlbumHelper {
 	}
 
 	/**
-	 * µÃµ½ËõÂÔÍ¼
+	 * å¾—åˆ°ç¼©ç•¥å›¾
 	 */
 	private void getThumbnail() {
 		String[] projection = { Thumbnails._ID, Thumbnails.IMAGE_ID,
@@ -67,7 +66,7 @@ public class AlbumHelper {
 	}
 
 	/**
-	 * ´ÓÊı¾İ¿âÖĞµÃµ½ËõÂÔÍ¼
+	 * ä»æ•°æ®åº“ä¸­å¾—åˆ°ç¼©ç•¥å›¾
 	 * 
 	 * @param cur
 	 */
@@ -90,7 +89,7 @@ public class AlbumHelper {
 	}
 
 	/**
-	 * µÃµ½Ô­Í¼
+	 * å¾—åˆ°åŸå›¾
 	 */
 	private void getAlbum() {
 		String[] projection = { Albums._ID, Albums.ALBUM, Albums.ALBUM_ART,
@@ -102,7 +101,7 @@ public class AlbumHelper {
 	}
 
 	/**
-	 * ´Ó±¾µØÊı¾İ¿âÖĞµÃµ½Ô­Í¼
+	 * ä»æœ¬åœ°æ•°æ®åº“ä¸­å¾—åˆ°åŸå›¾
 	 * 
 	 * @param cur
 	 */
@@ -146,28 +145,28 @@ public class AlbumHelper {
 	}
 
 	/**
-	 * ÊÇ·ñ´´½¨ÁËÍ¼Æ¬¼¯
+	 * æ˜¯å¦åˆ›å»ºäº†å›¾ç‰‡é›†
 	 */
 	private boolean hasBuildImagesBucketList = false;
 
 	/**
-	 * µÃµ½Í¼Æ¬¼¯
+	 * å¾—åˆ°å›¾ç‰‡é›†
 	 */
 	private void buildImagesBucketList() {
 		long startTime = System.currentTimeMillis();
 
-		// ¹¹ÔìËõÂÔÍ¼Ë÷Òı
+		// æ„é€ ç¼©ç•¥å›¾ç´¢å¼•
 		getThumbnail();
 
-		// ¹¹ÔìÏà²áË÷Òı
+		// æ„é€ ç›¸å†Œç´¢å¼•
 		String columns[] = new String[] { Media._ID, Media.BUCKET_ID,
 				Media.PICASA_ID, Media.DATA, Media.DISPLAY_NAME, Media.TITLE,
 				Media.SIZE, Media.BUCKET_DISPLAY_NAME };
-		// µÃµ½Ò»¸öÓÎ±ê
+		// å¾—åˆ°ä¸€ä¸ªæ¸¸æ ‡
 		Cursor cur = cr.query(Media.EXTERNAL_CONTENT_URI, columns, null, null,
 				null);
 		if (cur.moveToFirst()) {
-			// »ñÈ¡Ö¸¶¨ÁĞµÄË÷Òı
+			// è·å–æŒ‡å®šåˆ—çš„ç´¢å¼•
 			int photoIDIndex = cur.getColumnIndexOrThrow(Media._ID);
 			int photoPathIndex = cur.getColumnIndexOrThrow(Media.DATA);
 			int photoNameIndex = cur.getColumnIndexOrThrow(Media.DISPLAY_NAME);
@@ -177,7 +176,7 @@ public class AlbumHelper {
 					.getColumnIndexOrThrow(Media.BUCKET_DISPLAY_NAME);
 			int bucketIdIndex = cur.getColumnIndexOrThrow(Media.BUCKET_ID);
 			int picasaIdIndex = cur.getColumnIndexOrThrow(Media.PICASA_ID);
-			// »ñÈ¡Í¼Æ¬×ÜÊı
+			// è·å–å›¾ç‰‡æ€»æ•°
 			int totalNum = cur.getCount();
 
 			do {
@@ -211,8 +210,8 @@ public class AlbumHelper {
 
 			} while (cur.moveToNext());
 		}
-		// InteratorÎªµü´úÆ÷£¬EntryÎªMap½Ó¿Ú
-		// ±éÀúËùÓĞÍ¼Æ¬
+		// Interatorä¸ºè¿­ä»£å™¨ï¼ŒEntryä¸ºMapæ¥å£
+		// éå†æ‰€æœ‰å›¾ç‰‡
 		Iterator<Entry<String, ImageBucket>> itr = bucketList.entrySet()
 				.iterator();
 		while (itr.hasNext()) {
@@ -233,7 +232,7 @@ public class AlbumHelper {
 	}
 
 	/**
-	 * µÃµ½Í¼Æ¬¼¯
+	 * å¾—åˆ°å›¾ç‰‡é›†
 	 * 
 	 * @param refresh
 	 * @return
@@ -254,7 +253,7 @@ public class AlbumHelper {
 	}
 
 	/**
-	 * ¸ù¾İÍ¼Æ¬µÄ_IDµÃµ½Ô­Ê¼Í¼ÏñÂ·¾¶
+	 * æ ¹æ®å›¾ç‰‡çš„_IDå¾—åˆ°åŸå§‹å›¾åƒè·¯å¾„
 	 * 
 	 * @param image_id
 	 * @return
