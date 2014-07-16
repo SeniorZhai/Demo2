@@ -1,32 +1,50 @@
 package com.gkong.app.model;
 
 public class ClassBoard {
-	private String SID;
+	private int SID;
 	private String BoardName;
-	private String orders;
-	private String BoardID;
-	public String getSID() {
+	private int orders;
+	private int BoardID;
+
+	public ClassBoard() {
+	}
+
+	public ClassBoard(int SID, String BoardName, int oders, int BoardID) {
+		this.SID = SID;
+		this.BoardName = BoardName;
+		this.orders = oders;
+		this.BoardID = BoardID;
+	}
+
+	public int getSID() {
 		return SID;
 	}
-	public void setSID(String sID) {
+
+	public void setSID(int sID) {
 		SID = sID;
 	}
-	public String getBordName() {
+
+	public String getBoardName() {
 		return BoardName;
 	}
-	public void setBordName(String boardName) {
+
+	public void setBoardName(String boardName) {
 		BoardName = boardName;
 	}
-	public String getOrders() {
+
+	public int getOrders() {
 		return orders;
 	}
-	public void setOrders(String orders) {
+
+	public void setOrders(int orders) {
 		this.orders = orders;
 	}
-	public String getBoardID() {
+
+	public int getBoardID() {
 		return BoardID;
 	}
-	public void setBoardID(String boardID) {
+
+	public void setBoardID(int boardID) {
 		BoardID = boardID;
 	}
 }

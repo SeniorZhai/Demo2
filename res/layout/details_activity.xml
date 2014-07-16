@@ -12,6 +12,7 @@
         android:layout_gravity="top"
         android:layout_marginBottom="49dp"
         android:layout_marginTop="@dimen/title_height"
+        android:scrollbars="none"
         android:divider="@drawable/dis_behind_side"
         android:listSelector="#0fff" >
     </ListView>

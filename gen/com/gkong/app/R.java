@@ -54,17 +54,6 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int centered=0x7f010014;
-        /**  Screen edge padding. 
-         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int clipPadding=0x7f010018;
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -81,85 +70,6 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int fadeEnabled=0x7f01000a;
-        /**  Color of the footer line and indicator. 
-         <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
-"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int footerColor=0x7f010019;
-        /**  Height of the indicator above the footer line. 
-         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int footerIndicatorHeight=0x7f01001c;
-        /**  Style of the indicator. Default is triangle. 
-         <p>Must be one of the following constant values.</p>
-<table>
-<colgroup align="left" />
-<colgroup align="left" />
-<colgroup align="left" />
-<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-<tr><td><code>none</code></td><td>0</td><td></td></tr>
-<tr><td><code>triangle</code></td><td>1</td><td></td></tr>
-<tr><td><code>underline</code></td><td>2</td><td></td></tr>
-</table>
-         */
-        public static final int footerIndicatorStyle=0x7f01001b;
-        /**  Left and right padding of the underline indicator. 
-         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int footerIndicatorUnderlinePadding=0x7f01001d;
-        /**  Height of the footer line. 
-         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int footerLineHeight=0x7f01001a;
-        /**  Padding between the bottom of the title and the footer. 
-         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int footerPadding=0x7f01001e;
-        /**  Position of the line. 
-         <p>Must be one of the following constant values.</p>
-<table>
-<colgroup align="left" />
-<colgroup align="left" />
-<colgroup align="left" />
-<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-<tr><td><code>bottom</code></td><td>0</td><td></td></tr>
-<tr><td><code>top</code></td><td>1</td><td></td></tr>
-</table>
-         */
-        public static final int linePosition=0x7f01001f;
         /** <p>Must be one of the following constant values.</p>
 <table>
 <colgroup align="left" />
@@ -171,15 +81,6 @@ containing a value of this type.
 </table>
          */
         public static final int mode=0x7f010000;
-        /**  Whether or not the selected item is displayed as bold. 
-         <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int selectedBold=0x7f010020;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -225,28 +126,6 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int strokeWidth=0x7f010016;
-        /**  Padding between titles when bumping into each other. 
-         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int titlePadding=0x7f010021;
-        /**  Padding between titles and the top of the View. 
-         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int topPadding=0x7f010022;
         /** <p>Must be one of the following constant values.</p>
 <table>
 <colgroup align="left" />
@@ -317,27 +196,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          */
         public static final int vpiUnderlinePageIndicatorStyle=0x7f010013;
     }
-    public static final class bool {
-        public static final int default_circle_indicator_centered=0x7f090000;
-        public static final int default_circle_indicator_snap=0x7f090001;
-        public static final int default_line_indicator_centered=0x7f090002;
-        public static final int default_title_indicator_selected_bold=0x7f090003;
-        public static final int default_underline_indicator_fades=0x7f090004;
-    }
     public static final class color {
         public static final int backColor=0x7f060006;
         public static final int black=0x7f060004;
         public static final int blue=0x7f060002;
         public static final int defaultTextColor=0x7f060008;
-        public static final int default_circle_indicator_fill_color=0x7f06000a;
-        public static final int default_circle_indicator_page_color=0x7f06000b;
-        public static final int default_circle_indicator_stroke_color=0x7f06000c;
-        public static final int default_line_indicator_selected_color=0x7f06000d;
-        public static final int default_line_indicator_unselected_color=0x7f06000e;
-        public static final int default_title_indicator_footer_color=0x7f06000f;
-        public static final int default_title_indicator_selected_color=0x7f060010;
-        public static final int default_title_indicator_text_color=0x7f060011;
-        public static final int default_underline_indicator_selected_color=0x7f060012;
         public static final int detail_bgColor=0x7f060007;
         public static final int green=0x7f060001;
         public static final int red=0x7f060000;
@@ -354,19 +217,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int behind_list_height=0x7f07000a;
         public static final int behind_list_text_size=0x7f07000b;
         public static final int bottom_button_height=0x7f070008;
-        public static final int default_circle_indicator_radius=0x7f070017;
-        public static final int default_circle_indicator_stroke_width=0x7f070018;
-        public static final int default_line_indicator_gap_width=0x7f07001a;
-        public static final int default_line_indicator_line_width=0x7f070019;
-        public static final int default_line_indicator_stroke_width=0x7f07001b;
-        public static final int default_title_indicator_clip_padding=0x7f07001c;
-        public static final int default_title_indicator_footer_indicator_height=0x7f07001e;
-        public static final int default_title_indicator_footer_indicator_underline_padding=0x7f07001f;
-        public static final int default_title_indicator_footer_line_height=0x7f07001d;
-        public static final int default_title_indicator_footer_padding=0x7f070020;
-        public static final int default_title_indicator_text_size=0x7f070021;
-        public static final int default_title_indicator_title_padding=0x7f070022;
-        public static final int default_title_indicator_top_padding=0x7f070023;
         /**  详情页面 
          */
         public static final int details_bottom_height=0x7f07000c;
@@ -454,102 +304,93 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int icon_shanchu_unfocused=0x7f02002d;
         public static final int slidingmenu_shadow=0x7f02002e;
         public static final int splash=0x7f02002f;
-        public static final int text_while=0x7f020030;
-        public static final int webview_load_default=0x7f020031;
-        public static final int xlistview_arrow=0x7f020032;
+        public static final int text_blue=0x7f020030;
+        public static final int text_while=0x7f020031;
+        public static final int webview_load_default=0x7f020032;
+        public static final int xlistview_arrow=0x7f020033;
     }
     public static final class id {
-        public static final int activity_selectimg_send=0x7f050022;
-        public static final int behind_list_show=0x7f050027;
-        public static final int bn_refresh=0x7f050010;
-        public static final int bottom=0x7f050007;
-        public static final int bt=0x7f05001c;
-        public static final int bucket_exit=0x7f05001a;
-        public static final int button_user_login=0x7f050048;
-        public static final int button_user_unlogin=0x7f05004a;
-        public static final int count=0x7f050038;
-        public static final int details_button_enter=0x7f05002c;
-        public static final int details_edittext_discuss=0x7f05002b;
-        public static final int details_imageview_gohome=0x7f050033;
-        public static final int details_listview_show=0x7f050029;
-        public static final int details_textview_title=0x7f050034;
-        public static final int edit_linear=0x7f050045;
-        public static final int edittext_user_pwd=0x7f050047;
-        public static final int edittext_user_username=0x7f050046;
-        public static final int fl_off=0x7f050014;
+        public static final int activity_selectimg_send=0x7f05001d;
+        public static final int behind_list_show=0x7f050022;
+        public static final int bn_refresh=0x7f05000b;
+        public static final int bt=0x7f050017;
+        public static final int bucket_exit=0x7f050015;
+        public static final int button_user_login=0x7f050043;
+        public static final int button_user_unlogin=0x7f050045;
+        public static final int count=0x7f050033;
+        public static final int details_button_enter=0x7f050027;
+        public static final int details_edittext_discuss=0x7f050026;
+        public static final int details_imageview_gohome=0x7f05002e;
+        public static final int details_listview_show=0x7f050024;
+        public static final int details_textview_title=0x7f05002f;
+        public static final int edit_linear=0x7f050040;
+        public static final int edittext_user_pwd=0x7f050042;
+        public static final int edittext_user_username=0x7f050041;
+        public static final int fl_off=0x7f05000f;
         public static final int fullscreen=0x7f050003;
-        public static final int gridview=0x7f05001b;
-        public static final int image=0x7f050035;
-        public static final int imageview_above_more=0x7f050019;
-        public static final int imageview_above_query=0x7f050018;
-        public static final int isselected=0x7f050036;
-        public static final int item_date=0x7f050031;
-        public static final int item_grida_image=0x7f05003e;
-        public static final int item_image_grid_text=0x7f050039;
-        public static final int item_popupwindows_Photo=0x7f05003c;
-        public static final int item_popupwindows_camera=0x7f05003b;
-        public static final int item_popupwindows_cancel=0x7f05003d;
-        public static final int item_time=0x7f05000b;
-        public static final int item_title=0x7f05000a;
-        public static final int item_username=0x7f050030;
-        public static final int item_webView=0x7f050032;
-        public static final int iv_off=0x7f050015;
-        public static final int lastPage=0x7f05002d;
+        public static final int gridview=0x7f050016;
+        public static final int image=0x7f050030;
+        public static final int imageview_above_more=0x7f050014;
+        public static final int imageview_above_query=0x7f050013;
+        public static final int isselected=0x7f050031;
+        public static final int item_date=0x7f05002c;
+        public static final int item_grida_image=0x7f050039;
+        public static final int item_image_grid_text=0x7f050034;
+        public static final int item_popupwindows_Photo=0x7f050037;
+        public static final int item_popupwindows_camera=0x7f050036;
+        public static final int item_popupwindows_cancel=0x7f050038;
+        public static final int item_time=0x7f050006;
+        public static final int item_title=0x7f050005;
+        public static final int item_username=0x7f05002b;
+        public static final int item_webView=0x7f05002d;
+        public static final int iv_off=0x7f050010;
+        public static final int lastPage=0x7f050028;
         public static final int left=0x7f050000;
-        public static final int linearLayout_focus=0x7f05002a;
-        public static final int linear_above_to_Home=0x7f050016;
-        public static final int list_view=0x7f050012;
-        public static final int ll_popup=0x7f05003a;
-        public static final int load_progressBar=0x7f05000d;
-        public static final int login_login=0x7f050028;
-        public static final int main_linear_listview=0x7f050011;
-        public static final int main_title=0x7f050013;
+        public static final int linearLayout_focus=0x7f050025;
+        public static final int linear_above_to_Home=0x7f050011;
+        public static final int list_view=0x7f05000d;
+        public static final int ll_popup=0x7f050035;
+        public static final int load_progressBar=0x7f050008;
+        public static final int login_login=0x7f050023;
+        public static final int main_linear_listview=0x7f05000c;
+        public static final int main_title=0x7f05000e;
         public static final int margin=0x7f050002;
-        public static final int name=0x7f050037;
-        public static final int new_topic_enter=0x7f050041;
-        public static final int new_topic_gohome=0x7f05003f;
-        public static final int new_topic_textview_title=0x7f050040;
-        public static final int newtopic_content=0x7f050024;
-        public static final int newtopic_title=0x7f050023;
-        public static final int nextPage=0x7f05002f;
-        public static final int noScrollgridview=0x7f050025;
-        public static final int none=0x7f050004;
-        public static final int pageInfo=0x7f05002e;
-        public static final int photo_bt_del=0x7f050020;
-        public static final int photo_bt_enter=0x7f050021;
-        public static final int photo_bt_exit=0x7f05001f;
-        public static final int photo_relativeLayout=0x7f05001e;
+        public static final int name=0x7f050032;
+        public static final int new_topic_enter=0x7f05003c;
+        public static final int new_topic_gohome=0x7f05003a;
+        public static final int new_topic_textview_title=0x7f05003b;
+        public static final int newtopic_content=0x7f05001f;
+        public static final int newtopic_title=0x7f05001e;
+        public static final int nextPage=0x7f05002a;
+        public static final int noScrollgridview=0x7f050020;
+        public static final int pageInfo=0x7f050029;
+        public static final int photo_bt_del=0x7f05001b;
+        public static final int photo_bt_enter=0x7f05001c;
+        public static final int photo_bt_exit=0x7f05001a;
+        public static final int photo_relativeLayout=0x7f050019;
         public static final int right=0x7f050001;
-        public static final int selected_view=0x7f050009;
-        public static final int show_title_gohome=0x7f050042;
-        public static final int slidingmenumain=0x7f050044;
-        public static final int textview_behind_title=0x7f050026;
-        public static final int top=0x7f050008;
-        public static final int triangle=0x7f050005;
-        public static final int tv_above_title=0x7f050017;
-        public static final int txt_neterr=0x7f05000f;
-        public static final int underline=0x7f050006;
-        public static final int unlogin_linear=0x7f050049;
-        public static final int view_loading=0x7f05000c;
-        public static final int view_loading_fail=0x7f05000e;
-        public static final int viewpager=0x7f05001d;
-        public static final int web_image=0x7f050043;
-        public static final int xlistview_footer_content=0x7f05004b;
-        public static final int xlistview_footer_hint_textview=0x7f05004d;
-        public static final int xlistview_footer_progressbar=0x7f05004c;
-        public static final int xlistview_header_arrow=0x7f050052;
-        public static final int xlistview_header_content=0x7f05004e;
-        public static final int xlistview_header_hint_textview=0x7f050050;
-        public static final int xlistview_header_progressbar=0x7f050053;
-        public static final int xlistview_header_text=0x7f05004f;
-        public static final int xlistview_header_time=0x7f050051;
+        public static final int selected_view=0x7f050004;
+        public static final int show_title_gohome=0x7f05003d;
+        public static final int slidingmenumain=0x7f05003f;
+        public static final int textview_behind_title=0x7f050021;
+        public static final int tv_above_title=0x7f050012;
+        public static final int txt_neterr=0x7f05000a;
+        public static final int unlogin_linear=0x7f050044;
+        public static final int view_loading=0x7f050007;
+        public static final int view_loading_fail=0x7f050009;
+        public static final int viewpager=0x7f050018;
+        public static final int web_image=0x7f05003e;
+        public static final int xlistview_footer_content=0x7f050046;
+        public static final int xlistview_footer_hint_textview=0x7f050048;
+        public static final int xlistview_footer_progressbar=0x7f050047;
+        public static final int xlistview_header_arrow=0x7f05004d;
+        public static final int xlistview_header_content=0x7f050049;
+        public static final int xlistview_header_hint_textview=0x7f05004b;
+        public static final int xlistview_header_progressbar=0x7f05004e;
+        public static final int xlistview_header_text=0x7f05004a;
+        public static final int xlistview_header_time=0x7f05004c;
     }
     public static final class integer {
-        public static final int default_circle_indicator_orientation=0x7f080001;
-        public static final int default_title_indicator_footer_indicator_style=0x7f080002;
-        public static final int default_title_indicator_line_position=0x7f080003;
-        public static final int default_underline_indicator_fade_delay=0x7f080004;
-        public static final int default_underline_indicator_fade_length=0x7f080005;
         public static final int num_cols=0x7f080000;
     }
     public static final class layout {
@@ -584,47 +425,47 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int xlistview_header=0x7f03001c;
     }
     public static final class menu {
-        public static final int main=0x7f0c0000;
+        public static final int main=0x7f0b0000;
     }
     public static final class string {
-        public static final int app_name=0x7f0a0000;
-        public static final int detail_enter=0x7f0a0011;
+        public static final int app_name=0x7f090000;
+        public static final int detail_enter=0x7f090011;
         /**   
          */
-        public static final int detail_prompt=0x7f0a0010;
-        public static final int menuBlog=0x7f0a000b;
+        public static final int detail_prompt=0x7f090010;
+        public static final int menuBlog=0x7f09000b;
         /**  侧边栏菜单 
          */
-        public static final int menuGood=0x7f0a0008;
-        public static final int menuNews=0x7f0a0009;
-        public static final int menuStudio=0x7f0a000a;
-        public static final int new_topic=0x7f0a0013;
-        public static final int new_topic_enter=0x7f0a0012;
-        public static final int new_topic_prompt=0x7f0a0015;
-        public static final int new_topic_prompt_title=0x7f0a0014;
-        public static final int press_again_exit=0x7f0a0007;
-        public static final int user_enter=0x7f0a000e;
-        public static final int user_pwd=0x7f0a000d;
-        public static final int user_unlogin=0x7f0a000f;
+        public static final int menuGood=0x7f090008;
+        public static final int menuNews=0x7f090009;
+        public static final int menuStudio=0x7f09000a;
+        public static final int new_topic=0x7f090013;
+        public static final int new_topic_enter=0x7f090012;
+        public static final int new_topic_prompt=0x7f090015;
+        public static final int new_topic_prompt_title=0x7f090014;
+        public static final int press_again_exit=0x7f090007;
+        public static final int user_enter=0x7f09000e;
+        public static final int user_pwd=0x7f09000d;
+        public static final int user_unlogin=0x7f09000f;
         /**  提示语 
          */
-        public static final int user_username=0x7f0a000c;
-        public static final int xlistview_footer_hint_normal=0x7f0a0005;
-        public static final int xlistview_footer_hint_ready=0x7f0a0006;
-        public static final int xlistview_header_hint_loading=0x7f0a0003;
+        public static final int user_username=0x7f09000c;
+        public static final int xlistview_footer_hint_normal=0x7f090005;
+        public static final int xlistview_footer_hint_ready=0x7f090006;
+        public static final int xlistview_header_hint_loading=0x7f090003;
         /**  上拉下拉 
          */
-        public static final int xlistview_header_hint_normal=0x7f0a0001;
-        public static final int xlistview_header_hint_ready=0x7f0a0002;
-        public static final int xlistview_header_last_time=0x7f0a0004;
+        public static final int xlistview_header_hint_normal=0x7f090001;
+        public static final int xlistview_header_hint_ready=0x7f090002;
+        public static final int xlistview_header_last_time=0x7f090004;
     }
     public static final class style {
-        public static final int AppTheme=0x7f0b0000;
+        public static final int AppTheme=0x7f0a0000;
         /**  Loading页面风格，全屏 
          */
-        public static final int Theme_splash=0x7f0b0001;
-        public static final int Transparent=0x7f0b0003;
-        public static final int title_right_button=0x7f0b0002;
+        public static final int Theme_splash=0x7f0a0001;
+        public static final int Transparent=0x7f0a0003;
+        public static final int title_right_button=0x7f0a0002;
     }
     public static final class styleable {
         /** Attributes that can be used with a SlidingMenu.
@@ -864,292 +705,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr name com.gkong.app:viewBehind
         */
         public static final int SlidingMenu_viewBehind = 2;
-        /** Attributes that can be used with a TitlePageIndicator.
-           <p>Includes the following attributes:</p>
-           <table>
-           <colgroup align="left" />
-           <colgroup align="left" />
-           <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #TitlePageIndicator_android_background android:background}</code></td><td> View background </td></tr>
-           <tr><td><code>{@link #TitlePageIndicator_android_textColor android:textColor}</code></td><td> Color of regular titles.</td></tr>
-           <tr><td><code>{@link #TitlePageIndicator_android_textSize android:textSize}</code></td><td> Size of title text.</td></tr>
-           <tr><td><code>{@link #TitlePageIndicator_clipPadding com.gkong.app:clipPadding}</code></td><td> Screen edge padding.</td></tr>
-           <tr><td><code>{@link #TitlePageIndicator_footerColor com.gkong.app:footerColor}</code></td><td> Color of the footer line and indicator.</td></tr>
-           <tr><td><code>{@link #TitlePageIndicator_footerIndicatorHeight com.gkong.app:footerIndicatorHeight}</code></td><td> Height of the indicator above the footer line.</td></tr>
-           <tr><td><code>{@link #TitlePageIndicator_footerIndicatorStyle com.gkong.app:footerIndicatorStyle}</code></td><td> Style of the indicator.</td></tr>
-           <tr><td><code>{@link #TitlePageIndicator_footerIndicatorUnderlinePadding com.gkong.app:footerIndicatorUnderlinePadding}</code></td><td> Left and right padding of the underline indicator.</td></tr>
-           <tr><td><code>{@link #TitlePageIndicator_footerLineHeight com.gkong.app:footerLineHeight}</code></td><td> Height of the footer line.</td></tr>
-           <tr><td><code>{@link #TitlePageIndicator_footerPadding com.gkong.app:footerPadding}</code></td><td> Padding between the bottom of the title and the footer.</td></tr>
-           <tr><td><code>{@link #TitlePageIndicator_linePosition com.gkong.app:linePosition}</code></td><td> Position of the line.</td></tr>
-           <tr><td><code>{@link #TitlePageIndicator_selectedBold com.gkong.app:selectedBold}</code></td><td> Whether or not the selected item is displayed as bold.</td></tr>
-           <tr><td><code>{@link #TitlePageIndicator_selectedColor com.gkong.app:selectedColor}</code></td><td> Color of the selected title.</td></tr>
-           <tr><td><code>{@link #TitlePageIndicator_titlePadding com.gkong.app:titlePadding}</code></td><td> Padding between titles when bumping into each other.</td></tr>
-           <tr><td><code>{@link #TitlePageIndicator_topPadding com.gkong.app:topPadding}</code></td><td> Padding between titles and the top of the View.</td></tr>
-           </table>
-           @see #TitlePageIndicator_android_background
-           @see #TitlePageIndicator_android_textColor
-           @see #TitlePageIndicator_android_textSize
-           @see #TitlePageIndicator_clipPadding
-           @see #TitlePageIndicator_footerColor
-           @see #TitlePageIndicator_footerIndicatorHeight
-           @see #TitlePageIndicator_footerIndicatorStyle
-           @see #TitlePageIndicator_footerIndicatorUnderlinePadding
-           @see #TitlePageIndicator_footerLineHeight
-           @see #TitlePageIndicator_footerPadding
-           @see #TitlePageIndicator_linePosition
-           @see #TitlePageIndicator_selectedBold
-           @see #TitlePageIndicator_selectedColor
-           @see #TitlePageIndicator_titlePadding
-           @see #TitlePageIndicator_topPadding
-         */
-        public static final int[] TitlePageIndicator = {
-            0x01010095, 0x01010098, 0x010100d4, 0x7f010015,
-            0x7f010018, 0x7f010019, 0x7f01001a, 0x7f01001b,
-            0x7f01001c, 0x7f01001d, 0x7f01001e, 0x7f01001f,
-            0x7f010020, 0x7f010021, 0x7f010022
-        };
-        /**
-          <p>
-          @attr description
-           View background 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#background}.
-          @attr name android:background
-        */
-        public static final int TitlePageIndicator_android_background = 2;
-        /**
-          <p>
-          @attr description
-           Color of regular titles. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#textColor}.
-          @attr name android:textColor
-        */
-        public static final int TitlePageIndicator_android_textColor = 1;
-        /**
-          <p>
-          @attr description
-           Size of title text. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#textSize}.
-          @attr name android:textSize
-        */
-        public static final int TitlePageIndicator_android_textSize = 0;
-        /**
-          <p>
-          @attr description
-           Screen edge padding. 
-
-
-          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.gkong.app:clipPadding
-        */
-        public static final int TitlePageIndicator_clipPadding = 4;
-        /**
-          <p>
-          @attr description
-           Color of the footer line and indicator. 
-
-
-          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
-"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.gkong.app:footerColor
-        */
-        public static final int TitlePageIndicator_footerColor = 5;
-        /**
-          <p>
-          @attr description
-           Height of the indicator above the footer line. 
-
-
-          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.gkong.app:footerIndicatorHeight
-        */
-        public static final int TitlePageIndicator_footerIndicatorHeight = 8;
-        /**
-          <p>
-          @attr description
-           Style of the indicator. Default is triangle. 
-
-
-          <p>Must be one of the following constant values.</p>
-<table>
-<colgroup align="left" />
-<colgroup align="left" />
-<colgroup align="left" />
-<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-<tr><td><code>none</code></td><td>0</td><td></td></tr>
-<tr><td><code>triangle</code></td><td>1</td><td></td></tr>
-<tr><td><code>underline</code></td><td>2</td><td></td></tr>
-</table>
-          <p>This is a private symbol.
-          @attr name com.gkong.app:footerIndicatorStyle
-        */
-        public static final int TitlePageIndicator_footerIndicatorStyle = 7;
-        /**
-          <p>
-          @attr description
-           Left and right padding of the underline indicator. 
-
-
-          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.gkong.app:footerIndicatorUnderlinePadding
-        */
-        public static final int TitlePageIndicator_footerIndicatorUnderlinePadding = 9;
-        /**
-          <p>
-          @attr description
-           Height of the footer line. 
-
-
-          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.gkong.app:footerLineHeight
-        */
-        public static final int TitlePageIndicator_footerLineHeight = 6;
-        /**
-          <p>
-          @attr description
-           Padding between the bottom of the title and the footer. 
-
-
-          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.gkong.app:footerPadding
-        */
-        public static final int TitlePageIndicator_footerPadding = 10;
-        /**
-          <p>
-          @attr description
-           Position of the line. 
-
-
-          <p>Must be one of the following constant values.</p>
-<table>
-<colgroup align="left" />
-<colgroup align="left" />
-<colgroup align="left" />
-<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-<tr><td><code>bottom</code></td><td>0</td><td></td></tr>
-<tr><td><code>top</code></td><td>1</td><td></td></tr>
-</table>
-          <p>This is a private symbol.
-          @attr name com.gkong.app:linePosition
-        */
-        public static final int TitlePageIndicator_linePosition = 11;
-        /**
-          <p>
-          @attr description
-           Whether or not the selected item is displayed as bold. 
-
-
-          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.gkong.app:selectedBold
-        */
-        public static final int TitlePageIndicator_selectedBold = 12;
-        /**
-          <p>
-          @attr description
-           Color of the selected title. 
-
-
-          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
-"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.gkong.app:selectedColor
-        */
-        public static final int TitlePageIndicator_selectedColor = 3;
-        /**
-          <p>
-          @attr description
-           Padding between titles when bumping into each other. 
-
-
-          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.gkong.app:titlePadding
-        */
-        public static final int TitlePageIndicator_titlePadding = 13;
-        /**
-          <p>
-          @attr description
-           Padding between titles and the top of the View. 
-
-
-          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.gkong.app:topPadding
-        */
-        public static final int TitlePageIndicator_topPadding = 14;
         /** Attributes that can be used with a ViewPagerIndicator.
            <p>Includes the following attributes:</p>
            <table>

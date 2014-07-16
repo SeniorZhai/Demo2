@@ -3,16 +3,20 @@ package com.gkong.app.ui;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -28,13 +32,16 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.gkong.app.MyApplication;
 import com.gkong.app.R;
 import com.gkong.app.adapter.MyArrayAdapter;
 import com.gkong.app.config.Api;
+import com.gkong.app.data.BoardDao;
 import com.gkong.app.model.BBSBoard;
 import com.gkong.app.model.ClassBoard;
 import com.gkong.app.slidingmenu.SlidingMenu;
@@ -46,8 +53,10 @@ import com.google.gson.Gson;
 
 @SuppressLint("SimpleDateFormat") public class MainActivity extends BaseSlidingFragmentActivity implements
 		OnClickListener, IXListViewListener {
+	private static final String TAG = "MainActivity";
 	private Context mContext = MainActivity.this;
-
+	// DataBase
+	private BoardDao dao;
 	// Value
 	private final String LIST_TEXT = "text";
 	private final String LIST_URL = "url";
@@ -60,6 +69,7 @@ import com.google.gson.Gson;
 	// Data
 	private ArrayList<Map<String, Object>> list;
 	private ArrayList<BBSBoard> BBSList;
+	private ArrayList<ClassBoard> myList;
 	// View
 	private SlidingMenu sm;
 	private ImageView aboveImgQuery;
@@ -78,8 +88,9 @@ import com.google.gson.Gson;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		list = new ArrayList<Map<String, Object>>();
+		list = ((MyApplication)getApplication()).list;
 		BBSList = new ArrayList<BBSBoard>();
+		dao = new BoardDao(mContext);;
 		initSlidingMenu();
 		setContentView(R.layout.above_slidingmenu);
 		initControl();
@@ -88,6 +99,8 @@ import com.google.gson.Gson;
 
 	@Override
 	public void onDestroy() {
+		if (dao != null)
+			dao = null;
 		super.onDestroy();
 	}
 
@@ -141,7 +154,6 @@ import com.google.gson.Gson;
 			}
 		});
 		aboveLoadLayout.setVisibility(View.VISIBLE);
-//		getList(boardID, 1);
 		getNewBoard(Type, "date", page);
 		lvAdapter = new SimpleAdapter(this, list, R.layout.behind_list_show,
 				new String[] { LIST_TEXT },
@@ -298,6 +310,7 @@ import com.google.gson.Gson;
 			@Override
 			public void onResponse(String response) {
 				try {
+					myList = new ArrayList<ClassBoard>();
 					JSONObject obj1 = new JSONObject(response);
 					String str = obj1.getString("d");
 					JSONObject obj2 = new JSONObject(str);
@@ -308,20 +321,24 @@ import com.google.gson.Gson;
 					map0.put(LIST_TEXT, "技术区最新动态");
 					map0.put(LIST_URL, "0000");
 					list.add(map0);
+					myList.add(new ClassBoard(1,"技术区最新动态",1,1));
 					Map<String, Object> map1 = new HashMap<String, Object>();
 					map1.put(LIST_TEXT, "非技术区最新动态");
 					map1.put(LIST_URL, "0000");
 					list.add(map1);
+					myList.add(new ClassBoard(2,"非技术区最新动态",2,2));
 					for (int i = 0; i < array.length(); i++) {
 						ClassBoard obj = gson.fromJson(array.getString(i),
 								ClassBoard.class);
+						myList.add(obj);
 						Map<String, Object> map = new HashMap<String, Object>();
-						map.put(LIST_TEXT, obj.getBordName());
+						map.put(LIST_TEXT, obj.getBoardName());
 						map.put(LIST_URL, obj.getBoardID());
 						list.add(map);
 					}
+					MyTask task = new MyTask();
+					task.execute();
 					lvAdapter.notifyDataSetChanged();
-
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -337,8 +354,8 @@ import com.google.gson.Gson;
 		return new Response.ErrorListener() {
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				Toast.makeText(mContext, error.getMessage(), Toast.LENGTH_LONG)
-						.show();
+				Log.d(TAG, error.getMessage());
+				ToastUtil.show(mContext, "网络错误");
 			}
 		};
 	}
@@ -407,4 +424,12 @@ import com.google.gson.Gson;
 		}
 	}
 	// [start]XList监听
+	
+	class MyTask extends AsyncTask<Void, Void, Void>{
+		@Override
+		protected Void doInBackground(Void... params) {
+			dao.initCache(myList);
+			return null;
+		}
+	}
 }
