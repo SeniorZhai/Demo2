@@ -2,9 +2,11 @@ package com.gkong.app.ui;
 
 import java.util.ArrayList;
 import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -15,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -22,7 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
@@ -41,7 +44,8 @@ import com.gkong.app.ui.base.BaseActivity;
 import com.gkong.app.utils.ToastUtil;
 import com.google.gson.Gson;
 
-@SuppressLint("SetJavaScriptEnabled") public class DetailsActivity extends BaseActivity implements OnClickListener {
+@SuppressLint("SetJavaScriptEnabled")
+public class DetailsActivity extends BaseActivity implements OnClickListener {
 	// Context
 	private MyApplication mApplication;
 	private Activity mActivity;
@@ -49,6 +53,7 @@ import com.google.gson.Gson;
 	private int currentPage = 1, pageCout;
 	private String url;
 	private String detailId;
+	private int myPosition = 0;
 	// View
 	private ImageView imgGoHome;
 	private EditText editText;
@@ -146,6 +151,7 @@ import com.google.gson.Gson;
 			}
 		};
 	}
+
 	private Response.Listener<String> repayResponseListener() {
 		return new Response.Listener<String>() {
 			@Override
@@ -154,16 +160,17 @@ import com.google.gson.Gson;
 				RepayInfo info = gson.fromJson(response, RepayInfo.class);
 				currentPage = pageCout;
 				if (info.isIsSuccess()) {
-					String url = Api.Archive(detailId,currentPage);
+					String url = Api.Archive(detailId, currentPage);
 					executeRequest(new StringRequest(Method.GET, url,
 							responseListener(), errorListener()));
 					editText.setText("");
-				}else {
+				} else {
 					Log.d("DetailsActivity", info.getMessage());
 				}
 			}
 		};
 	}
+
 	// [end]网络请求反馈
 	// [start]网络请求错误
 	protected Response.ErrorListener errorListener() {
@@ -179,8 +186,6 @@ import com.google.gson.Gson;
 	protected void executeRequest(Request<?> request) {
 		RequestManager.addRequest(request, this);
 	}
-
-
 
 	@Override
 	public void onClick(View v) {
@@ -217,14 +222,13 @@ import com.google.gson.Gson;
 						JSONObject json = new JSONObject();
 						try {
 							json.put("UID", mApplication.loginInfo.getData());
-							json.put("AnnounceId", mList.get(0).getAnnounceID());
+							json.put("AnnounceId", mList.get(myPosition).getAnnounceID());
 							json.put("Body", editText.getText().toString());
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}
 						String content = String.valueOf(json);
-						return new ApiParams().with("d",
-								content);
+						return new ApiParams().with("d", content);
 					}
 				});
 			}
@@ -258,7 +262,7 @@ import com.google.gson.Gson;
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-
+			final int myPosition = position;
 			if (convertView == null) {
 				convertView = LayoutInflater.from(context).inflate(
 						R.layout.details_list_item, null);
@@ -271,11 +275,26 @@ import com.google.gson.Gson;
 			TextView userName = (TextView) convertView
 					.findViewById(R.id.item_username);
 			TextView time = (TextView) convertView.findViewById(R.id.item_date);
+			TextView reply = (TextView) convertView
+					.findViewById(R.id.item_reply);
 
 			Archive obj = list.get(position);
 			userName.setText(obj.getUserName());
 			time.setText(obj.getDateAndTime());
-
+			reply.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					DetailsActivity.this.myPosition = myPosition;
+					if (myPosition == 0)
+						ToastUtil.show(context, "回复楼主");
+					else
+						ToastUtil.show(context, "回复"+myPosition+"楼");
+					editText.requestFocus();  
+					InputMethodManager imm = (InputMethodManager) context
+							  .getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+				}
+			});
 			webView.getSettings().setJavaScriptEnabled(true);
 			webView.addJavascriptInterface(new JavascriptInterface(context),
 					"imagelistner");

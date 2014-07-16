@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,6 +28,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -38,7 +38,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -101,6 +100,12 @@ public class PublishedActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				InputMethodManager m = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+				if (m.isActive()) {
+					m.hideSoftInputFromWindow(PublishedActivity.this
+					.getCurrentFocus().getWindowToken(),
+					InputMethodManager.HIDE_NOT_ALWAYS);
+				}
 				if (position == Bimp.bmp.size()) {
 					new PopupWindows(mActivity, gridview).show();
 				} else {
@@ -117,19 +122,23 @@ public class PublishedActivity extends Activity {
 			public void onClick(View v) {
 				if (mApplication.loginInfo == null) {
 					ToastUtil.show(mActivity, "请登入");
-					Intent intent = new Intent(mActivity, UserLoginUidActivity.class);
+					Intent intent = new Intent(mActivity,
+							UserLoginUidActivity.class);
 					startActivity(intent);
-//				} else if (title.getText().length() <= 5) {
-//					ToastUtil.show(mActivity, "标题过短");
-//				} else if (content.getText().length() <= 10) {
-//					ToastUtil.show(mActivity, "内容过短");
+					// } else if (title.getText().length() <= 5) {
+					// ToastUtil.show(mActivity, "标题过短");
+					// } else if (content.getText().length() <= 10) {
+					// ToastUtil.show(mActivity, "内容过短");
 				} else {
 					ToastUtil.show(mActivity, "发帖中。。。");
-					Intent intent = new Intent(mActivity,UploadService.class);
-//					intent.putExtra(UploadService.CONTENT, title.getText().toString());
-//					intent.putExtra(UploadService.TITLE, content.getText().toString());
-					intent.putExtra(UploadService.UID, mApplication.loginInfo.getData());
-//					intent.putExtra(UploadService.BOARDID, boardID);
+					Intent intent = new Intent(mActivity, UploadService.class);
+					// intent.putExtra(UploadService.CONTENT,
+					// title.getText().toString());
+					// intent.putExtra(UploadService.TITLE,
+					// content.getText().toString());
+					intent.putExtra(UploadService.UID,
+							mApplication.loginInfo.getData());
+					// intent.putExtra(UploadService.BOARDID, boardID);
 					startService(intent);
 				}
 			}
@@ -252,9 +261,10 @@ public class PublishedActivity extends Activity {
 		}).start();
 	}
 
-	public class PopupWindows  {
+	public class PopupWindows {
 		private PopupWindow window;
 		private View parent;
+
 		public PopupWindows(Context mContext, View parent) {
 			this.parent = parent;
 			View view = View
@@ -265,7 +275,8 @@ public class PublishedActivity extends Activity {
 					.findViewById(R.id.ll_popup);
 			ll_popup.startAnimation(AnimationUtils.loadAnimation(mContext,
 					R.anim.push_bottom_in));
-			 window = new PopupWindow(view,LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
+			window = new PopupWindow(view, LayoutParams.MATCH_PARENT,
+					LayoutParams.MATCH_PARENT);
 
 			Button bt1 = (Button) view
 					.findViewById(R.id.item_popupwindows_camera);
@@ -293,12 +304,13 @@ public class PublishedActivity extends Activity {
 				}
 			});
 		}
-		private void show(){
+
+		private void show() {
 			window.setFocusable(true);
-			window.setOutsideTouchable(true);	
+			window.setOutsideTouchable(true);
 			window.showAtLocation(parent, Gravity.BOTTOM, 0, 0);
 			window.update();
-		}			
+		}
 	}
 
 	private static final int TAKE_PICTURE = 0x000000;
