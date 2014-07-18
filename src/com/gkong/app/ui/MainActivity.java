@@ -354,7 +354,6 @@ import com.google.gson.Gson;
 		return new Response.ErrorListener() {
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				Log.d(TAG, error.getMessage());
 				ToastUtil.show(mContext, "网络错误");
 			}
 		};

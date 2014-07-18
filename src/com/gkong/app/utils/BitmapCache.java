@@ -47,7 +47,6 @@ public class BitmapCache {
 			// iv.setImageBitmap(null);
 			return;
 		}
-		// »º´æÖÐÊÇ·ñÓÐ¸ÃÍ¼Æ¬
 		if (imageCache.containsKey(path)) {
 			SoftReference<Bitmap> reference = imageCache.get(path);
 			Bitmap bmp = reference.get();

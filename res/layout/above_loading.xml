@@ -3,20 +3,19 @@
     android:id="@+id/view_loading"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
     android:background="#f5f5f5"
-    android:visibility="gone"
+    android:clickable="true"
     android:gravity="center_vertical|center_horizontal"
-    android:orientation="vertical" >
-    
-    <ProgressBar 
+    android:orientation="vertical"
+    android:visibility="gone" >
+
+    <ProgressBar
         android:id="@+id/load_progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <ImageView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/dis_logo"/>
+        android:layout_width="150dp"
+        android:layout_height="128dp"
+        android:layout_gravity="center"
+        android:indeterminate="false"
+        style="?android:attr/progressBarStyleSmall"
+        android:indeterminateDrawable="@anim/progress_bar_anim" />
 
 </LinearLayout>

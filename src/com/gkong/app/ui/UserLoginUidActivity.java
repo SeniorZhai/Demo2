@@ -154,7 +154,8 @@ public class UserLoginUidActivity extends BaseActivity implements
 		return new Response.ErrorListener() {
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				Toast.makeText(UserLoginUidActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+				dialog.dismiss();
+				Toast.makeText(UserLoginUidActivity.this, "网络错误", Toast.LENGTH_LONG).show();
 			}
 		};
 	}

@@ -52,6 +52,11 @@ public class BucketActivity extends Activity {
 				getResources(),
 				R.drawable.icon_addpic_unfocused);
 	}
+	@Override
+	protected void onResume() {
+		initData();
+		super.onResume();
+	}
 	/**
 	 * 初始化view视图
 	 */

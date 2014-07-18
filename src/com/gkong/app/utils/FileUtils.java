@@ -11,7 +11,7 @@ import android.util.Log;
 
 public class FileUtils {
 	public static String SDPATH = Environment.getExternalStorageDirectory()
-			+ "/formats/";
+			+ "/gkong/";
 	public static void saveBitmap(Bitmap bm, String picName) {
 		Log.e("---", "保存图片");
 		try {

@@ -127,7 +127,6 @@ public class NewTopicActivity extends Activity implements OnClickListener {
 				}else {
 					ToastUtil.show(mActivity, info.getMessage());
 				}
-
 			}
 		};
 	}

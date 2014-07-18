@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import com.gkong.app.R;
 import com.gkong.app.data.Bimp;
 import com.gkong.app.utils.FileUtils;
+import com.gkong.app.utils.ToastUtil;
 
 public class PhotoActivity extends Activity {
 	private ArrayList<View> listViews = null;
@@ -34,6 +35,10 @@ public class PhotoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_photo);
+		if (Bimp.bmp == null || Bimp.drr == null) {
+			ToastUtil.show(this, "内存中不存在图片");
+			finish();
+		}
 		for (int i = 0; i < Bimp.bmp.size(); i++) {
 			bmp.add(Bimp.bmp.get(i));
 		}

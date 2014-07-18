@@ -1,9 +1,13 @@
 package com.gkong.app.ui;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,6 +20,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -53,10 +58,14 @@ import com.gkong.app.data.ApiParams;
 import com.gkong.app.data.Bimp;
 import com.gkong.app.data.RequestManager;
 import com.gkong.app.model.NewTopicInfo;
+import com.gkong.app.model.UploadInfo;
 import com.gkong.app.service.UploadService;
 import com.gkong.app.utils.FileUtils;
 import com.gkong.app.utils.ToastUtil;
 import com.google.gson.Gson;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 public class PublishedActivity extends Activity {
 	private MyApplication mApplication;
@@ -69,11 +78,16 @@ public class PublishedActivity extends Activity {
 	private GridView gridview;
 	private GridAdapter adapter;
 	private TextView activity_selectimg_send;
+	private ImageView goHome;
+	private StringBuffer buffer;
+	private Gson gson;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_selecting);
+		gson = new Gson();
+		buffer = new StringBuffer();
 		mApplication = (MyApplication) getApplication();
 		mActivity = this;
 		boardID = getIntent().getStringExtra("BoardID");
@@ -90,7 +104,13 @@ public class PublishedActivity extends Activity {
 
 		title = (EditText) findViewById(R.id.newtopic_title);
 		content = (EditText) findViewById(R.id.newtopic_content);
-
+		goHome = (ImageView) findViewById(R.id.select_gohome);
+		goHome.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 		gridview = (GridView) findViewById(R.id.noScrollgridview);
 		gridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
 		adapter = new GridAdapter(this);
@@ -103,8 +123,8 @@ public class PublishedActivity extends Activity {
 				InputMethodManager m = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 				if (m.isActive()) {
 					m.hideSoftInputFromWindow(PublishedActivity.this
-					.getCurrentFocus().getWindowToken(),
-					InputMethodManager.HIDE_NOT_ALWAYS);
+							.getCurrentFocus().getWindowToken(),
+							InputMethodManager.HIDE_NOT_ALWAYS);
 				}
 				if (position == Bimp.bmp.size()) {
 					new PopupWindows(mActivity, gridview).show();
@@ -125,21 +145,15 @@ public class PublishedActivity extends Activity {
 					Intent intent = new Intent(mActivity,
 							UserLoginUidActivity.class);
 					startActivity(intent);
-					// } else if (title.getText().length() <= 5) {
-					// ToastUtil.show(mActivity, "标题过短");
-					// } else if (content.getText().length() <= 10) {
-					// ToastUtil.show(mActivity, "内容过短");
+				} else if (title.getText().length() <= 5) {
+					ToastUtil.show(mActivity, "标题过短");
+				} else if (content.getText().length() <= 10) {
+					ToastUtil.show(mActivity, "内容过短");
 				} else {
-					ToastUtil.show(mActivity, "发帖中。。。");
-					Intent intent = new Intent(mActivity, UploadService.class);
-					// intent.putExtra(UploadService.CONTENT,
-					// title.getText().toString());
-					// intent.putExtra(UploadService.TITLE,
-					// content.getText().toString());
-					intent.putExtra(UploadService.UID,
-							mApplication.loginInfo.getData());
-					// intent.putExtra(UploadService.BOARDID, boardID);
-					startService(intent);
+					dialog.show();
+					buffer.append(content.getText());
+					MyTask task = new MyTask();
+					task.execute();
 				}
 			}
 		});
@@ -343,37 +357,6 @@ public class PublishedActivity extends Activity {
 		}
 	}
 
-	private void enter() {
-		if (mApplication.loginInfo == null) {
-			ToastUtil.show(mActivity, "请登入");
-			Intent intent = new Intent(mActivity, UserLoginUidActivity.class);
-			startActivity(intent);
-		} else if (title.getText().length() <= 5) {
-			ToastUtil.show(mActivity, "标题过短");
-		} else if (content.getText().length() <= 10) {
-			ToastUtil.show(mActivity, "内容过短");
-		} else {
-			dialog.show();
-			executeRequest(new StringRequest(Method.POST, Api.NewTopic,
-					responseListener(), errorListener()) {
-				@Override
-				protected Map<String, String> getParams() {
-					JSONObject json = new JSONObject();
-					try {
-						json.put("UID", mApplication.loginInfo.getData());
-						json.put("Title", title.getText().toString());
-						json.put("Body", content.getText().toString());
-						json.put("BoardId", boardID);
-					} catch (JSONException e) {
-						e.printStackTrace();
-					}
-					String body = String.valueOf(json);
-					return new ApiParams().with("d", body);
-				}
-			});
-		}
-	}
-
 	// [start]网络请求
 	protected void executeRequest(Request<?> request) {
 		RequestManager.addRequest(request, this);
@@ -416,5 +399,96 @@ public class PublishedActivity extends Activity {
 	protected void onDestroy() {
 		FileUtils.deleteDir();
 		super.onDestroy();
+	}
+
+	class MyTask extends AsyncTask<Void, Void, Void> {
+		private int flag = 0;
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			List<String> list = new ArrayList<String>();
+			for (int i = 0; i < Bimp.drr.size(); i++) {
+				String Str = Bimp.drr.get(i).substring(
+						Bimp.drr.get(i).lastIndexOf("/") + 1,
+						Bimp.drr.get(i).lastIndexOf("."));
+				list.add(FileUtils.SDPATH + Str + ".JPEG");
+			}
+			if (list.size() > 0) {
+				post(Api.Upload + mApplication.loginInfo.getData(), list);
+			} else {
+				published();
+			}
+			return null;
+		}
+
+		private void post(String uploadUrl, final List<String> paths) {
+			for (String path : paths) {
+				File file = new File(path);
+				if (file.exists() && file.length() > 0) {
+					AsyncHttpClient client = new AsyncHttpClient();
+					RequestParams params = new RequestParams();
+					try {
+						params.put("profile_picture", file);
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
+					client.post(uploadUrl, params,
+							new AsyncHttpResponseHandler() {
+								@Override
+								public void onSuccess(int statusCode,
+										Header[] headers, byte[] responseBody) {
+									flag++;
+									Log.d("---", "StatusCode:" + statusCode
+											+ "\t" + new String(responseBody));
+									UploadInfo info = gson.fromJson(new String(
+											responseBody), UploadInfo.class);
+									buffer.append(info.getResult());
+									if (flag == paths.size()) {
+										Log.d("---", "全部上传");
+										published();
+									}
+								}
+
+								@Override
+								public void onFailure(int statusCode,
+										Header[] headers, byte[] responseBody,
+										Throwable error) {
+									flag++;
+									if (responseBody != null) {
+										Log.d("---", "StatusCode:" + statusCode
+												+ "\n"
+												+ new String(responseBody));
+									}
+									Log.d("---", "StatusCode:" + statusCode
+											+ "\n");
+								}
+							});
+				} else {
+					ToastUtil.show(PublishedActivity.this, "文件错误");
+				}
+			}
+
+		}
+
+		private void published() {
+			executeRequest(new StringRequest(Method.POST, Api.NewTopic,
+					responseListener(), errorListener()) {
+				@Override
+				protected Map<String, String> getParams() {
+					JSONObject json = new JSONObject();
+					try {
+						json.put("UID", mApplication.loginInfo.getData());
+						json.put("Title", title.getText().toString());
+						json.put("Body", buffer.toString());
+						Log.d("---", buffer.toString());
+						json.put("BoardId", boardID);
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+					String body = String.valueOf(json);
+					return new ApiParams().with("d", body);
+				}
+			});
+		}
 	}
 }
