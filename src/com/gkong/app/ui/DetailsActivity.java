@@ -54,6 +54,7 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 	private String url;
 	private String detailId;
 	private int myPosition = 0;
+	private boolean isIncRepay = false;
 	// View
 	private ImageView imgGoHome;
 	private EditText editText;
@@ -224,6 +225,7 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 							json.put("UID", mApplication.loginInfo.getData());
 							json.put("AnnounceId", mList.get(myPosition).getAnnounceID());
 							json.put("Body", editText.getText().toString());
+							json.put("IsIncRepay", isIncRepay);
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}
@@ -277,13 +279,31 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 			TextView time = (TextView) convertView.findViewById(R.id.item_date);
 			TextView reply = (TextView) convertView
 					.findViewById(R.id.item_reply);
-
+			TextView incReply = (TextView) convertView
+					.findViewById(R.id.item_incReply);
+			
 			Archive obj = list.get(position);
 			userName.setText(obj.getUserName());
 			time.setText(obj.getDateAndTime());
+			incReply.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					isIncRepay = true;
+					DetailsActivity.this.myPosition = myPosition;
+					if (myPosition == 0)
+						ToastUtil.show(context, "引用楼主");
+					else
+						ToastUtil.show(context, "引用"+myPosition+"楼");
+					editText.requestFocus();  
+					InputMethodManager imm = (InputMethodManager) context
+							.getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+				}
+			});
 			reply.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					isIncRepay = false;
 					DetailsActivity.this.myPosition = myPosition;
 					if (myPosition == 0)
 						ToastUtil.show(context, "回复楼主");

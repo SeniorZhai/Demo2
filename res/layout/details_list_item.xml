@@ -38,6 +38,17 @@
             android:text="回复"
             android:textColor="@drawable/text_blue"
             android:textSize="14sp" />
+        <TextView
+            android:id="@+id/item_incReply"
+            android:focusable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/item_reply"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="1dp"
+            android:text="引用"
+            android:textColor="@drawable/text_blue"
+            android:textSize="14sp" />
     </RelativeLayout>
 
     <WebView
