@@ -31,20 +31,20 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageview_above_query"
-        style="@style/title_right_button"
-        android:layout_width="@dimen/title_height"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/title_height"
-        android:src="@drawable/button_title_query" />
-
-    <ImageView
         android:id="@+id/imageview_above_more"
         style="@style/title_right_button"
         android:layout_width="@dimen/title_height"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/title_height"
         android:src="@drawable/button_title_edit" />
+
+    <ImageView
+        android:id="@+id/imageview_above_query"
+        style="@style/title_right_button"
+        android:layout_width="@dimen/title_height"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/button_title_query" />
 
 </RelativeLayout>

@@ -51,7 +51,8 @@ import com.gkong.app.widget.XListView;
 import com.gkong.app.widget.XListView.IXListViewListener;
 import com.google.gson.Gson;
 
-@SuppressLint("SimpleDateFormat") public class MainActivity extends BaseSlidingFragmentActivity implements
+@SuppressLint("SimpleDateFormat")
+public class MainActivity extends BaseSlidingFragmentActivity implements
 		OnClickListener, IXListViewListener {
 	private static final String TAG = "MainActivity";
 	private Context mContext = MainActivity.this;
@@ -88,9 +89,9 @@ import com.google.gson.Gson;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		list = ((MyApplication)getApplication()).list;
+		list = ((MyApplication) getApplication()).list;
 		BBSList = new ArrayList<BBSBoard>();
-		dao = new BoardDao(mContext);;
+		dao = new BoardDao(mContext);
 		initSlidingMenu();
 		setContentView(R.layout.above_slidingmenu);
 		initControl();
@@ -132,7 +133,6 @@ import com.google.gson.Gson;
 		imgLogin.setOnClickListener(this);
 		lvTitle = (ListView) findViewById(R.id.behind_list_show);
 		aboveImgMore.setVisibility(View.GONE);
-		aboveImgQuery.setVisibility(View.GONE);
 	}
 
 	// 初始化ListView
@@ -199,20 +199,17 @@ import com.google.gson.Gson;
 					Type = "tech";
 					getNewBoard("tech", "date", 1);
 					aboveImgMore.setVisibility(View.GONE);
-					aboveImgQuery.setVisibility(View.GONE);
 					break;
 				case 1:
 					flag = false;
 					Type = "notech";
 					getNewBoard("notech", "date", 1);
 					aboveImgMore.setVisibility(View.GONE);
-					aboveImgQuery.setVisibility(View.GONE);
 					break;
 				default:
-					flag  =true;
+					flag = true;
 					getList(boardID, page);
 					aboveImgMore.setVisibility(View.VISIBLE);
-					aboveImgQuery.setVisibility(View.VISIBLE);
 					break;
 				}
 			}
@@ -233,9 +230,9 @@ import com.google.gson.Gson;
 				ClassResponseListener(), errorListener()));
 	}
 
-	private void getNewBoard(String Type,String Sort,int Page) {
-		executeRequest(new StringRequest(Method.GET, Api.NewBoard(Type,
-				Sort, Page), BBSResponseListener(), errorListener()));
+	private void getNewBoard(String Type, String Sort, int Page) {
+		executeRequest(new StringRequest(Method.GET, Api.NewBoard(Type, Sort,
+				Page), BBSResponseListener(), errorListener()));
 	}
 
 	// [end]数据请求
@@ -251,7 +248,8 @@ import com.google.gson.Gson;
 			startActivity(intent);
 			break;
 		case R.id.imageview_above_query:
-			ToastUtil.show(this, "query");
+			intent = new Intent(MainActivity.this, SearchActivity.class);
+			startActivity(intent);
 			break;
 		case R.id.login_login:
 			intent = new Intent(MainActivity.this, UserLoginUidActivity.class);
@@ -321,12 +319,12 @@ import com.google.gson.Gson;
 					map0.put(LIST_TEXT, "技术区最新动态");
 					map0.put(LIST_URL, "0000");
 					list.add(map0);
-					myList.add(new ClassBoard(1,"技术区最新动态",1,1));
+					myList.add(new ClassBoard(1, "技术区最新动态", 1, 1));
 					Map<String, Object> map1 = new HashMap<String, Object>();
 					map1.put(LIST_TEXT, "非技术区最新动态");
 					map1.put(LIST_URL, "0000");
 					list.add(map1);
-					myList.add(new ClassBoard(2,"非技术区最新动态",2,2));
+					myList.add(new ClassBoard(2, "非技术区最新动态", 2, 2));
 					for (int i = 0; i < array.length(); i++) {
 						ClassBoard obj = gson.fromJson(array.getString(i),
 								ClassBoard.class);
@@ -408,7 +406,7 @@ import com.google.gson.Gson;
 		page = 1;
 		if (flag) {
 			getList(boardID, page);
-		}else{
+		} else {
 			getNewBoard(Type, "date", page);
 		}
 	}
@@ -418,13 +416,14 @@ import com.google.gson.Gson;
 		page++;
 		if (flag) {
 			getList(boardID, page);
-		}else{
+		} else {
 			getNewBoard(Type, "date", page);
 		}
 	}
+
 	// [start]XList监听
-	
-	class MyTask extends AsyncTask<Void, Void, Void>{
+
+	class MyTask extends AsyncTask<Void, Void, Void> {
 		@Override
 		protected Void doInBackground(Void... params) {
 			dao.initCache(myList);

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/title_height"
+    android:background="@drawable/back_title" >
+
+    <ImageView
+        android:id="@+id/search_imageview_gohome"
+        style="@style/title_right_button"
+        android:layout_width="@dimen/title_height"
+        android:layout_height="match_parent"
+        android:src="@drawable/button_details_gohome" />
+
+    <ImageView
+        android:id="@+id/search_imageview_query"
+        style="@style/title_right_button"
+        android:layout_width="@dimen/title_height"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/button_title_query" />
+
+    <EditText
+        android:id="@+id/search_edit"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/search_imageview_query"
+        android:layout_toRightOf="@id/search_imageview_gohome"
+        android:background="@drawable/edittext_change"
+        android:hint="关键词..."
+        android:maxWidth="160dp"
+        android:singleLine="true"
+        android:textSize="25sp" />
+
+</RelativeLayout>
