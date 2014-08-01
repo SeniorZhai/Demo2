@@ -193,6 +193,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 				boardID = "" + list.get(position).get(LIST_URL);
 				page = 1;
 				aboveLoadLayout.setVisibility(View.VISIBLE);
+
 				switch (position) {
 				case 0:
 					flag = false;
@@ -220,7 +221,6 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 
 	// [start]数据请求
 	private void getList(String boardID, int page) {
-
 		executeRequest(new StringRequest(Method.GET, Api.List(boardID, page),
 				BBSResponseListener(), errorListener()));
 	}

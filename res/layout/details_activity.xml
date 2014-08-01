@@ -12,11 +12,14 @@
         android:layout_gravity="top"
         android:layout_marginBottom="49dp"
         android:layout_marginTop="@dimen/title_height"
-        android:scrollbars="none"
         android:divider="@drawable/dis_behind_side"
-        android:listSelector="#0fff" >
+        android:listSelector="#0fff"
+        android:scrollbars="none" >
     </ListView>
 
+    <include layout="@layout/chat_bottom_bar" >
+
+        <!--
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -58,5 +61,8 @@
             android:text="@string/detail_enter"
             android:textColor="#fff" />
     </FrameLayout>
+        -->
+
+    </include>
 
 </FrameLayout>

@@ -10,11 +10,12 @@ import java.io.UnsupportedEncodingException;
 //
 //	// 获取论坛版块
 //	public static final String Board = "http://api.local.gkong.com/serviceapi.svc/GetBBSClassBoard";
-//	
-//	public static final String NewBoard (String type,String sort,int page){
-//		return "http://api.local.gkong.com/serviceapi.svc/GetBBSListNew?Type="+type+"&Sort="+sort+"&Page="+page;
+//
+//	public static final String NewBoard(String type, String sort, int page) {
+//		return "http://api.local.gkong.com/serviceapi.svc/GetBBSListNew?Type="
+//				+ type + "&Sort=" + sort + "&Page=" + page;
 //	}
-//	
+//
 //	// 获取帖子列表
 //	public static final String List(String boardID, int page) {
 //		return "http://api.local.gkong.com/serviceapi.svc/GetBBSListByBoardID"
@@ -34,15 +35,19 @@ import java.io.UnsupportedEncodingException;
 //	public static final String NewTopic = "http://192.168.0.121:7080/API/BBS_New_Topic.ashx";
 //	// 回帖
 //	public static final String RepayTopic = "http://192.168.0.121:7080/API/BBS_Repay_Topic.ashx";
-//  public static final String Search(String query, int page) {
-//  try {
-//	return new String(("http://192.168.0.121:19090/Service/wcfSearch.svc/Search?name=搜索论坛"
-//			+ "&query=" + query + "&page=" + page).getBytes("UTF-8"),"UTF-8");
-//  } catch (UnsupportedEncodingException e) {
-//	e.printStackTrace();
-//	return null;
-//}
-//}
+//
+//	public static final String Search(String query, int page) {
+//		try {
+//			return new String(
+//					("http://192.168.0.121:19090/Service/wcfSearch.svc/Search?name=搜索论坛"
+//							+ "&query=" + query + "&page=" + page)
+//							.getBytes("UTF-8"),
+//					"UTF-8");
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
 //}
 public class Api {
 	/*

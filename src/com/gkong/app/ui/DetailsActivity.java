@@ -1,6 +1,7 @@
 package com.gkong.app.ui;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONArray;
@@ -12,17 +13,25 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.text.Selection;
+import android.text.Spannable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -42,6 +51,10 @@ import com.gkong.app.model.RepayInfo;
 import com.gkong.app.model.TopicInfo;
 import com.gkong.app.ui.base.BaseActivity;
 import com.gkong.app.utils.ToastUtil;
+import com.gkong.app.view.emtion.EmoticonsEditText;
+import com.gkong.app.view.emtion.adapter.EmoViewPagerAdapter;
+import com.gkong.app.view.emtion.adapter.EmoteAdapter;
+import com.gkong.app.view.emtion.model.FaceText;
 import com.google.gson.Gson;
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -57,7 +70,6 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 	private boolean isIncRepay = false;
 	// View
 	private ImageView imgGoHome;
-	private EditText editText;
 	private ListView mlistView;
 	private View mFooter;
 	private TextView title;
@@ -69,6 +81,11 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 	private PageInfo pageInfo;
 	private TopicInfo topicInfo;
 	private ArrayList<Archive> mList;
+	// emotion
+	private Button btn_chat_emo, btn_chat_keyboard, details_button_enter;
+	private EmoticonsEditText editText;
+	private LinearLayout layout_emo;
+	private ViewPager pager_emo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,18 +102,14 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 
 		mlistView = (ListView) findViewById(R.id.details_listview_show);
 		title = (TextView) findViewById(R.id.details_textview_title);
-
 		mAdapter = new DetailsArrayAdapter(mActivity, mList);
 		mFooter = getLayoutInflater().inflate(R.layout.details_footer, null);
 		mlistView.addFooterView(mFooter);
 		mlistView.setAdapter(mAdapter);
-		editText = (EditText) findViewById(R.id.details_edittext_discuss);
 		lastBn = (Button) mFooter.findViewById(R.id.lastPage);
 		lastBn.setOnClickListener(this);
 		nextBn = (Button) mFooter.findViewById(R.id.nextPage);
 		nextBn.setOnClickListener(this);
-		repayBn = (Button) findViewById(R.id.details_button_enter);
-		repayBn.setOnClickListener(this);
 		pageInfoView = (TextView) mFooter.findViewById(R.id.pageInfo);
 		imgGoHome = (ImageView) findViewById(R.id.details_imageview_gohome);
 		imgGoHome.setOnClickListener(new OnClickListener() {
@@ -105,13 +118,106 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 				finish();
 			}
 		});
+		details_button_enter = (Button) findViewById(R.id.btn_chat_send);
+		details_button_enter.setOnClickListener(this);
+		btn_chat_emo = (Button) findViewById(R.id.btn_chat_emo);
+		btn_chat_keyboard = (Button) findViewById(R.id.btn_chat_keyboard);
+		layout_emo = (LinearLayout) findViewById(R.id.layout_emo);
+		editText = (EmoticonsEditText) findViewById(R.id.edit_user_comment);
+		editText.setOnFocusChangeListener(new android.view.View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (hasFocus) {
+					if (mApplication.loginInfo == null) {
+						ToastUtil.show(mActivity, "请登入");
+						Intent intent = new Intent(mActivity,
+								UserLoginUidActivity.class);
+						startActivity(intent);
+						return;
+					}
+				} else {
+					// 此处为失去焦点时的处理内容
+					hideSoftInputView();
+				}
+			}
+		});
+		initEmoView();
+	}
+
+	List<FaceText> emos;
+
+	private void initEmoView() {
+		pager_emo = (ViewPager) findViewById(R.id.pager_emo);
+		emos = EmoticonsEditText.faceTexts;
+		List<View> views = new ArrayList<View>();
+		// 分为两页
+		for (int i = 0; i < 5; ++i) {
+			views.add(getGridView(i));
+		}
+		pager_emo.setAdapter(new EmoViewPagerAdapter(views));
+	}
+
+	public void toAction(View view) {
+		switch (view.getId()) {
+		case R.id.btn_chat_emo:
+			hideSoftInputView();
+			btn_chat_keyboard.setVisibility(View.VISIBLE);
+			btn_chat_emo.setVisibility(View.GONE);
+			layout_emo.setVisibility(View.VISIBLE);
+			break;
+		case R.id.btn_chat_keyboard:
+			showSoftInputView();
+			btn_chat_keyboard.setVisibility(View.GONE);
+			btn_chat_emo.setVisibility(View.VISIBLE);
+			layout_emo.setVisibility(View.GONE);
+			break;
+		}
+	}
+
+	private View getGridView(final int i) {
+		View view = View.inflate(this, R.layout.include_emo_gridview, null);
+		GridView gridview = (GridView) view.findViewById(R.id.gridview);
+		List<FaceText> list = new ArrayList<FaceText>();
+		list.addAll(emos.subList(21 * i,
+				21 * (i + 1) > emos.size() ? emos.size() : 21 * (i + 1)));
+		final EmoteAdapter gridAdapter = new EmoteAdapter(DetailsActivity.this,
+				list);
+		gridview.setAdapter(gridAdapter);
+		gridview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+				FaceText name = (FaceText) gridAdapter.getItem(position);
+				String key = name.text.toString();
+				try {
+					if (editText != null && !TextUtils.isEmpty(key)) {
+						int start = editText.getSelectionStart();
+						CharSequence content = editText.getText().insert(start,
+								key);
+						editText.setText(content);
+						// 定位光标位置
+						CharSequence info = editText.getText();
+						if (info instanceof Spannable) {
+							Spannable spanText = (Spannable) info;
+							Selection.setSelection(spanText,
+									start + key.length());
+						}
+					}
+				} catch (Exception e) {
+
+				}
+
+			}
+		});
+		return view;
 	}
 
 	private void netWork() {
 		detailId = getIntent().getStringExtra("url");
-		Log.d("---", detailId);
+		Log.d("DetailsActivity", detailId);
 		url = Api.Archive(detailId, currentPage);
-		Log.d("---", url);
+		Log.d("DetailsActivity", url);
 		executeRequest(new StringRequest(Method.GET, url, responseListener(),
 				errorListener()));
 	}
@@ -165,8 +271,10 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 					executeRequest(new StringRequest(Method.GET, url,
 							responseListener(), errorListener()));
 					editText.setText("");
+					layout_emo.setVisibility(View.GONE);
 				} else {
-					Log.d("DetailsActivity", info.getMessage());
+					layout_emo.setVisibility(View.GONE);
+					ToastUtil.show(mActivity, info.getMessage());
 				}
 			}
 		};
@@ -209,7 +317,7 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 				ToastUtil.show(mActivity, "没有下一页");
 			}
 			break;
-		case R.id.details_button_enter:
+		case R.id.btn_chat_send:
 			if (mApplication.loginInfo == null) {
 				ToastUtil.show(mActivity, "请登入");
 				Intent intent = new Intent(mActivity,
@@ -223,13 +331,15 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 						JSONObject json = new JSONObject();
 						try {
 							json.put("UID", mApplication.loginInfo.getData());
-							json.put("AnnounceId", mList.get(myPosition).getAnnounceID());
+							json.put("AnnounceId", mList.get(myPosition)
+									.getAnnounceID());
 							json.put("Body", editText.getText().toString());
 							json.put("IsIncRepay", isIncRepay);
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}
 						String content = String.valueOf(json);
+						Log.d("DetailsActivity", content);
 						return new ApiParams().with("d", content);
 					}
 				});
@@ -281,20 +391,27 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 					.findViewById(R.id.item_reply);
 			TextView incReply = (TextView) convertView
 					.findViewById(R.id.item_incReply);
-			
+
 			Archive obj = list.get(position);
 			userName.setText(obj.getUserName());
 			time.setText(obj.getDateAndTime());
 			incReply.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					if (mApplication.loginInfo == null) {
+						ToastUtil.show(mActivity, "请登入");
+						Intent intent = new Intent(mActivity,
+								UserLoginUidActivity.class);
+						startActivity(intent);
+						return;
+					}
 					isIncRepay = true;
 					DetailsActivity.this.myPosition = myPosition;
 					if (myPosition == 0)
 						ToastUtil.show(context, "引用楼主");
 					else
-						ToastUtil.show(context, "引用"+myPosition+"楼");
-					editText.requestFocus();  
+						ToastUtil.show(context, "引用" + myPosition + "楼");
+					editText.requestFocus();
 					InputMethodManager imm = (InputMethodManager) context
 							.getSystemService(Context.INPUT_METHOD_SERVICE);
 					imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
@@ -303,15 +420,22 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 			reply.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					if (mApplication.loginInfo == null) {
+						ToastUtil.show(mActivity, "请登入");
+						Intent intent = new Intent(mActivity,
+								UserLoginUidActivity.class);
+						startActivity(intent);
+						return;
+					}
 					isIncRepay = false;
 					DetailsActivity.this.myPosition = myPosition;
 					if (myPosition == 0)
 						ToastUtil.show(context, "回复楼主");
 					else
-						ToastUtil.show(context, "回复"+myPosition+"楼");
-					editText.requestFocus();  
+						ToastUtil.show(context, "回复" + myPosition + "楼");
+					editText.requestFocus();
 					InputMethodManager imm = (InputMethodManager) context
-							  .getSystemService(Context.INPUT_METHOD_SERVICE);
+							.getSystemService(Context.INPUT_METHOD_SERVICE);
 					imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
 				}
 			});
@@ -359,6 +483,26 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 				context.startActivity(intent);
 				finish();
 			}
+		}
+	}
+
+	// 显示软键盘
+	public void showSoftInputView() {
+		if (getWindow().getAttributes().softInputMode == WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
+			if (getCurrentFocus() != null)
+				((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
+						.showSoftInput(editText, 0);
+		}
+	}
+
+	// 隐藏软键盘
+	public void hideSoftInputView() {
+		InputMethodManager manager = ((InputMethodManager) this
+				.getSystemService(Activity.INPUT_METHOD_SERVICE));
+		if (getWindow().getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
+			if (getCurrentFocus() != null)
+				manager.hideSoftInputFromWindow(getCurrentFocus()
+						.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 		}
 	}
 }
