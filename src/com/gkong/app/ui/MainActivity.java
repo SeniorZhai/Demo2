@@ -3,7 +3,6 @@ package com.gkong.app.ui;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,13 +17,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -50,6 +49,8 @@ import com.gkong.app.utils.ToastUtil;
 import com.gkong.app.widget.XListView;
 import com.gkong.app.widget.XListView.IXListViewListener;
 import com.google.gson.Gson;
+import com.umeng.fb.FeedbackAgent;
+import com.umeng.update.UmengUpdateAgent;
 
 @SuppressLint("SimpleDateFormat")
 public class MainActivity extends BaseSlidingFragmentActivity implements
@@ -72,6 +73,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	private ArrayList<BBSBoard> BBSList;
 	private ArrayList<ClassBoard> myList;
 	// View
+	private Button update, feedback;
 	private SlidingMenu sm;
 	private ImageView aboveImgQuery;
 	private ImageView aboveImgMore;
@@ -85,10 +87,17 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	// Adapter
 	private SimpleAdapter lvAdapter;
 	private MyArrayAdapter listAdapter;
+	//
+	private FeedbackAgent agent;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		UmengUpdateAgent.silentUpdate(this);
+		UmengUpdateAgent.setUpdateOnlyWifi(false);
+		UmengUpdateAgent.update(this);
+		agent = new FeedbackAgent(mContext);
+		
 		list = ((MyApplication) getApplication()).list;
 		BBSList = new ArrayList<BBSBoard>();
 		dao = new BoardDao(mContext);
@@ -133,6 +142,10 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		imgLogin.setOnClickListener(this);
 		lvTitle = (ListView) findViewById(R.id.behind_list_show);
 		aboveImgMore.setVisibility(View.GONE);
+		update = (Button) findViewById(R.id.umeng_update);
+		feedback = (Button) findViewById(R.id.umeng_feedback);
+		update.setOnClickListener(this);
+		feedback.setOnClickListener(this);
 	}
 
 	// 初始化ListView
@@ -257,6 +270,13 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			break;
 		case R.id.linear_above_to_Home:
 			showMenu();
+			break;
+		case R.id.umeng_update:
+			UmengUpdateAgent.forceUpdate(mContext);
+			break;
+		case R.id.umeng_feedback:
+
+			agent.startFeedbackActivity();
 			break;
 		default:
 			break;
