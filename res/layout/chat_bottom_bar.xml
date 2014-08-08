@@ -48,9 +48,14 @@
 
         <Button
             android:id="@+id/btn_chat_send"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/btn_chat_send_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/tab_padding_left_right"
+            android:text="发送"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:background="@drawable/btn_style_grey"
             android:gravity="center"
             android:textColor="@color/base_color_text_black"
             android:visibility="visible" >
