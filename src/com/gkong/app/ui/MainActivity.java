@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -97,7 +98,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		UmengUpdateAgent.setUpdateOnlyWifi(false);
 		UmengUpdateAgent.update(this);
 		agent = new FeedbackAgent(mContext);
-		
+
 		list = ((MyApplication) getApplication()).list;
 		BBSList = new ArrayList<BBSBoard>();
 		dao = new BoardDao(mContext);
@@ -184,12 +185,16 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			}
 		};
 		lvTitle.setAdapter(lvAdapter);
+		// 获取栏目
 		getBoard();
 		lvTitle.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				if (position > 1 && myList.get(position).getBoardID() == 0) {
+					return;
+				}
 				mTag = position - 1;
 				if (lvTitle.getTag() != null) {
 					if (lvTitle.getTag() == view) {
@@ -238,6 +243,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 				BBSResponseListener(), errorListener()));
 	}
 
+	// 获取栏目
 	private void getBoard() {
 		executeRequest(new StringRequest(Method.GET, Api.Board,
 				ClassResponseListener(), errorListener()));
@@ -291,6 +297,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		return new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {
+
 				try {
 					JSONObject obj1 = new JSONObject(response);
 					String str = obj1.getString("d");
@@ -323,6 +330,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		};
 	}
 
+	// 栏目获取
 	private Response.Listener<String> ClassResponseListener() {
 		return new Response.Listener<String>() {
 			@Override
@@ -354,6 +362,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 						map.put(LIST_URL, obj.getBoardID());
 						list.add(map);
 					}
+					// 将栏目缓存到数据库
 					MyTask task = new MyTask();
 					task.execute();
 					lvAdapter.notifyDataSetChanged();
@@ -443,6 +452,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 
 	// [start]XList监听
 
+	// 将栏目缓存到数据库
 	class MyTask extends AsyncTask<Void, Void, Void> {
 		@Override
 		protected Void doInBackground(Void... params) {

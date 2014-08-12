@@ -5,6 +5,7 @@
     android:background="#0fff" >
 
     <RelativeLayout
+        android:padding="10dp"
         android:id="@+id/xlistview_footer_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
