@@ -70,8 +70,9 @@ public class SearchActivity extends BaseActivity implements OnClickListener,
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Intent intent = new Intent(SearchActivity.this, DetailsActivity.class);
-				intent.putExtra("url", list.get(position - 1).getTopicID()+"");
+				Intent intent = new Intent(SearchActivity.this,
+						DetailsActivity.class);
+				intent.putExtra("url", list.get(position - 1).getTopicID() + "");
 				startActivity(intent);
 			}
 		});
@@ -112,7 +113,7 @@ public class SearchActivity extends BaseActivity implements OnClickListener,
 	}
 
 	private void getSeach(String url) {
-		
+
 		AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
 		asyncHttpClient.get(url, new AsyncHttpResponseHandler() {
 			@Override
@@ -120,6 +121,7 @@ public class SearchActivity extends BaseActivity implements OnClickListener,
 					byte[] responseBody) {
 				super.onSuccess(statusCode, headers, responseBody);
 				String result = new String(responseBody);
+
 				try {
 					JSONObject obj1 = new JSONObject(result);
 					String str = obj1.getString("d");

@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:textColor="#3F4244"
-            android:textSize="13dp" />
+            android:textSize="15dp" />
 
         <TextView
             android:id="@+id/item_time"
@@ -32,7 +32,7 @@
             android:layout_marginTop="2dp"
             android:ellipsize="middle"
             android:textColor="#898989"
-            android:textSize="11dp" />
+            android:textSize="13dp" />
     </LinearLayout>
 
 </LinearLayout>
