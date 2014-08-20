@@ -23,29 +23,27 @@
     <LinearLayout
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
+        android:background="@drawable/back_title"
         android:layout_height="@dimen/list_margin_height"
         android:orientation="horizontal" >
         <Button
                 android:id="@+id/umeng_update"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_height="@dimen/list_margin_height"
                 android:layout_weight="1"
-                android:background="@drawable/back_above_menushow_style"
+               style="@style/title_right_button"
                 android:gravity="center"
-                android:padding="12dp"
                 android:text="@string/update"
 				android:focusable="true"
                 android:textColor="#FFFFFF" />
+        
         <Button
                 android:id="@+id/umeng_feedback"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_height="@dimen/list_margin_height"
                 android:layout_weight="1"
-                android:background="@drawable/back_above_menushow_style"
+                style="@style/title_right_button"
                 android:gravity="center"
-                android:padding="12dp"
                 android:text="@string/feedback"
 				android:focusable="true"
                 android:textColor="#FFFFFF" />

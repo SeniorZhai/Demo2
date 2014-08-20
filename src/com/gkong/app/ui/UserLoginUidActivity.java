@@ -7,13 +7,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.text.Layout;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -49,7 +49,7 @@ public class UserLoginUidActivity extends BaseActivity implements
 	private View unloginLinear;
 	private SharedPreferences share;
 	private ProgressDialog dialog;
-
+	private TextView userName;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,8 +69,10 @@ public class UserLoginUidActivity extends BaseActivity implements
 
 	private void initControl() {
 		dialog = new ProgressDialog(this);
+		userName = (TextView)findViewById(R.id.user_name);
 		unloginLinear = (View)findViewById(R.id.unlogin_linear);
 		if (application.loginInfo != null) {
+			userName.setText(application.loginInfo.getName());
 			unloginLinear.setVisibility(View.VISIBLE);
 		}else {
 			unloginLinear.setVisibility(View.GONE);
@@ -137,6 +139,7 @@ public class UserLoginUidActivity extends BaseActivity implements
 					edit.putString(UID, editUserID.getText().toString());
 					edit.putString(PWD, editPwd.getText().toString());
 					edit.commit();
+					userName.setText(application.loginInfo.getName());
 					showLongToast("登入成功");
 					finish();
 				}else {

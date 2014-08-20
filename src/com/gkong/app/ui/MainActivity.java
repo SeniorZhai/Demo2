@@ -17,7 +17,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -52,6 +51,9 @@ import com.gkong.app.widget.XListView.IXListViewListener;
 import com.google.gson.Gson;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
+import com.umeng.update.UmengUpdateListener;
+import com.umeng.update.UpdateResponse;
+import com.umeng.update.UpdateStatus;
 
 @SuppressLint("SimpleDateFormat")
 public class MainActivity extends BaseSlidingFragmentActivity implements
@@ -278,10 +280,22 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			showMenu();
 			break;
 		case R.id.umeng_update:
+			UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
+			    @Override
+			    public void onUpdateReturned(int updateStatus,UpdateResponse updateInfo) {
+			        switch (updateStatus) {
+			        case UpdateStatus.No: // has no update
+			            Toast.makeText(mContext, "已经是最新版本", Toast.LENGTH_SHORT).show();
+			            break;
+			        case UpdateStatus.Timeout: // time out
+			            Toast.makeText(mContext, "超时", Toast.LENGTH_SHORT).show();
+			            break;
+			        }
+			    }
+			});
 			UmengUpdateAgent.forceUpdate(mContext);
 			break;
 		case R.id.umeng_feedback:
-
 			agent.startFeedbackActivity();
 			break;
 		default:

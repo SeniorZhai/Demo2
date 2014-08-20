@@ -2,11 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f5f5f5" >
+    android:background="@android:color/white" >
 
-    <include
-        android:layout_gravity="top"
-        layout="@layout/show_title" />
+    <include layout="@layout/show_title" />
 
     <ImageView
         android:layout_width="106dp"
@@ -71,10 +69,60 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="@dimen/title_height"
-        android:background="#f5f5f5"
+        android:background="@android:color/white"
         android:orientation="vertical"
-        android:visibility="gone"
-        android:paddingTop="10dp" >
+        android:paddingTop="10dp"
+        android:visibility="gone" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="112dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/transparent" >
+
+            <ImageView
+                android:id="@+id/user_avatar"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_marginLeft="21dp"
+                android:background="@android:color/white"
+                android:contentDescription="@null"
+                android:padding="1px"
+                android:src="@drawable/avatar_default" />
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:layout_toRightOf="@id/user_avatar"
+                android:ellipsize="end"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="3.0"
+                android:shadowDy="3.0"
+                android:shadowRadius="5.0"
+                android:singleLine="true"
+                android:text="用户名"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <FrameLayout
+                android:id="@+id/user_divider_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/user_avatar"
+                android:layout_marginLeft="21dp"
+                android:layout_marginRight="21dp"
+                android:layout_marginTop="4dp" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="5dp"
+                    android:background="#DFDFDF"
+                    android:contentDescription="@null" />
+            </FrameLayout>
+        </RelativeLayout>
 
         <Button
             android:id="@+id/button_user_unlogin"

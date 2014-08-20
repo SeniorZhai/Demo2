@@ -408,9 +408,9 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 					isIncRepay = true;
 					DetailsActivity.this.myPosition = myPosition;
 					if (myPosition == 0)
-						ToastUtil.show(context, "引用楼主");
+						editText.setHint("引用楼主");
 					else
-						ToastUtil.show(context, "引用" + myPosition + "楼");
+						editText.setHint("引用" + myPosition + "楼");
 					editText.requestFocus();
 					InputMethodManager imm = (InputMethodManager) context
 							.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -430,9 +430,9 @@ public class DetailsActivity extends BaseActivity implements OnClickListener {
 					isIncRepay = false;
 					DetailsActivity.this.myPosition = myPosition;
 					if (myPosition == 0)
-						ToastUtil.show(context, "回复楼主");
+						editText.setHint("回复楼主");
 					else
-						ToastUtil.show(context, "回复" + myPosition + "楼");
+						editText.setHint("回复" + myPosition + "楼");
 					editText.requestFocus();
 					InputMethodManager imm = (InputMethodManager) context
 							.getSystemService(Context.INPUT_METHOD_SERVICE);

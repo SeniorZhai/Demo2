@@ -43,9 +43,13 @@ public class MyArrayAdapter extends BaseAdapter {
 		}
 		TextView titleView = (TextView)convertView.findViewById(R.id.item_title);
 		TextView timeView = (TextView)convertView.findViewById(R.id.item_time);
+		TextView childView = (TextView)convertView.findViewById(R.id.item_child);
+		TextView hitsView = (TextView)convertView.findViewById(R.id.item_hits);
 		BBSBoard obj = list.get(position);
 		titleView.setText(obj.getTitle());
 		timeView.setText(obj.getDateAndTime());
+		childView.setText("回复:"+obj.getChild());
+		hitsView.setText("人气:"+obj.getHits());
 		return convertView;
 	}
 	

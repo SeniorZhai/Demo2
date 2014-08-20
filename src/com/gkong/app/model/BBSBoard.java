@@ -5,6 +5,15 @@ public class BBSBoard {
 	private String Title;
 	private String DateAndTime;
 	private String hits;
+	private String Child;
+
+	public String getChild() {
+		return Child;
+	}
+
+	public void setChild(String child) {
+		Child = child;
+	}
 
 	public String getTopicID() {
 		return TopicID;
