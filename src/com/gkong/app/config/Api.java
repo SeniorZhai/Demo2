@@ -89,4 +89,9 @@ public class Api {
 		return "http://s.gkong.com/Service/wcfSearch.svc/Search?name=搜索论坛"
 				+ "&query=" + query + "&page=" + page;
 	}
+	
+	// 
+	public static final String Avatar(int id) {
+		return "http://filestools.gkong.com/thumbnail/face/"+id;
+	}
 }

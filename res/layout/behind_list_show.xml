@@ -1,19 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/behind_list_height"
-    android:background="@drawable/back_behind_listitem_style"
+    android:background="@drawable/back_behind_list"
     android:orientation="horizontal" >
-
-    <!--
-         <ImageView
-        android:id="@+id/imageview_behind_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" 
-        android:src="@drawable/dis_menu_blog"
-        android:scaleType="fitCenter"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"/>
-    -->
 
     <TextView
         android:id="@+id/textview_behind_title"
@@ -21,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dp"
-        android:textColor="#666"
+        android:textColor="#FFF"
         android:textSize="@dimen/behind_list_text_size" />
 
 </LinearLayout>

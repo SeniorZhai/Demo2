@@ -13,6 +13,46 @@ public class ClassBoardHandle {
 		public int BoardId;
 		public List<Item> items = new ArrayList<Item>();
 
+		public long getSID() {
+			return SID;
+		}
+
+		public void setSID(long sID) {
+			SID = sID;
+		}
+
+		public String getBoardName() {
+			return BoardName;
+		}
+
+		public void setBoardName(String boardName) {
+			BoardName = boardName;
+		}
+
+		public long getOrders() {
+			return orders;
+		}
+
+		public void setOrders(long orders) {
+			this.orders = orders;
+		}
+
+		public int getBoardId() {
+			return BoardId;
+		}
+
+		public void setBoardId(int boardId) {
+			BoardId = boardId;
+		}
+
+		public List<Item> getItems() {
+			return items;
+		}
+
+		public void setItems(List<Item> items) {
+			this.items = items;
+		}
+
 		public GroupItem(Item item) {
 			this.SID = item.getSID();
 			this.BoardName = item.getBoardName();
@@ -23,7 +63,7 @@ public class ClassBoardHandle {
 
 	public static List<GroupItem> getList(ClassBoardSrc board) {
 		List<GroupItem> list = new ArrayList<GroupItem>();
-		GroupItem groupItem =null;
+		GroupItem groupItem = null;
 		for (Item item : board.getHead()) {
 			if (item.getBoardId() == 0) {
 				groupItem = new GroupItem(item);

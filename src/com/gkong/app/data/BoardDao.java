@@ -8,7 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.gkong.app.model.ClassBoard;
+import com.gkong.app.model.ClassBoardSrc.Item;
 
 public class BoardDao implements BoardDaoInface {
 	private SQLHelper helper = null;
@@ -19,7 +19,7 @@ public class BoardDao implements BoardDaoInface {
 
 	// 添加cache
 	@Override
-	public boolean addCache(ClassBoard item) {
+	public boolean addCache(Item item) {
 		boolean flag = false;
 		SQLiteDatabase database = null;
 		long id = -1;
@@ -27,9 +27,7 @@ public class BoardDao implements BoardDaoInface {
 			database = helper.getWritableDatabase();
 			ContentValues values = new ContentValues();
 			values.put(SQLHelper.ID, item.getSID());
-			values.put(SQLHelper.NAME, item.getBoardName());
-			values.put(SQLHelper.ORDERID, item.getOrders());
-			values.put(SQLHelper.BoardId, item.getBoardID());
+			values.put(SQLHelper.JSON, item.getJson());
 
 			id = database.insert(SQLHelper.TABLE_CHANNEL, null, values);
 			flag = (id != -1 ? true : false);
@@ -85,26 +83,21 @@ public class BoardDao implements BoardDaoInface {
 	}
 
 	@Override
-	public List<ClassBoard> listCache(String selection, String[] selectionArgs) {
-		List<ClassBoard> list = new ArrayList<ClassBoard>();
+	public List<Item> listCache(String selection, String[] selectionArgs) {
+		List<Item> list = new ArrayList<Item>();
 		SQLiteDatabase database = null;
 		Cursor cursor = null;
+		String json = null;
 		try {
 			database = helper.getReadableDatabase();
 			cursor = database.query(false, SQLHelper.TABLE_CHANNEL, null,
 					selection, selectionArgs, null, null, null, null);
-			int cols_len = cursor.getColumnCount();
+			cursor.moveToFirst();
 			while (cursor.moveToNext()) {
-				ClassBoard board = new ClassBoard();
-				board.setBoardID(cursor.getInt(cursor
-						.getColumnIndex(SQLHelper.ID)));
-				board.setBoardName(cursor.getString(cursor
-						.getColumnIndex(SQLHelper.NAME)));
-				board.setOrders(cursor.getInt(cursor
-						.getColumnIndex(SQLHelper.ORDERID)));
-				board.setBoardID(cursor.getInt(cursor
-						.getColumnIndex(SQLHelper.BoardId)));
-				list.add(board);
+				json = cursor.getString(cursor
+						.getColumnIndex(SQLHelper.JSON));
+				Item item = Item.getItem(json);
+				list.add(item);
 			}
 
 		} catch (Exception e) {
@@ -133,11 +126,12 @@ public class BoardDao implements BoardDaoInface {
 		SQLiteDatabase db = helper.getWritableDatabase();
 		db.execSQL(sql);
 	}
-
+	
+	// 根据List初始化
 	@Override
-	public boolean initCache(List<ClassBoard> list) {
+	public boolean initCache(List<Item> list) {
 		this.deleteCache("_id"+">= ?" ,new String[] {"0"});
-		for(ClassBoard item :list){
+		for(Item item :list){
 			this.addCache(item);
 		}
 		return false;

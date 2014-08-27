@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white" >
+
+    <include layout="@layout/show_title" />
+
+    <ImageView
+        android:layout_width="106dp"
+        android:layout_height="86dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="30dp"
+        android:src="@drawable/dis_logo" />
+
+    <LinearLayout
+        android:id="@+id/edit_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="@dimen/title_height"
+        android:orientation="vertical"
+        android:paddingTop="10dp" >
+
+        <EditText
+            android:id="@+id/edittext_user_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/back_textview_style"
+            android:hint="@string/user_username"
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:textCursorDrawable="@color/black"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/edittext_user_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/back_textview_style"
+            android:hint="@string/user_pwd"
+            android:inputType="textPassword"
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+            android:textColor="#000"
+            android:textCursorDrawable="@color/black"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/button_user_login"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/back_submit_style"
+            android:text="@string/user_enter"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/unlogin_linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="@dimen/title_height"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:visibility="gone" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="112dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/transparent" >
+
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/user_avatar"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_marginLeft="21dp"
+                android:background="@android:color/white"
+                android:contentDescription="@null"
+                android:padding="1px"
+                android:src="@drawable/avatar_default" />
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:layout_toRightOf="@id/user_avatar"
+                android:ellipsize="end"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="3.0"
+                android:shadowDy="3.0"
+                android:shadowRadius="5.0"
+                android:singleLine="true"
+                android:text="用户名"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <FrameLayout
+                android:id="@+id/user_divider_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/user_avatar"
+                android:layout_marginLeft="21dp"
+                android:layout_marginRight="21dp"
+                android:layout_marginTop="4dp" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="5dp"
+                    android:background="#DFDFDF"
+                    android:contentDescription="@null" />
+            </FrameLayout>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/button_user_unlogin"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/back_submit_style"
+            android:text="@string/user_unlogin"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+</FrameLayout>

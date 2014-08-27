@@ -1,6 +1,6 @@
 package com.gkong.app.adapter;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,12 +11,13 @@ import android.widget.TextView;
 
 import com.gkong.app.R;
 import com.gkong.app.model.BBSBoard;
+import com.gkong.app.model.ClassBoardHandle.GroupItem;
 
 public class MyArrayAdapter extends BaseAdapter {
 
-	private ArrayList<BBSBoard> list;
+	private List<BBSBoard> list;
 	private Context context;
-	public MyArrayAdapter(Context context,ArrayList<BBSBoard> list) {
+	public MyArrayAdapter(Context context,List<BBSBoard> list) {
 		this.list = list;
 		this.context = context;
 	}
@@ -52,6 +53,5 @@ public class MyArrayAdapter extends BaseAdapter {
 		hitsView.setText("人气:"+obj.getHits());
 		return convertView;
 	}
-	
 
 }

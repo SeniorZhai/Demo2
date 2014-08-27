@@ -20,6 +20,8 @@ import com.android.volley.Request;
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.gkong.app.MyApplication;
 import com.gkong.app.R;
@@ -50,11 +52,13 @@ public class UserLoginUidActivity extends BaseActivity implements
 	private SharedPreferences share;
 	private ProgressDialog dialog;
 	private TextView userName;
+	private NetworkImageView userAvatar;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.user_login_activity);
-		application = (MyApplication)getApplication();
+		setContentView(R.layout.activity_user_login);
+		application = (MyApplication) getApplication();
 		initControl();
 		initSharePreferences();
 	}
@@ -69,12 +73,16 @@ public class UserLoginUidActivity extends BaseActivity implements
 
 	private void initControl() {
 		dialog = new ProgressDialog(this);
-		userName = (TextView)findViewById(R.id.user_name);
-		unloginLinear = (View)findViewById(R.id.unlogin_linear);
+		userName = (TextView) findViewById(R.id.user_name);
+		unloginLinear = (View) findViewById(R.id.unlogin_linear);
+		userAvatar = (NetworkImageView) findViewById(R.id.user_avatar);
 		if (application.loginInfo != null) {
 			userName.setText(application.loginInfo.getName());
+			ImageLoader imageLoader = RequestManager.getImageLoader();
+			userAvatar.setImageUrl(Api.Avatar(application.loginInfo.getId()),
+					imageLoader);
 			unloginLinear.setVisibility(View.VISIBLE);
-		}else {
+		} else {
 			unloginLinear.setVisibility(View.GONE);
 		}
 		editUserID = (EditText) findViewById(R.id.edittext_user_username);
@@ -99,10 +107,11 @@ public class UserLoginUidActivity extends BaseActivity implements
 			application.loginInfo = null;
 			break;
 		case R.id.show_title_gohome:
-				finish();
+			finish();
 			break;
 		}
 	}
+
 	private void checkUsername(final String name, final String pwd) {
 		if (TextUtils.isEmpty(name)) {
 			showShortToast(getResources().getString(R.string.user_username));
@@ -112,28 +121,32 @@ public class UserLoginUidActivity extends BaseActivity implements
 			return;
 		} else if (!CommonUtil.checkNetState(this)) {
 			showLongToast("没有网络");
-			return ;
+			return;
 		}
 		dialog.show();
-		executeRequest(new StringRequest(Method.POST, Api.Login, responseListener(),
-				errorListener()) {
+		executeRequest(new StringRequest(Method.POST, Api.Login,
+				responseListener(), errorListener()) {
 			protected Map<String, String> getParams() {
-				return new ApiParams().with("username", name).with("password", pwd);
+				return new ApiParams().with("username", name).with("password",
+						pwd);
 			}
 		});
 	}
+
 	@Override
 	public void onStop() {
 		super.onStop();
 		RequestManager.cancelAll(this);
 	}
+
 	private Response.Listener<String> responseListener() {
 		return new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {
 				Gson gson = new Gson();
 				dialog.dismiss();
-				application.loginInfo = gson.fromJson(response, LoginInfo.class);
+				application.loginInfo = gson
+						.fromJson(response, LoginInfo.class);
 				if (application.loginInfo.isSuccess()) {
 					Editor edit = share.edit();
 					edit.putString(UID, editUserID.getText().toString());
@@ -142,13 +155,14 @@ public class UserLoginUidActivity extends BaseActivity implements
 					userName.setText(application.loginInfo.getName());
 					showLongToast("登入成功");
 					finish();
-				}else {
+				} else {
 					editPwd.setText("");
 					showLongToast("账户名或密码错误");
 				}
 			}
 		};
 	}
+
 	protected void executeRequest(Request<?> request) {
 		RequestManager.addRequest(request, this);
 	}
@@ -158,7 +172,8 @@ public class UserLoginUidActivity extends BaseActivity implements
 			@Override
 			public void onErrorResponse(VolleyError error) {
 				dialog.dismiss();
-				Toast.makeText(UserLoginUidActivity.this, "网络错误", Toast.LENGTH_LONG).show();
+				Toast.makeText(UserLoginUidActivity.this, "网络错误",
+						Toast.LENGTH_LONG).show();
 			}
 		};
 	}

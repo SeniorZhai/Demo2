@@ -2,8 +2,7 @@ package com.gkong.app.ui;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,13 +13,11 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -28,7 +25,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,14 +34,19 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.gkong.app.MyApplication;
 import com.gkong.app.R;
+import com.gkong.app.adapter.ClassAdapter;
 import com.gkong.app.adapter.MyArrayAdapter;
 import com.gkong.app.config.Api;
 import com.gkong.app.data.BoardDao;
 import com.gkong.app.model.BBSBoard;
-import com.gkong.app.model.ClassBoard;
+import com.gkong.app.model.ClassBoardHandle;
+import com.gkong.app.model.ClassBoardHandle.GroupItem;
+import com.gkong.app.model.ClassBoardSrc;
+import com.gkong.app.model.ClassBoardSrc.Item;
 import com.gkong.app.slidingmenu.SlidingMenu;
 import com.gkong.app.ui.base.BaseSlidingFragmentActivity;
 import com.gkong.app.utils.ToastUtil;
+import com.gkong.app.widget.CircularImage;
 import com.gkong.app.widget.XListView;
 import com.gkong.app.widget.XListView.IXListViewListener;
 import com.google.gson.Gson;
@@ -63,18 +64,14 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	// DataBase
 	private BoardDao dao;
 	// Value
-	private final String LIST_TEXT = "text";
-	private final String LIST_URL = "url";
 	private int mTag = 0;
 	private int page = 1;
-	private String boardID = "93";
+	private String boardID;
 	private boolean flag = false;
 	private String Type = "tech";
-	// private String boardID = "114";
 	// Data
-	private ArrayList<Map<String, Object>> list;
-	private ArrayList<BBSBoard> BBSList;
-	private ArrayList<ClassBoard> myList;
+	private List<Item> list;
+	private List<BBSBoard> BBSList;
 	// View
 	private Button update, feedback;
 	private SlidingMenu sm;
@@ -87,8 +84,9 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	private LinearLayout aboveLoadFaillayout;
 	private ImageButton imgLogin;
 	private ListView lvTitle;
+	private CircularImage user_avatar;
 	// Adapter
-	private SimpleAdapter lvAdapter;
+	private ClassAdapter classAdapter;
 	private MyArrayAdapter listAdapter;
 	//
 	private FeedbackAgent agent;
@@ -101,7 +99,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		UmengUpdateAgent.update(this);
 		agent = new FeedbackAgent(mContext);
 
-		list = ((MyApplication) getApplication()).list;
+		list = ((MyApplication) getApplication()).myList;
 		BBSList = new ArrayList<BBSBoard>();
 		dao = new BoardDao(mContext);
 		initSlidingMenu();
@@ -145,6 +143,8 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		imgLogin.setOnClickListener(this);
 		lvTitle = (ListView) findViewById(R.id.behind_list_show);
 		aboveImgMore.setVisibility(View.GONE);
+		user_avatar = (CircularImage) findViewById(R.id.behind_avatar);
+		user_avatar.setOnClickListener(this);
 		update = (Button) findViewById(R.id.umeng_update);
 		feedback = (Button) findViewById(R.id.umeng_feedback);
 		update.setOnClickListener(this);
@@ -171,47 +171,32 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		});
 		aboveLoadLayout.setVisibility(View.VISIBLE);
 		getNewBoard(Type, "date", page);
-		lvAdapter = new SimpleAdapter(this, list, R.layout.behind_list_show,
-				new String[] { LIST_TEXT },
-				new int[] { R.id.textview_behind_title }) {
-			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
-				View view = super.getView(position, convertView, parent);
-				if (position == mTag) {
-					view.setBackgroundResource(R.drawable.back_behind_list);
-					lvTitle.setTag(view);
-				} else {
-					view.setBackgroundColor(Color.TRANSPARENT);
-				}
-				return view;
-			}
-		};
-		lvTitle.setAdapter(lvAdapter);
+		classAdapter = new ClassAdapter(mContext, list);
+		// lvAdapter = new SimpleAdapter(this, list, R.layout.behind_list_show,
+		// new String[] { LIST_TEXT },
+		// new int[] { R.id.textview_behind_title }) {
+		// @Override
+		// public View getView(int position, View convertView, ViewGroup parent)
+		// {
+		// View view = super.getView(position, convertView, parent);
+		// if (position == mTag) {
+		// view.setBackgroundResource(R.drawable.back_behind_list);
+		// lvTitle.setTag(view);
+		// } else {
+		// view.setBackgroundColor(Color.TRANSPARENT);
+		// }
+		// return view;
+		// }
+		// };
+		lvTitle.setAdapter(classAdapter);
 		// 获取栏目
-		getBoard();
+		// getBoard();
 		lvTitle.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				if (position > 1 && myList.get(position).getBoardID() == 0) {
-					return;
-				}
-				mTag = position - 1;
-				if (lvTitle.getTag() != null) {
-					if (lvTitle.getTag() == view) {
-						MainActivity.this.showContent();
-						return;
-					}
-					((View) lvTitle.getTag())
-							.setBackgroundColor(Color.TRANSPARENT);
-				}
-				lvTitle.setTag(view);
-				view.setBackgroundResource(R.drawable.back_behind_list);
-				MainActivity.this.showContent();
-				aboveTitle.setText(list.get(position).get(LIST_TEXT) + "");
-				boardID = "" + list.get(position).get(LIST_URL);
-				page = 1;
+				// 点击事件处理
 				aboveLoadLayout.setVisibility(View.VISIBLE);
 
 				switch (position) {
@@ -279,24 +264,33 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		case R.id.linear_above_to_Home:
 			showMenu();
 			break;
+		case R.id.behind_avatar:
+			intent = new Intent(MainActivity.this, UserLoginUidActivity.class);
+			startActivity(intent);
+			break;
 		case R.id.umeng_update:
 			UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
-			    @Override
-			    public void onUpdateReturned(int updateStatus,UpdateResponse updateInfo) {
-			        switch (updateStatus) {
-			        case UpdateStatus.No: // has no update
-			            Toast.makeText(mContext, "已经是最新版本", Toast.LENGTH_SHORT).show();
-			            break;
-			        case UpdateStatus.Timeout: // time out
-			            Toast.makeText(mContext, "超时", Toast.LENGTH_SHORT).show();
-			            break;
-			        }
-			    }
+				@Override
+				public void onUpdateReturned(int updateStatus,
+						UpdateResponse updateInfo) {
+					switch (updateStatus) {
+					case UpdateStatus.No: // has no update
+						Toast.makeText(mContext, "已经是最新版本", Toast.LENGTH_SHORT)
+								.show();
+						break;
+					case UpdateStatus.Timeout: // time out
+						Toast.makeText(mContext, "超时", Toast.LENGTH_SHORT)
+								.show();
+						break;
+					}
+				}
 			});
 			UmengUpdateAgent.forceUpdate(mContext);
 			break;
 		case R.id.umeng_feedback:
-			agent.startFeedbackActivity();
+			intent = new Intent(mContext, SubscribeActivity.class);
+			startActivity(intent);
+			// agent.startFeedbackActivity();
 			break;
 		default:
 			break;
@@ -306,7 +300,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	// [end]点击监听
 
 	// [start]网络请求反馈
-
+	// 获取文章
 	private Response.Listener<String> BBSResponseListener() {
 		return new Response.Listener<String>() {
 			@Override
@@ -349,40 +343,17 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		return new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {
-				try {
-					myList = new ArrayList<ClassBoard>();
-					JSONObject obj1 = new JSONObject(response);
-					String str = obj1.getString("d");
-					JSONObject obj2 = new JSONObject(str);
-					JSONArray array = obj2.getJSONArray("Head");
-					Gson gson = new Gson();
-					list.clear();
-					Map<String, Object> map0 = new HashMap<String, Object>();
-					map0.put(LIST_TEXT, "技术区最新动态");
-					map0.put(LIST_URL, "0000");
-					list.add(map0);
-					myList.add(new ClassBoard(1, "技术区最新动态", 1, 1));
-					Map<String, Object> map1 = new HashMap<String, Object>();
-					map1.put(LIST_TEXT, "非技术区最新动态");
-					map1.put(LIST_URL, "0000");
-					list.add(map1);
-					myList.add(new ClassBoard(2, "非技术区最新动态", 2, 2));
-					for (int i = 0; i < array.length(); i++) {
-						ClassBoard obj = gson.fromJson(array.getString(i),
-								ClassBoard.class);
-						myList.add(obj);
-						Map<String, Object> map = new HashMap<String, Object>();
-						map.put(LIST_TEXT, obj.getBoardName());
-						map.put(LIST_URL, obj.getBoardID());
-						list.add(map);
-					}
-					// 将栏目缓存到数据库
-					MyTask task = new MyTask();
-					task.execute();
-					lvAdapter.notifyDataSetChanged();
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+
+				List<GroupItem> MyList = ClassBoardHandle.getList(ClassBoardSrc
+						.getBoard(response));
+
+				MyApplication app = (MyApplication) getApplication();
+				app.mList = MyList;
+
+				// 将栏目缓存到数据库
+				MyTask task = new MyTask();
+				task.execute();
+				classAdapter.notifyDataSetChanged();
 
 			}
 		};
@@ -470,7 +441,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	class MyTask extends AsyncTask<Void, Void, Void> {
 		@Override
 		protected Void doInBackground(Void... params) {
-			dao.initCache(myList);
+			// dao.initCache(myList);
 			return null;
 		}
 	}

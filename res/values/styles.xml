@@ -1,6 +1,8 @@
 <resources>
 
-    <style name="AppTheme" parent="android:Theme.Light" />
+    <style name="AppTheme" parent="android:Theme.Light">
+        <item name="android:windowNoTitle">true</item>
+    </style>
     <!-- Loading页面风格，全屏 -->
     <style name="Theme.splash" parent="@android:style/Theme.NoTitleBar.Fullscreen">
         <item name="android:windowIsTranslucent">true</item>

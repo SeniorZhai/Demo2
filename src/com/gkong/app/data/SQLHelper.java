@@ -10,11 +10,8 @@ public class SQLHelper extends SQLiteOpenHelper {
 	public static final int VERSION = 1;
 	public static final String TABLE_CHANNEL = "channel";
 	public static final String ID = "SID";
-	public static final String NAME = "BoardName";
-	public static final String ORDERID = "orders";
-	public static final String BoardId = "BoardID";
+	public static final String JSON = "Json";
 	public static final String SELECTED = "Selected";
-
 	private Context context;
 
 	public SQLHelper(Context context) {
@@ -30,8 +27,7 @@ public class SQLHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		String sql = "create table if not exists " + TABLE_CHANNEL
 				+ "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " + ID
-				+ " INTEGER ," + NAME + " TEXT ," + ORDERID + " INTEGER ,"
-				+ BoardId + " INTEGER " + SELECTED + " SELECTED)";
+				+ " INTEGER ," + JSON + " TEXT ,"  + SELECTED + " BLOB)";
 		db.execSQL(sql);
 	}
 

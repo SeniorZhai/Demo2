@@ -1,52 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#dadada"
-    android:orientation="vertical" >
+    android:background="@drawable/back_behind" >
 
-    <include layout="@layout/behind_title" />
+    <include
+        android:id="@+id/top_title"
+        layout="@layout/behind_title" />
+
+    <com.gkong.app.widget.CircularImage
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/behind_avatar"
+        android:layout_width="92.0dip"
+        android:layout_height="92.0dip"
+        android:layout_below="@id/top_title"
+        android:layout_centerInParent="true"
+        android:src="@drawable/default_avatar" />
+
+    <LinearLayout
+        android:id="@+id/bottom_bn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_margin_height"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="@drawable/back_title"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/umeng_update"
+            style="@style/title_right_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/list_margin_height"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="@string/update"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/umeng_feedback"
+            style="@style/title_right_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/list_margin_height"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="@string/feedback"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/behind_list_show"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/bottom_bn"
+        android:layout_below="@id/behind_avatar"
         android:layout_gravity="top"
-        android:layout_marginBottom="@dimen/list_margin_height"
-        android:layout_marginTop="@dimen/title_height"
         android:cacheColorHint="#0000"
         android:divider="@drawable/dis_behind_side"
         android:listSelector="#0fff"
         android:scrollbars="none" >
     </ListView>
 
-    <LinearLayout
-        android:layout_gravity="bottom"
-        android:layout_width="match_parent"
-        android:background="@drawable/back_title"
-        android:layout_height="@dimen/list_margin_height"
-        android:orientation="horizontal" >
-        <Button
-                android:id="@+id/umeng_update"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/list_margin_height"
-                android:layout_weight="1"
-               style="@style/title_right_button"
-                android:gravity="center"
-                android:text="@string/update"
-				android:focusable="true"
-                android:textColor="#FFFFFF" />
-        
-        <Button
-                android:id="@+id/umeng_feedback"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/list_margin_height"
-                android:layout_weight="1"
-                style="@style/title_right_button"
-                android:gravity="center"
-                android:text="@string/feedback"
-				android:focusable="true"
-                android:textColor="#FFFFFF" />
-    </LinearLayout>
-
-</FrameLayout>
+</RelativeLayout>

@@ -43,6 +43,9 @@
             android:name=".ui.DetailsActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.SubscribeActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.ShowWebImageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Transparent" />

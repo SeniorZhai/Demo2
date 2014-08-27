@@ -5,8 +5,6 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 
 public class ClassBoardSrc {
@@ -31,11 +29,19 @@ public class ClassBoardSrc {
 		Head = head;
 	}
 
-	public class Item {
+	public static class Item {
 		private long SID;
 		private String BoardName;
 		private long orders;
 		private int BoardID;
+
+		public String getJson() {
+			return new Gson().toJson(this);
+		}
+
+		public static Item getItem(String json) {
+			return new Gson().fromJson(json, Item.class);
+		}
 
 		public long getSID() {
 			return SID;
