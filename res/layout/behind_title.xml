@@ -4,7 +4,7 @@
     android:layout_height="@dimen/title_height"
     android:background="#2477ab" >
 	<ImageButton
-	    android:id="@+id/login_login"
+	    android:id="@+id/behind_edit"
 	    android:layout_width="@dimen/title_button_height"
 	    android:layout_height="@dimen/title_button_height"
 	    android:layout_gravity="right|center_vertical"

@@ -61,10 +61,10 @@ public class ClassBoardHandle {
 		}
 	}
 
-	public static List<GroupItem> getList(ClassBoardSrc board) {
+	public static List<GroupItem> getList(List<Item> board) {
 		List<GroupItem> list = new ArrayList<GroupItem>();
 		GroupItem groupItem = null;
-		for (Item item : board.getHead()) {
+		for (Item item : board) {
 			if (item.getBoardId() == 0) {
 				groupItem = new GroupItem(item);
 				list.add(groupItem);

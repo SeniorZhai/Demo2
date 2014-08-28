@@ -7,11 +7,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.gkong.app.model.ClassBoardSrc.Item;
+import com.umeng.update.net.i;
 
 public class BoardDao implements BoardDaoInface {
-	private SQLHelper helper = null;
+	public SQLHelper helper = null;
 
 	public BoardDao(Context context) {
 		helper = new SQLHelper(context);
@@ -28,7 +30,7 @@ public class BoardDao implements BoardDaoInface {
 			ContentValues values = new ContentValues();
 			values.put(SQLHelper.ID, item.getSID());
 			values.put(SQLHelper.JSON, item.getJson());
-
+			values.put(SQLHelper.SELECTED, item.isSelect());
 			id = database.insert(SQLHelper.TABLE_CHANNEL, null, values);
 			flag = (id != -1 ? true : false);
 		} catch (Exception e) {
@@ -97,6 +99,7 @@ public class BoardDao implements BoardDaoInface {
 				json = cursor.getString(cursor
 						.getColumnIndex(SQLHelper.JSON));
 				Item item = Item.getItem(json);
+				item.setSelect((cursor.getInt(cursor.getColumnIndex(SQLHelper.SELECTED))== 1 ? true:false));
 				list.add(item);
 			}
 
@@ -126,12 +129,12 @@ public class BoardDao implements BoardDaoInface {
 		SQLiteDatabase db = helper.getWritableDatabase();
 		db.execSQL(sql);
 	}
-	
+
 	// 根据List初始化
 	@Override
 	public boolean initCache(List<Item> list) {
-		this.deleteCache("_id"+">= ?" ,new String[] {"0"});
-		for(Item item :list){
+		this.deleteCache("_id" + ">= ?", new String[] { "0" });
+		for (Item item : list) {
 			this.addCache(item);
 		}
 		return false;

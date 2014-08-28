@@ -34,6 +34,18 @@ public class ClassBoardSrc {
 		private String BoardName;
 		private long orders;
 		private int BoardID;
+		private boolean select = true;
+		public boolean isSelect() {
+			return select;
+		}
+
+		public void setSelect(boolean select) {
+			this.select = select;
+		}
+
+		public int getBoardID() {
+			return BoardID;
+		}
 
 		public String getJson() {
 			return new Gson().toJson(this);

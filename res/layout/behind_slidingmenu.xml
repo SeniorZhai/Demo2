@@ -58,7 +58,6 @@
         android:layout_below="@id/behind_avatar"
         android:layout_gravity="top"
         android:cacheColorHint="#0000"
-        android:divider="@drawable/dis_behind_side"
         android:listSelector="#0fff"
         android:scrollbars="none" >
     </ListView>

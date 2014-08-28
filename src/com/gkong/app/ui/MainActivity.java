@@ -13,7 +13,6 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -39,9 +38,6 @@ import com.gkong.app.adapter.MyArrayAdapter;
 import com.gkong.app.config.Api;
 import com.gkong.app.data.BoardDao;
 import com.gkong.app.model.BBSBoard;
-import com.gkong.app.model.ClassBoardHandle;
-import com.gkong.app.model.ClassBoardHandle.GroupItem;
-import com.gkong.app.model.ClassBoardSrc;
 import com.gkong.app.model.ClassBoardSrc.Item;
 import com.gkong.app.slidingmenu.SlidingMenu;
 import com.gkong.app.ui.base.BaseSlidingFragmentActivity;
@@ -50,6 +46,9 @@ import com.gkong.app.widget.CircularImage;
 import com.gkong.app.widget.XListView;
 import com.gkong.app.widget.XListView.IXListViewListener;
 import com.google.gson.Gson;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
@@ -88,8 +87,10 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	// Adapter
 	private ClassAdapter classAdapter;
 	private MyArrayAdapter listAdapter;
-	//
+	// 用户反馈
 	private FeedbackAgent agent;
+	//
+	private DisplayImageOptions options;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -102,6 +103,12 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		list = ((MyApplication) getApplication()).myList;
 		BBSList = new ArrayList<BBSBoard>();
 		dao = new BoardDao(mContext);
+		options = new DisplayImageOptions.Builder()
+		.showImageOnLoading(R.drawable.avatar_default)
+		.showImageForEmptyUri(R.drawable.avatar_default)
+		.showImageOnFail(R.drawable.avatar_default).cacheInMemory(true)
+		.cacheOnDisc(true).considerExifParams(true)
+		.displayer(new RoundedBitmapDisplayer(20)).build();
 		initSlidingMenu();
 		setContentView(R.layout.above_slidingmenu);
 		initControl();
@@ -139,7 +146,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		aboveLoadLayout = (LinearLayout) findViewById(R.id.view_loading);
 		aboveLoadFaillayout = (LinearLayout) findViewById(R.id.view_loading_fail);
 		mListView = (XListView) findViewById(R.id.list_view);
-		imgLogin = (ImageButton) findViewById(R.id.login_login);
+		imgLogin = (ImageButton) findViewById(R.id.behind_edit);
 		imgLogin.setOnClickListener(this);
 		lvTitle = (ListView) findViewById(R.id.behind_list_show);
 		aboveImgMore.setVisibility(View.GONE);
@@ -172,25 +179,8 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		aboveLoadLayout.setVisibility(View.VISIBLE);
 		getNewBoard(Type, "date", page);
 		classAdapter = new ClassAdapter(mContext, list);
-		// lvAdapter = new SimpleAdapter(this, list, R.layout.behind_list_show,
-		// new String[] { LIST_TEXT },
-		// new int[] { R.id.textview_behind_title }) {
-		// @Override
-		// public View getView(int position, View convertView, ViewGroup parent)
-		// {
-		// View view = super.getView(position, convertView, parent);
-		// if (position == mTag) {
-		// view.setBackgroundResource(R.drawable.back_behind_list);
-		// lvTitle.setTag(view);
-		// } else {
-		// view.setBackgroundColor(Color.TRANSPARENT);
-		// }
-		// return view;
-		// }
-		// };
+		
 		lvTitle.setAdapter(classAdapter);
-		// 获取栏目
-		// getBoard();
 		lvTitle.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -230,12 +220,6 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 				BBSResponseListener(), errorListener()));
 	}
 
-	// 获取栏目
-	private void getBoard() {
-		executeRequest(new StringRequest(Method.GET, Api.Board,
-				ClassResponseListener(), errorListener()));
-	}
-
 	private void getNewBoard(String Type, String Sort, int Page) {
 		executeRequest(new StringRequest(Method.GET, Api.NewBoard(Type, Sort,
 				Page), BBSResponseListener(), errorListener()));
@@ -257,8 +241,8 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			intent = new Intent(MainActivity.this, SearchActivity.class);
 			startActivity(intent);
 			break;
-		case R.id.login_login:
-			intent = new Intent(MainActivity.this, UserLoginUidActivity.class);
+		case R.id.behind_edit:
+			intent = new Intent(mContext, EditActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.linear_above_to_Home:
@@ -288,9 +272,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			UmengUpdateAgent.forceUpdate(mContext);
 			break;
 		case R.id.umeng_feedback:
-			intent = new Intent(mContext, SubscribeActivity.class);
-			startActivity(intent);
-			// agent.startFeedbackActivity();
+		 agent.startFeedbackActivity();
 			break;
 		default:
 			break;
@@ -338,27 +320,6 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		};
 	}
 
-	// 栏目获取
-	private Response.Listener<String> ClassResponseListener() {
-		return new Response.Listener<String>() {
-			@Override
-			public void onResponse(String response) {
-
-				List<GroupItem> MyList = ClassBoardHandle.getList(ClassBoardSrc
-						.getBoard(response));
-
-				MyApplication app = (MyApplication) getApplication();
-				app.mList = MyList;
-
-				// 将栏目缓存到数据库
-				MyTask task = new MyTask();
-				task.execute();
-				classAdapter.notifyDataSetChanged();
-
-			}
-		};
-	}
-
 	// [end]网络请求反馈
 
 	// [start]网络请求错误
@@ -379,6 +340,9 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if (((MyApplication) getApplication()).loginInfo != null) {
+			ImageLoader.getInstance().displayImage(Api.Avatar(((MyApplication) getApplication()).loginInfo.getId()), user_avatar, options);
+		}
 		keyBackClickCount = 0;
 	}
 
@@ -437,12 +401,4 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 
 	// [start]XList监听
 
-	// 将栏目缓存到数据库
-	class MyTask extends AsyncTask<Void, Void, Void> {
-		@Override
-		protected Void doInBackground(Void... params) {
-			// dao.initCache(myList);
-			return null;
-		}
-	}
 }

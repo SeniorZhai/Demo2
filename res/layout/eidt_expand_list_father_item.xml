@@ -2,14 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EBEBEB"
+    android:background="@drawable/back_behind_list"
     android:orientation="vertical" >
 
     <TextView
         android:id="@+id/expand_tv"
-        android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="25dp" />
+        android:paddingBottom="5dp"
+        android:paddingLeft="32dp"
+        android:paddingTop="5dp"
+        android:textColor="#FFF"
+        android:textSize="25sp" />
 
 </LinearLayout>
