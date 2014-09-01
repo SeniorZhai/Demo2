@@ -1,6 +1,5 @@
 package com.gkong.app.config;
 
-import java.io.UnsupportedEncodingException;
 
 //public class Api {
 //	/*
@@ -94,4 +93,6 @@ public class Api {
 	public static final String Avatar(int id) {
 		return "http://filestools.gkong.com/thumbnail/face/"+id;
 	}
+	// post UID 
+	public static final String UserInfo =	"http://api.gkong.com/serviceapi.svc/GetUserInfo";
 }

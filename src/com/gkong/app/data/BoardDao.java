@@ -7,10 +7,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.gkong.app.model.ClassBoardSrc.Item;
-import com.umeng.update.net.i;
 
 public class BoardDao implements BoardDaoInface {
 	public SQLHelper helper = null;

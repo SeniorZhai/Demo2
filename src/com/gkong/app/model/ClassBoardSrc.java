@@ -79,10 +79,6 @@ public class ClassBoardSrc {
 			this.orders = orders;
 		}
 
-		public int getBoardId() {
-			return BoardID;
-		}
-
 		public void setBoardID(int boardID) {
 			BoardID = boardID;
 		}

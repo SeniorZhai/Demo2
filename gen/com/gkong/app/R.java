@@ -22,6 +22,11 @@ public final class R {
         public static final int umeng_fb_slide_out_from_left=0x7f04000a;
         public static final int umeng_fb_slide_out_from_right=0x7f04000b;
     }
+    public static final class array {
+        /**  SmoothProgressBar 
+         */
+        public static final int gplus_colors=0x7f070000;
+    }
     public static final class attr {
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -121,6 +126,88 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int shadowWidth=0x7f010009;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int spbStyle=0x7f010018;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int spb_color=0x7f010019;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int spb_colors=0x7f010021;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>spb_interpolator_accelerate</code></td><td>0</td><td></td></tr>
+<tr><td><code>spb_interpolator_linear</code></td><td>1</td><td></td></tr>
+<tr><td><code>spb_interpolator_acceleratedecelerate</code></td><td>2</td><td></td></tr>
+<tr><td><code>spb_interpolator_decelerate</code></td><td>3</td><td></td></tr>
+</table>
+         */
+        public static final int spb_interpolator=0x7f01001e;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int spb_mirror_mode=0x7f010020;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int spb_reversed=0x7f01001f;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int spb_sections_count=0x7f01001c;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int spb_speed=0x7f01001d;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int spb_stroke_separator_length=0x7f01001b;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int spb_stroke_width=0x7f01001a;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -201,6 +288,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          */
         public static final int vpiUnderlinePageIndicatorStyle=0x7f010013;
     }
+    public static final class bool {
+        public static final int spb_default_mirror_mode=0x7f0b0001;
+        public static final int spb_default_reversed=0x7f0b0000;
+    }
     public static final class color {
         public static final int app_bg=0x7f060000;
         public static final int backColor=0x7f060007;
@@ -211,28 +302,35 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int blue=0x7f060003;
         public static final int defaultTextColor=0x7f060009;
         public static final int detail_bgColor=0x7f060008;
+        public static final int gplus_color_1=0x7f06000d;
+        public static final int gplus_color_2=0x7f06000e;
+        public static final int gplus_color_3=0x7f06000f;
+        public static final int gplus_color_4=0x7f060010;
         public static final int green=0x7f060002;
         public static final int msg_emote_divider=0x7f06000c;
         public static final int red=0x7f060001;
+        public static final int second_color=0x7f060011;
+        public static final int spb_default_color=0x7f060013;
+        public static final int theme_color=0x7f060012;
         public static final int transparent=0x7f060006;
         public static final int transparent_background=0x7f06000a;
-        public static final int umeng_fb_color_btn_normal=0x7f06000e;
-        public static final int umeng_fb_color_btn_pressed=0x7f06000d;
+        public static final int umeng_fb_color_btn_normal=0x7f060015;
+        public static final int umeng_fb_color_btn_pressed=0x7f060014;
         public static final int white=0x7f060004;
     }
     public static final class dimen {
         /**  behind配置 
          */
-        public static final int ad_height=0x7f070007;
-        public static final int base_scrollview_top_height=0x7f070018;
+        public static final int ad_height=0x7f080007;
+        public static final int base_scrollview_top_height=0x7f080018;
         /**  上边两个的和 
          */
-        public static final int behind_list_height=0x7f07000a;
-        public static final int behind_list_text_size=0x7f07000b;
-        public static final int bottom_button_height=0x7f070008;
+        public static final int behind_list_height=0x7f08000a;
+        public static final int behind_list_text_size=0x7f08000b;
+        public static final int bottom_button_height=0x7f080008;
         /**  详情页面 
          */
-        public static final int details_bottom_height=0x7f07000c;
+        public static final int details_bottom_height=0x7f08000c;
         /**  用户信息图标宽度 
 
 		建议 直接使用单位来命名,不要使用具体含义,这样可以减少重复的声明,增加重用性
@@ -242,35 +340,37 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
     
          */
-        public static final int dp10=0x7f070014;
-        public static final int list_margin_height=0x7f070009;
-        public static final int list_padding=0x7f070001;
-        public static final int popupWindow_margin=0x7f070013;
+        public static final int dp10=0x7f080014;
+        public static final int list_margin_height=0x7f080009;
+        public static final int list_padding=0x7f080001;
+        public static final int popupWindow_margin=0x7f080013;
         /**  弹出框 
          */
-        public static final int popupWindow_width=0x7f070012;
-        public static final int shadow_width=0x7f070002;
-        public static final int slidingmenu_offset=0x7f070000;
-        public static final int sp14=0x7f070015;
-        public static final int sp20=0x7f070016;
+        public static final int popupWindow_width=0x7f080012;
+        public static final int shadow_width=0x7f080002;
+        public static final int slidingmenu_offset=0x7f080000;
+        public static final int sp14=0x7f080015;
+        public static final int sp20=0x7f080016;
+        public static final int spb_default_stroke_separator_length=0x7f080019;
+        public static final int spb_default_stroke_width=0x7f08001a;
         /**  emotion 
          */
-        public static final int tab_padding_left_right=0x7f070017;
-        public static final int title_button_height=0x7f070004;
+        public static final int tab_padding_left_right=0x7f080017;
+        public static final int title_button_height=0x7f080004;
         /**  标题配置 
          */
-        public static final int title_height=0x7f070003;
-        public static final int title_rightButton_padding=0x7f070005;
-        public static final int title_text_size=0x7f070006;
-        public static final int user_alert_size=0x7f07000f;
+        public static final int title_height=0x7f080003;
+        public static final int title_rightButton_padding=0x7f080005;
+        public static final int title_text_size=0x7f080006;
+        public static final int user_alert_size=0x7f08000f;
         /**  用户中心配置 
          */
-        public static final int user_bind_height=0x7f07000d;
+        public static final int user_bind_height=0x7f08000d;
         /**  用户信息 
          */
-        public static final int user_icon_height=0x7f070011;
-        public static final int user_linear_height=0x7f070010;
-        public static final int user_title_size=0x7f07000e;
+        public static final int user_icon_height=0x7f080011;
+        public static final int user_linear_height=0x7f080010;
+        public static final int user_title_size=0x7f08000e;
     }
     public static final class drawable {
         public static final int avatar_default=0x7f020000;
@@ -492,145 +592,151 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int xlistview_arrow=0x7f0200d8;
     }
     public static final class id {
-        public static final int activity_selectimg_send=0x7f050023;
-        public static final int behind_avatar=0x7f050032;
-        public static final int behind_edit=0x7f050037;
-        public static final int behind_list_show=0x7f050036;
-        public static final int bn_refresh=0x7f05000d;
-        public static final int bottom_bn=0x7f050033;
-        public static final int bt=0x7f05001b;
-        public static final int btn_chat_emo=0x7f050038;
-        public static final int btn_chat_keyboard=0x7f050039;
-        public static final int btn_chat_send=0x7f05003b;
-        public static final int bucket_exit=0x7f050018;
-        public static final int button_user_login=0x7f05002a;
-        public static final int button_user_unlogin=0x7f05002f;
-        public static final int count=0x7f050050;
-        public static final int details_imageview_gohome=0x7f050047;
-        public static final int details_listview_show=0x7f05003e;
-        public static final int details_textview_title=0x7f050048;
-        public static final int edit_linear=0x7f050027;
-        public static final int edit_list=0x7f050017;
-        public static final int edit_user_comment=0x7f05003a;
-        public static final int edittext_user_pwd=0x7f050029;
-        public static final int edittext_user_username=0x7f050028;
-        public static final int expand_check=0x7f05004a;
-        public static final int expand_tv=0x7f050049;
-        public static final int fl_off=0x7f050011;
+        public static final int activity_selectimg_send=0x7f050027;
+        public static final int behind_avatar=0x7f050036;
+        public static final int behind_edit=0x7f05003b;
+        public static final int behind_list_show=0x7f05003a;
+        public static final int bn_refresh=0x7f050011;
+        public static final int bottom_bn=0x7f050037;
+        public static final int bt=0x7f05001f;
+        public static final int btn_chat_emo=0x7f05003c;
+        public static final int btn_chat_keyboard=0x7f05003d;
+        public static final int btn_chat_send=0x7f05003f;
+        public static final int bucket_exit=0x7f05001c;
+        public static final int button_user_login=0x7f05002e;
+        public static final int button_user_unlogin=0x7f050033;
+        public static final int count=0x7f050054;
+        public static final int details_imageview_gohome=0x7f05004b;
+        public static final int details_listview_show=0x7f050042;
+        public static final int details_textview_title=0x7f05004c;
+        public static final int edit_linear=0x7f05002b;
+        public static final int edit_list=0x7f05001b;
+        public static final int edit_user_comment=0x7f05003e;
+        public static final int edittext_user_pwd=0x7f05002d;
+        public static final int edittext_user_username=0x7f05002c;
+        public static final int expand_check=0x7f05004e;
+        public static final int expand_tv=0x7f05004d;
+        public static final int fl_off=0x7f050015;
         public static final int fullscreen=0x7f050003;
-        public static final int gridview=0x7f050019;
-        public static final int iamge_grid_bn=0x7f05001a;
-        public static final int image=0x7f05004d;
-        public static final int imageview_above_more=0x7f050015;
-        public static final int imageview_above_query=0x7f050016;
-        public static final int isselected=0x7f05004e;
-        public static final int item_child=0x7f050008;
-        public static final int item_date=0x7f050043;
-        public static final int item_grida_image=0x7f050056;
-        public static final int item_hits=0x7f050007;
-        public static final int item_image_grid_text=0x7f050051;
-        public static final int item_incReply=0x7f050045;
-        public static final int item_popupwindows_Photo=0x7f050054;
-        public static final int item_popupwindows_camera=0x7f050053;
-        public static final int item_popupwindows_cancel=0x7f050055;
-        public static final int item_reply=0x7f050044;
-        public static final int item_time=0x7f050006;
-        public static final int item_title=0x7f050005;
-        public static final int item_username=0x7f050042;
-        public static final int item_webView=0x7f050046;
-        public static final int iv_off=0x7f050012;
-        public static final int lastPage=0x7f05003f;
-        public static final int layout_emo=0x7f05003c;
+        public static final int gridview=0x7f05001d;
+        public static final int iamge_grid_bn=0x7f05001e;
+        public static final int image=0x7f050051;
+        public static final int imageview_above_more=0x7f050019;
+        public static final int imageview_above_query=0x7f05001a;
+        public static final int isselected=0x7f050052;
+        public static final int item_child=0x7f05000c;
+        public static final int item_date=0x7f050047;
+        public static final int item_grida_image=0x7f05005a;
+        public static final int item_hits=0x7f05000b;
+        public static final int item_image_grid_text=0x7f050055;
+        public static final int item_incReply=0x7f050049;
+        public static final int item_popupwindows_Photo=0x7f050058;
+        public static final int item_popupwindows_camera=0x7f050057;
+        public static final int item_popupwindows_cancel=0x7f050059;
+        public static final int item_reply=0x7f050048;
+        public static final int item_time=0x7f05000a;
+        public static final int item_title=0x7f050009;
+        public static final int item_username=0x7f050046;
+        public static final int item_webView=0x7f05004a;
+        public static final int iv_off=0x7f050016;
+        public static final int lastPage=0x7f050043;
+        public static final int layout_emo=0x7f050040;
         public static final int left=0x7f050000;
-        public static final int linear_above_to_Home=0x7f050013;
-        public static final int list_view=0x7f05000f;
-        public static final int ll_popup=0x7f050052;
-        public static final int load_progressBar=0x7f05000a;
-        public static final int main_linear_listview=0x7f05000e;
-        public static final int main_title=0x7f050010;
+        public static final int linear_above_to_Home=0x7f050017;
+        public static final int list_view=0x7f050013;
+        public static final int ll_popup=0x7f050056;
+        public static final int load_progressBar=0x7f05000e;
+        public static final int main_linear_listview=0x7f050012;
+        public static final int main_title=0x7f050014;
         public static final int margin=0x7f050002;
-        public static final int name=0x7f05004f;
-        public static final int new_topic_enter=0x7f05005a;
-        public static final int new_topic_gohome=0x7f050058;
-        public static final int new_topic_textview_title=0x7f050059;
-        public static final int newtopic_content=0x7f050025;
-        public static final int newtopic_title=0x7f050024;
-        public static final int nextPage=0x7f050041;
-        public static final int noScrollgridview=0x7f050026;
-        public static final int pageInfo=0x7f050040;
-        public static final int pager_emo=0x7f05003d;
-        public static final int photo_bt_del=0x7f05001f;
-        public static final int photo_bt_enter=0x7f050020;
-        public static final int photo_bt_exit=0x7f05001e;
-        public static final int photo_relativeLayout=0x7f05001d;
+        public static final int name=0x7f050053;
+        public static final int new_topic_enter=0x7f05005e;
+        public static final int new_topic_gohome=0x7f05005c;
+        public static final int new_topic_textview_title=0x7f05005d;
+        public static final int newtopic_content=0x7f050029;
+        public static final int newtopic_title=0x7f050028;
+        public static final int nextPage=0x7f050045;
+        public static final int noScrollgridview=0x7f05002a;
+        public static final int pageInfo=0x7f050044;
+        public static final int pager_emo=0x7f050041;
+        public static final int photo_bt_del=0x7f050023;
+        public static final int photo_bt_enter=0x7f050024;
+        public static final int photo_bt_exit=0x7f050022;
+        public static final int photo_relativeLayout=0x7f050021;
         public static final int right=0x7f050001;
-        public static final int search_edit=0x7f05005d;
-        public static final int search_imageview_gohome=0x7f05005b;
-        public static final int search_imageview_query=0x7f05005c;
-        public static final int search_list_view=0x7f050021;
-        public static final int select_gohome=0x7f050022;
-        public static final int selected_view=0x7f050004;
-        public static final int show_title_gohome=0x7f05005e;
-        public static final int slidingmenumain=0x7f050060;
-        public static final int textHint=0x7f050057;
-        public static final int textTitle=0x7f05004b;
-        public static final int textview_behind_title=0x7f050030;
-        public static final int top_title=0x7f050031;
-        public static final int tv_above_title=0x7f050014;
-        public static final int txt_neterr=0x7f05000c;
-        public static final int umeng_common_icon_view=0x7f050061;
-        public static final int umeng_common_notification=0x7f050065;
-        public static final int umeng_common_notification_controller=0x7f050062;
-        public static final int umeng_common_progress_bar=0x7f050068;
-        public static final int umeng_common_progress_text=0x7f050067;
-        public static final int umeng_common_rich_notification_cancel=0x7f050064;
-        public static final int umeng_common_rich_notification_continue=0x7f050063;
-        public static final int umeng_common_title=0x7f050066;
-        public static final int umeng_fb_back=0x7f05006a;
-        public static final int umeng_fb_contact_header=0x7f050069;
-        public static final int umeng_fb_contact_info=0x7f05006c;
-        public static final int umeng_fb_contact_update_at=0x7f05006d;
-        public static final int umeng_fb_conversation_contact_entry=0x7f05006f;
-        public static final int umeng_fb_conversation_header=0x7f05006e;
-        public static final int umeng_fb_conversation_list_wrapper=0x7f050070;
-        public static final int umeng_fb_conversation_umeng_logo=0x7f050075;
-        public static final int umeng_fb_list_reply_header=0x7f050076;
-        public static final int umeng_fb_reply_content=0x7f050074;
-        public static final int umeng_fb_reply_content_wrapper=0x7f050072;
-        public static final int umeng_fb_reply_date=0x7f050077;
-        public static final int umeng_fb_reply_list=0x7f050071;
-        public static final int umeng_fb_save=0x7f05006b;
-        public static final int umeng_fb_send=0x7f050073;
-        public static final int umeng_feedback=0x7f050035;
-        public static final int umeng_update=0x7f050034;
-        public static final int umeng_update_content=0x7f05007a;
-        public static final int umeng_update_id_cancel=0x7f05007d;
-        public static final int umeng_update_id_check=0x7f05007b;
-        public static final int umeng_update_id_close=0x7f050079;
-        public static final int umeng_update_id_ignore=0x7f05007e;
-        public static final int umeng_update_id_ok=0x7f05007c;
-        public static final int umeng_update_wifi_indicator=0x7f050078;
-        public static final int unlogin_linear=0x7f05002b;
-        public static final int user_avatar=0x7f05002c;
-        public static final int user_divider_layout=0x7f05002e;
-        public static final int user_name=0x7f05002d;
-        public static final int v_face_text=0x7f05004c;
-        public static final int view_loading=0x7f050009;
-        public static final int view_loading_fail=0x7f05000b;
-        public static final int viewpager=0x7f05001c;
-        public static final int web_image=0x7f05005f;
-        public static final int xlistview_footer_content=0x7f05007f;
-        public static final int xlistview_footer_hint_textview=0x7f050081;
-        public static final int xlistview_footer_progressbar=0x7f050080;
-        public static final int xlistview_header_arrow=0x7f050086;
-        public static final int xlistview_header_content=0x7f050082;
-        public static final int xlistview_header_hint_textview=0x7f050084;
-        public static final int xlistview_header_progressbar=0x7f050087;
-        public static final int xlistview_header_text=0x7f050083;
-        public static final int xlistview_header_time=0x7f050085;
+        public static final int search_edit=0x7f050061;
+        public static final int search_imageview_gohome=0x7f05005f;
+        public static final int search_imageview_query=0x7f050060;
+        public static final int search_list_view=0x7f050025;
+        public static final int select_gohome=0x7f050026;
+        public static final int selected_view=0x7f050008;
+        public static final int show_title_gohome=0x7f050062;
+        public static final int slidingmenumain=0x7f050064;
+        public static final int spb_interpolator_accelerate=0x7f050004;
+        public static final int spb_interpolator_acceleratedecelerate=0x7f050006;
+        public static final int spb_interpolator_decelerate=0x7f050007;
+        public static final int spb_interpolator_linear=0x7f050005;
+        public static final int textHint=0x7f05005b;
+        public static final int textTitle=0x7f05004f;
+        public static final int textview_behind_title=0x7f050034;
+        public static final int top_title=0x7f050035;
+        public static final int tv_above_title=0x7f050018;
+        public static final int txt_neterr=0x7f050010;
+        public static final int umeng_common_icon_view=0x7f050065;
+        public static final int umeng_common_notification=0x7f050069;
+        public static final int umeng_common_notification_controller=0x7f050066;
+        public static final int umeng_common_progress_bar=0x7f05006c;
+        public static final int umeng_common_progress_text=0x7f05006b;
+        public static final int umeng_common_rich_notification_cancel=0x7f050068;
+        public static final int umeng_common_rich_notification_continue=0x7f050067;
+        public static final int umeng_common_title=0x7f05006a;
+        public static final int umeng_fb_back=0x7f05006e;
+        public static final int umeng_fb_contact_header=0x7f05006d;
+        public static final int umeng_fb_contact_info=0x7f050070;
+        public static final int umeng_fb_contact_update_at=0x7f050071;
+        public static final int umeng_fb_conversation_contact_entry=0x7f050073;
+        public static final int umeng_fb_conversation_header=0x7f050072;
+        public static final int umeng_fb_conversation_list_wrapper=0x7f050074;
+        public static final int umeng_fb_conversation_umeng_logo=0x7f050079;
+        public static final int umeng_fb_list_reply_header=0x7f05007a;
+        public static final int umeng_fb_reply_content=0x7f050078;
+        public static final int umeng_fb_reply_content_wrapper=0x7f050076;
+        public static final int umeng_fb_reply_date=0x7f05007b;
+        public static final int umeng_fb_reply_list=0x7f050075;
+        public static final int umeng_fb_save=0x7f05006f;
+        public static final int umeng_fb_send=0x7f050077;
+        public static final int umeng_feedback=0x7f050039;
+        public static final int umeng_update=0x7f050038;
+        public static final int umeng_update_content=0x7f05007e;
+        public static final int umeng_update_id_cancel=0x7f050081;
+        public static final int umeng_update_id_check=0x7f05007f;
+        public static final int umeng_update_id_close=0x7f05007d;
+        public static final int umeng_update_id_ignore=0x7f050082;
+        public static final int umeng_update_id_ok=0x7f050080;
+        public static final int umeng_update_wifi_indicator=0x7f05007c;
+        public static final int unlogin_linear=0x7f05002f;
+        public static final int user_avatar=0x7f050030;
+        public static final int user_divider_layout=0x7f050032;
+        public static final int user_name=0x7f050031;
+        public static final int v_face_text=0x7f050050;
+        public static final int view_loading=0x7f05000d;
+        public static final int view_loading_fail=0x7f05000f;
+        public static final int viewpager=0x7f050020;
+        public static final int web_image=0x7f050063;
+        public static final int xlistview_footer_content=0x7f050083;
+        public static final int xlistview_footer_hint_textview=0x7f050085;
+        public static final int xlistview_footer_progressbar=0x7f050084;
+        public static final int xlistview_header_arrow=0x7f05008a;
+        public static final int xlistview_header_content=0x7f050086;
+        public static final int xlistview_header_hint_textview=0x7f050088;
+        public static final int xlistview_header_progressbar=0x7f05008b;
+        public static final int xlistview_header_text=0x7f050087;
+        public static final int xlistview_header_time=0x7f050089;
     }
     public static final class integer {
-        public static final int num_cols=0x7f080000;
+        public static final int num_cols=0x7f090000;
+        public static final int spb_default_interpolator=0x7f090002;
+        public static final int spb_default_sections_count=0x7f090001;
     }
     public static final class layout {
         public static final int above_list_item=0x7f030000;
@@ -681,88 +787,89 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int xlistview_header=0x7f03002d;
     }
     public static final class menu {
-        public static final int main=0x7f0b0000;
+        public static final int main=0x7f0d0000;
     }
     public static final class string {
-        public static final int UMAppUpdate=0x7f090039;
-        public static final int UMBreak_Network=0x7f090031;
-        public static final int UMDialog_InstallAPK=0x7f09003d;
-        public static final int UMGprsCondition=0x7f090037;
-        public static final int UMIgnore=0x7f09003b;
-        public static final int UMNewVersion=0x7f090033;
-        public static final int UMNotNow=0x7f09003a;
-        public static final int UMTargetSize=0x7f090036;
-        public static final int UMToast_IsUpdating=0x7f09003c;
-        public static final int UMUpdateCheck=0x7f09003e;
-        public static final int UMUpdateContent=0x7f090034;
-        public static final int UMUpdateNow=0x7f090038;
-        public static final int UMUpdateSize=0x7f090035;
-        public static final int UMUpdateTitle=0x7f090032;
-        public static final int app_name=0x7f090000;
-        public static final int detail_enter=0x7f09000f;
+        public static final int UMAppUpdate=0x7f0a003a;
+        public static final int UMBreak_Network=0x7f0a0032;
+        public static final int UMDialog_InstallAPK=0x7f0a003e;
+        public static final int UMGprsCondition=0x7f0a0038;
+        public static final int UMIgnore=0x7f0a003c;
+        public static final int UMNewVersion=0x7f0a0034;
+        public static final int UMNotNow=0x7f0a003b;
+        public static final int UMTargetSize=0x7f0a0037;
+        public static final int UMToast_IsUpdating=0x7f0a003d;
+        public static final int UMUpdateCheck=0x7f0a003f;
+        public static final int UMUpdateContent=0x7f0a0035;
+        public static final int UMUpdateNow=0x7f0a0039;
+        public static final int UMUpdateSize=0x7f0a0036;
+        public static final int UMUpdateTitle=0x7f0a0033;
+        public static final int app_name=0x7f0a0001;
+        public static final int detail_enter=0x7f0a0010;
         /**   
          */
-        public static final int detail_prompt=0x7f09000e;
-        public static final int feedback=0x7f090009;
-        public static final int new_topic=0x7f090011;
-        public static final int new_topic_enter=0x7f090010;
-        public static final int new_topic_prompt=0x7f090013;
-        public static final int new_topic_prompt_title=0x7f090012;
-        public static final int press_again_exit=0x7f090007;
-        public static final int umeng_common_action_cancel=0x7f090018;
-        public static final int umeng_common_action_continue=0x7f090017;
-        public static final int umeng_common_action_info_exist=0x7f090014;
-        public static final int umeng_common_action_pause=0x7f090016;
-        public static final int umeng_common_download_failed=0x7f09001e;
-        public static final int umeng_common_download_finish=0x7f09001f;
-        public static final int umeng_common_download_notification_prefix=0x7f090019;
-        public static final int umeng_common_icon=0x7f090022;
-        public static final int umeng_common_info_interrupt=0x7f090015;
-        public static final int umeng_common_network_break_alert=0x7f09001d;
-        public static final int umeng_common_patch_finish=0x7f090020;
-        public static final int umeng_common_pause_notification_prefix=0x7f09001a;
-        public static final int umeng_common_silent_download_finish=0x7f090021;
-        public static final int umeng_common_start_download_notification=0x7f09001b;
-        public static final int umeng_common_start_patch_notification=0x7f09001c;
-        public static final int umeng_fb_back=0x7f090025;
-        public static final int umeng_fb_contact_info=0x7f090028;
-        public static final int umeng_fb_contact_info_hint=0x7f090023;
-        public static final int umeng_fb_contact_title=0x7f090027;
-        public static final int umeng_fb_contact_update_at=0x7f090024;
-        public static final int umeng_fb_notification_content_formatter_multiple_msg=0x7f090030;
-        public static final int umeng_fb_notification_content_formatter_single_msg=0x7f09002f;
-        public static final int umeng_fb_notification_ticker_text=0x7f09002e;
-        public static final int umeng_fb_powered_by=0x7f09002d;
-        public static final int umeng_fb_reply_content_default=0x7f09002b;
-        public static final int umeng_fb_reply_content_hint=0x7f090029;
-        public static final int umeng_fb_reply_date_default=0x7f09002c;
-        public static final int umeng_fb_send=0x7f09002a;
-        public static final int umeng_fb_title=0x7f090026;
+        public static final int detail_prompt=0x7f0a000f;
+        public static final int feedback=0x7f0a000a;
+        public static final int new_topic=0x7f0a0012;
+        public static final int new_topic_enter=0x7f0a0011;
+        public static final int new_topic_prompt=0x7f0a0014;
+        public static final int new_topic_prompt_title=0x7f0a0013;
+        public static final int press_again_exit=0x7f0a0008;
+        public static final int spb_default_speed=0x7f0a0000;
+        public static final int umeng_common_action_cancel=0x7f0a0019;
+        public static final int umeng_common_action_continue=0x7f0a0018;
+        public static final int umeng_common_action_info_exist=0x7f0a0015;
+        public static final int umeng_common_action_pause=0x7f0a0017;
+        public static final int umeng_common_download_failed=0x7f0a001f;
+        public static final int umeng_common_download_finish=0x7f0a0020;
+        public static final int umeng_common_download_notification_prefix=0x7f0a001a;
+        public static final int umeng_common_icon=0x7f0a0023;
+        public static final int umeng_common_info_interrupt=0x7f0a0016;
+        public static final int umeng_common_network_break_alert=0x7f0a001e;
+        public static final int umeng_common_patch_finish=0x7f0a0021;
+        public static final int umeng_common_pause_notification_prefix=0x7f0a001b;
+        public static final int umeng_common_silent_download_finish=0x7f0a0022;
+        public static final int umeng_common_start_download_notification=0x7f0a001c;
+        public static final int umeng_common_start_patch_notification=0x7f0a001d;
+        public static final int umeng_fb_back=0x7f0a0026;
+        public static final int umeng_fb_contact_info=0x7f0a0029;
+        public static final int umeng_fb_contact_info_hint=0x7f0a0024;
+        public static final int umeng_fb_contact_title=0x7f0a0028;
+        public static final int umeng_fb_contact_update_at=0x7f0a0025;
+        public static final int umeng_fb_notification_content_formatter_multiple_msg=0x7f0a0031;
+        public static final int umeng_fb_notification_content_formatter_single_msg=0x7f0a0030;
+        public static final int umeng_fb_notification_ticker_text=0x7f0a002f;
+        public static final int umeng_fb_powered_by=0x7f0a002e;
+        public static final int umeng_fb_reply_content_default=0x7f0a002c;
+        public static final int umeng_fb_reply_content_hint=0x7f0a002a;
+        public static final int umeng_fb_reply_date_default=0x7f0a002d;
+        public static final int umeng_fb_send=0x7f0a002b;
+        public static final int umeng_fb_title=0x7f0a0027;
         /**  侧边栏菜单 
          */
-        public static final int update=0x7f090008;
-        public static final int user_enter=0x7f09000c;
-        public static final int user_pwd=0x7f09000b;
-        public static final int user_unlogin=0x7f09000d;
+        public static final int update=0x7f0a0009;
+        public static final int user_enter=0x7f0a000d;
+        public static final int user_pwd=0x7f0a000c;
+        public static final int user_unlogin=0x7f0a000e;
         /**  提示语 
          */
-        public static final int user_username=0x7f09000a;
-        public static final int xlistview_footer_hint_normal=0x7f090005;
-        public static final int xlistview_footer_hint_ready=0x7f090006;
-        public static final int xlistview_header_hint_loading=0x7f090003;
+        public static final int user_username=0x7f0a000b;
+        public static final int xlistview_footer_hint_normal=0x7f0a0006;
+        public static final int xlistview_footer_hint_ready=0x7f0a0007;
+        public static final int xlistview_header_hint_loading=0x7f0a0004;
         /**  上拉下拉 
          */
-        public static final int xlistview_header_hint_normal=0x7f090001;
-        public static final int xlistview_header_hint_ready=0x7f090002;
-        public static final int xlistview_header_last_time=0x7f090004;
+        public static final int xlistview_header_hint_normal=0x7f0a0002;
+        public static final int xlistview_header_hint_ready=0x7f0a0003;
+        public static final int xlistview_header_last_time=0x7f0a0005;
     }
     public static final class style {
-        public static final int AppTheme=0x7f0a0000;
+        public static final int AppTheme=0x7f0c0000;
         /**  Loading页面风格，全屏 
          */
-        public static final int Theme_splash=0x7f0a0001;
-        public static final int Transparent=0x7f0a0003;
-        public static final int title_right_button=0x7f0a0002;
+        public static final int Theme_splash=0x7f0c0001;
+        public static final int Transparent=0x7f0c0003;
+        public static final int title_right_button=0x7f0c0002;
     }
     public static final class styleable {
         /** Attributes that can be used with a SlidingMenu.
@@ -1002,6 +1109,181 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr name com.gkong.app:viewBehind
         */
         public static final int SlidingMenu_viewBehind = 2;
+        /**  SmoothProgressBar 
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spbStyle com.gkong.app:spbStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_color com.gkong.app:spb_color}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_colors com.gkong.app:spb_colors}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_interpolator com.gkong.app:spb_interpolator}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_mirror_mode com.gkong.app:spb_mirror_mode}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_reversed com.gkong.app:spb_reversed}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_sections_count com.gkong.app:spb_sections_count}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_speed com.gkong.app:spb_speed}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_stroke_separator_length com.gkong.app:spb_stroke_separator_length}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_stroke_width com.gkong.app:spb_stroke_width}</code></td><td></td></tr>
+           </table>
+           @see #SmoothProgressBar_spbStyle
+           @see #SmoothProgressBar_spb_color
+           @see #SmoothProgressBar_spb_colors
+           @see #SmoothProgressBar_spb_interpolator
+           @see #SmoothProgressBar_spb_mirror_mode
+           @see #SmoothProgressBar_spb_reversed
+           @see #SmoothProgressBar_spb_sections_count
+           @see #SmoothProgressBar_spb_speed
+           @see #SmoothProgressBar_spb_stroke_separator_length
+           @see #SmoothProgressBar_spb_stroke_width
+         */
+        public static final int[] SmoothProgressBar = {
+            0x7f010018, 0x7f010019, 0x7f01001a, 0x7f01001b,
+            0x7f01001c, 0x7f01001d, 0x7f01001e, 0x7f01001f,
+            0x7f010020, 0x7f010021
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.gkong.app.R.attr#spbStyle}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.gkong.app:spbStyle
+        */
+        public static final int SmoothProgressBar_spbStyle = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.gkong.app.R.attr#spb_color}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.gkong.app:spb_color
+        */
+        public static final int SmoothProgressBar_spb_color = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.gkong.app.R.attr#spb_colors}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.gkong.app:spb_colors
+        */
+        public static final int SmoothProgressBar_spb_colors = 9;
+        /**
+          <p>This symbol is the offset where the {@link com.gkong.app.R.attr#spb_interpolator}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>spb_interpolator_accelerate</code></td><td>0</td><td></td></tr>
+<tr><td><code>spb_interpolator_linear</code></td><td>1</td><td></td></tr>
+<tr><td><code>spb_interpolator_acceleratedecelerate</code></td><td>2</td><td></td></tr>
+<tr><td><code>spb_interpolator_decelerate</code></td><td>3</td><td></td></tr>
+</table>
+          @attr name com.gkong.app:spb_interpolator
+        */
+        public static final int SmoothProgressBar_spb_interpolator = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.gkong.app.R.attr#spb_mirror_mode}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.gkong.app:spb_mirror_mode
+        */
+        public static final int SmoothProgressBar_spb_mirror_mode = 8;
+        /**
+          <p>This symbol is the offset where the {@link com.gkong.app.R.attr#spb_reversed}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.gkong.app:spb_reversed
+        */
+        public static final int SmoothProgressBar_spb_reversed = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.gkong.app.R.attr#spb_sections_count}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.gkong.app:spb_sections_count
+        */
+        public static final int SmoothProgressBar_spb_sections_count = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.gkong.app.R.attr#spb_speed}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.gkong.app:spb_speed
+        */
+        public static final int SmoothProgressBar_spb_speed = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.gkong.app.R.attr#spb_stroke_separator_length}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.gkong.app:spb_stroke_separator_length
+        */
+        public static final int SmoothProgressBar_spb_stroke_separator_length = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.gkong.app.R.attr#spb_stroke_width}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.gkong.app:spb_stroke_width
+        */
+        public static final int SmoothProgressBar_spb_stroke_width = 2;
         /** Attributes that can be used with a ViewPagerIndicator.
            <p>Includes the following attributes:</p>
            <table>

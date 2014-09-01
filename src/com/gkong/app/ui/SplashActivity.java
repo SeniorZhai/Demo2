@@ -26,11 +26,7 @@ public class SplashActivity extends BaseActivity {
 		setContentView(view);
 		Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha);
 		view.setAnimation(animation);
-		// 用于列表存储
-		dao = new BoardDao(this);
-		myList = ((MyApplication)getApplication()).myList;
-		myList = dao.listCache("_id" + "> ?",
-				new String[] { "0" });
+
 		animation.setAnimationListener(new AnimationListener() {
 
 			@Override

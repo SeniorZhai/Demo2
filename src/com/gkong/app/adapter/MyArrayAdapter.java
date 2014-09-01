@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.gkong.app.R;
 import com.gkong.app.model.BBSBoard;
-import com.gkong.app.model.ClassBoardHandle.GroupItem;
 
 public class MyArrayAdapter extends BaseAdapter {
 

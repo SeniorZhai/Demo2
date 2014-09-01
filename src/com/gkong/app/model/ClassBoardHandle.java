@@ -57,7 +57,7 @@ public class ClassBoardHandle {
 			this.SID = item.getSID();
 			this.BoardName = item.getBoardName();
 			this.orders = item.getOrders();
-			this.BoardId = item.getBoardId();
+			this.BoardId = item.getBoardID();
 		}
 	}
 
@@ -65,7 +65,7 @@ public class ClassBoardHandle {
 		List<GroupItem> list = new ArrayList<GroupItem>();
 		GroupItem groupItem = null;
 		for (Item item : board) {
-			if (item.getBoardId() == 0) {
+			if (item.getBoardID() == 0) {
 				groupItem = new GroupItem(item);
 				list.add(groupItem);
 			} else{

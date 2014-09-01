@@ -45,7 +45,7 @@ import com.gkong.app.model.ClassBoardSrc.Item;
 				finish();
 			}
 		});
-		mList = app.mList;
+		mList = app.dataGroupList;
 		listView =  (ExpandableListView) findViewById(R.id.edit_list);
 		listView.setAdapter(new MyAdapter(mList, this));
 		listView.expandGroup(0);  

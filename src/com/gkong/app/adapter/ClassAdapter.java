@@ -10,8 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.gkong.app.R;
-import com.gkong.app.model.BBSBoard;
-import com.gkong.app.model.ClassBoardHandle.GroupItem;
 import com.gkong.app.model.ClassBoardSrc.Item;
 
 public class ClassAdapter extends BaseAdapter {

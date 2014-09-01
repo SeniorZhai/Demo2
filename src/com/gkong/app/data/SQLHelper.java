@@ -12,6 +12,7 @@ public class SQLHelper extends SQLiteOpenHelper {
 	public static final String ID = "SID";
 	public static final String JSON = "Json";
 	public static final String SELECTED = "Selected";
+
 	private Context context;
 
 	public SQLHelper(Context context) {

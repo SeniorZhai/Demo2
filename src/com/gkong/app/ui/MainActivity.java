@@ -100,7 +100,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		UmengUpdateAgent.update(this);
 		agent = new FeedbackAgent(mContext);
 
-		list = ((MyApplication) getApplication()).myList;
+		list = ((MyApplication) getApplication()).subscriboList;
 		BBSList = new ArrayList<BBSBoard>();
 		dao = new BoardDao(mContext);
 		options = new DisplayImageOptions.Builder()
@@ -219,7 +219,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		executeRequest(new StringRequest(Method.GET, Api.List(boardID, page),
 				BBSResponseListener(), errorListener()));
 	}
-
+	// 
 	private void getNewBoard(String Type, String Sort, int Page) {
 		executeRequest(new StringRequest(Method.GET, Api.NewBoard(Type, Sort,
 				Page), BBSResponseListener(), errorListener()));
@@ -344,6 +344,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			ImageLoader.getInstance().displayImage(Api.Avatar(((MyApplication) getApplication()).loginInfo.getId()), user_avatar, options);
 		}
 		keyBackClickCount = 0;
+		classAdapter.notifyDataSetChanged();
 	}
 
 	@Override

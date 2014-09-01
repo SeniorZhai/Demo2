@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -19,7 +20,6 @@ import com.gkong.app.config.Api;
 import com.gkong.app.data.ApiParams;
 import com.gkong.app.data.BoardDao;
 import com.gkong.app.data.RequestManager;
-import com.gkong.app.data.SQLHelper;
 import com.gkong.app.model.ClassBoardHandle;
 import com.gkong.app.model.ClassBoardHandle.GroupItem;
 import com.gkong.app.model.ClassBoardSrc;
@@ -31,13 +31,14 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.umeng.update.d;
+import com.umeng.update.net.f;
 
 public class MyApplication extends Application {
 	public static LoginInfo loginInfo = null;
 	private SharedPreferences share;
-	public List<Item> myList = null;
-	public List<GroupItem> mList = null;
+	public List<Item> dataList;
+	public List<GroupItem> dataGroupList;
+	public List<Item> subscriboList;
 	public BoardDao dao;
 
 	@Override
@@ -45,8 +46,6 @@ public class MyApplication extends Application {
 		super.onCreate();
 		RequestManager.init(this);
 		dao = new BoardDao(this);
-		myList = new ArrayList<ClassBoardSrc.Item>();
-		mList = new ArrayList<ClassBoardHandle.GroupItem>();
 		// 用户登入
 		share = getSharedPreferences(UserLoginUidActivity.SharedName,
 				Context.MODE_PRIVATE);
@@ -62,13 +61,38 @@ public class MyApplication extends Application {
 				}
 			});
 		}
-		myList = dao.listCache("_id " + " >= ", new String[] { "0" });
-		if (myList.size() == 0) {
+		dataList = dao.listCache("_id " + " >=? ", new String[] { "0" });
+		if (dataList.size() <= 0) {
+			// 从网络获取数据
 			executeRequest(new StringRequest(Method.GET, Api.Board,
 					ClassResponseListener(), errorListener()));
 		}else {
-			mList = ClassBoardHandle.getList(myList);
-			Log.d("---", "---");
+			subscriboList = new ArrayList<Item>();
+			dataGroupList = new ArrayList<GroupItem>();
+			for(Item item : dataList){
+				if (item.getBoardID()==0) {
+					Log.d("---", "---");
+					GroupItem grop = new GroupItem(item);
+					dataGroupList.add(grop);
+				}
+				if (item.isSelect()) {
+					subscriboList.add(item);
+				}
+			}
+			int index=0,jx = 0;
+			for(Item item : dataList){
+				index++;
+				if (item.getBoardID() != 0) {
+					jx ++;
+				for (GroupItem grop : dataGroupList) {
+					
+					if (grop.getSID()/1000000 == item.getSID()/1000000) {
+						grop.items.add(item);
+					}
+				}
+				}
+			}
+			Log.d("---", index+"\t"+jx);
 		}
 		initImageLoader(getApplicationContext());
 	}
@@ -99,9 +123,16 @@ public class MyApplication extends Application {
 		return new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {
-				myList = ClassBoardSrc.getBoard(response).getHead();
-				dao.initCache(myList);
-				mList = ClassBoardHandle.getList(myList);
+				dataList = ClassBoardSrc.getBoard(response).getHead();
+				dataGroupList = ClassBoardHandle.getList(dataList);
+				dao.initCache(dataList);
+				subscriboList = new ArrayList<Item>();
+				for (int i = 0; i < dataGroupList.size();i++)
+				{
+					for (Item item : dataGroupList.get(i).getItems()) {
+						subscriboList.add(item);
+					}
+				}
 			}
 		};
 	}
