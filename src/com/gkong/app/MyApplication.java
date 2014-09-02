@@ -1,9 +1,10 @@
 package com.gkong.app;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 
 import android.app.Application;
 import android.content.Context;
@@ -18,7 +19,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.gkong.app.config.Api;
 import com.gkong.app.data.ApiParams;
-import com.gkong.app.data.BoardDao;
 import com.gkong.app.data.RequestManager;
 import com.gkong.app.model.ClassBoardHandle;
 import com.gkong.app.model.ClassBoardHandle.GroupItem;
@@ -26,26 +26,28 @@ import com.gkong.app.model.ClassBoardSrc;
 import com.gkong.app.model.ClassBoardSrc.Item;
 import com.gkong.app.model.LoginInfo;
 import com.gkong.app.ui.UserLoginUidActivity;
+import com.gkong.app.utils.CacheUtils;
+import com.gkong.app.utils.SerializeUtils;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.umeng.update.net.f;
 
 public class MyApplication extends Application {
 	public static LoginInfo loginInfo = null;
 	private SharedPreferences share;
-	public List<Item> dataList;
+	private List<Item> dataList;
 	public List<GroupItem> dataGroupList;
 	public List<Item> subscriboList;
-	public BoardDao dao;
 
+	public File cache;
+
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		RequestManager.init(this);
-		dao = new BoardDao(this);
 		// 用户登入
 		share = getSharedPreferences(UserLoginUidActivity.SharedName,
 				Context.MODE_PRIVATE);
@@ -61,47 +63,41 @@ public class MyApplication extends Application {
 				}
 			});
 		}
-		dataList = dao.listCache("_id " + " >=? ", new String[] { "0" });
-		if (dataList.size() <= 0) {
+
+		File cacheDir = CacheUtils.getCacheDirectory(getApplicationContext(),false,"gkong");
+		cache = new File(cacheDir, "DataList");
+		if (!cache.exists()) {
+			try {
+				cache.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else if (cache.length() > 0) {
+			SerializeUtils
+					.deserialization(cache.getAbsolutePath());
+		}
+		
+		// 从文件中获取
+		if (dataList == null) {
 			// 从网络获取数据
 			executeRequest(new StringRequest(Method.GET, Api.Board,
 					ClassResponseListener(), errorListener()));
 		}else {
-			subscriboList = new ArrayList<Item>();
-			dataGroupList = new ArrayList<GroupItem>();
-			for(Item item : dataList){
-				if (item.getBoardID()==0) {
-					Log.d("---", "---");
-					GroupItem grop = new GroupItem(item);
-					dataGroupList.add(grop);
-				}
-				if (item.isSelect()) {
-					subscriboList.add(item);
-				}
-			}
-			int index=0,jx = 0;
-			for(Item item : dataList){
-				index++;
-				if (item.getBoardID() != 0) {
-					jx ++;
-				for (GroupItem grop : dataGroupList) {
-					
-					if (grop.getSID()/1000000 == item.getSID()/1000000) {
-						grop.items.add(item);
+			subscriboList = new ArrayList<ClassBoardSrc.Item>();
+			for (int i = 0; i < dataGroupList.size(); i++) {
+				for (Item item : dataGroupList.get(i).getItems()) {
+					if (item.isSelect()) {
+						subscriboList.add(item);
 					}
 				}
-				}
 			}
-			Log.d("---", index+"\t"+jx);
 		}
 		initImageLoader(getApplicationContext());
 	}
 
 	@Override
 	public void onTerminate() {
-		if (dao == null) {
-			dao.helper.close();
-		}
+		saveList();
 		super.onTerminate();
 	}
 
@@ -125,18 +121,22 @@ public class MyApplication extends Application {
 			public void onResponse(String response) {
 				dataList = ClassBoardSrc.getBoard(response).getHead();
 				dataGroupList = ClassBoardHandle.getList(dataList);
-				dao.initCache(dataList);
 				subscriboList = new ArrayList<Item>();
-				for (int i = 0; i < dataGroupList.size();i++)
-				{
+				for (int i = 0; i < dataGroupList.size(); i++) {
 					for (Item item : dataGroupList.get(i).getItems()) {
 						subscriboList.add(item);
 					}
 				}
+				saveList();
 			}
 		};
 	}
 
+	public void saveList(){
+		SerializeUtils.serialization(cache.getAbsolutePath(),
+				dataGroupList);
+	}
+	
 	private Response.Listener<String> responseListener() {
 		return new Response.Listener<String>() {
 			@Override
@@ -161,4 +161,5 @@ public class MyApplication extends Application {
 			}
 		};
 	}
+
 }

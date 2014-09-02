@@ -1,5 +1,6 @@
 package com.gkong.app.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.json.JSONException;
@@ -29,7 +30,8 @@ public class ClassBoardSrc {
 		Head = head;
 	}
 
-	public static class Item {
+	public static class Item  implements Serializable{
+		private static final long serialVersionUID = 6780331288813086255L;
 		private long SID;
 		private String BoardName;
 		private long orders;

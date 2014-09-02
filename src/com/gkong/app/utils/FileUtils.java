@@ -13,7 +13,6 @@ public class FileUtils {
 	public static String SDPATH = Environment.getExternalStorageDirectory()
 			+ "/gkong/";
 	public static void saveBitmap(Bitmap bm, String picName) {
-		Log.e("---", "保存图片");
 		try {
 			if (!isFileExist("")) {
 				File tempf = createSDDir("");
@@ -26,7 +25,6 @@ public class FileUtils {
 			bm.compress(Bitmap.CompressFormat.JPEG, 90, out);
 			out.flush();
 			out.close();
-			Log.e("---", "已经保存");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

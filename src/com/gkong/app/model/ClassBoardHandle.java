@@ -1,12 +1,14 @@
 package com.gkong.app.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.gkong.app.model.ClassBoardSrc.Item;
 
 public class ClassBoardHandle {
-	public static class GroupItem {
+	public static class GroupItem implements Serializable{
+		private static final long serialVersionUID = -113751092900269375L;
 		public long SID;
 		public String BoardName;
 		public long orders;

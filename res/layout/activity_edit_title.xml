@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/title_height"
+    android:layout_gravity="top"
+    android:background="#2477ab" >
+
+    <ImageView
+        android:id="@+id/edit_title_gohome"
+        style="@style/title_right_button"
+        android:layout_width="@dimen/title_height"
+        android:layout_height="match_parent"
+        android:src="@drawable/button_details_gohome" />
+
+    <Button
+        android:id="@+id/edit_title_save"
+        android:layout_width="@dimen/title_button_height"
+        android:layout_height="@dimen/title_button_height"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/back_behind_usershow_style"
+        android:gravity="center"
+        android:scaleType="centerInside"
+        android:text="保存"
+        android:textColor="@android:color/white" />
+
+</FrameLayout>

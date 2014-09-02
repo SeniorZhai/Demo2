@@ -9,16 +9,13 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 
-import com.gkong.app.MyApplication;
 import com.gkong.app.R;
-import com.gkong.app.data.BoardDao;
 import com.gkong.app.model.ClassBoardSrc.Item;
 import com.gkong.app.ui.base.BaseActivity;
 
 public class SplashActivity extends BaseActivity {
 	public List<Item> myList;
 	private Handler mHandler = new Handler();
-	private BoardDao dao;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

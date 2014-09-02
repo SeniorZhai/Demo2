@@ -36,11 +36,11 @@ import com.gkong.app.R;
 import com.gkong.app.adapter.ClassAdapter;
 import com.gkong.app.adapter.MyArrayAdapter;
 import com.gkong.app.config.Api;
-import com.gkong.app.data.BoardDao;
 import com.gkong.app.model.BBSBoard;
 import com.gkong.app.model.ClassBoardSrc.Item;
 import com.gkong.app.slidingmenu.SlidingMenu;
 import com.gkong.app.ui.base.BaseSlidingFragmentActivity;
+import com.gkong.app.utils.SerializeUtils;
 import com.gkong.app.utils.ToastUtil;
 import com.gkong.app.widget.CircularImage;
 import com.gkong.app.widget.XListView;
@@ -60,8 +60,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		OnClickListener, IXListViewListener {
 	private static final String TAG = "MainActivity";
 	private Context mContext = MainActivity.this;
-	// DataBase
-	private BoardDao dao;
+	private MyApplication app;
 	// Value
 	private int mTag = 0;
 	private int page = 1;
@@ -69,7 +68,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	private boolean flag = false;
 	private String Type = "tech";
 	// Data
-	private List<Item> list;
+	private List<Item> subscriboList;
 	private List<BBSBoard> BBSList;
 	// View
 	private Button update, feedback;
@@ -99,16 +98,15 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		UmengUpdateAgent.setUpdateOnlyWifi(false);
 		UmengUpdateAgent.update(this);
 		agent = new FeedbackAgent(mContext);
-
-		list = ((MyApplication) getApplication()).subscriboList;
+		app = (MyApplication)getApplication();
+		subscriboList = app.subscriboList;
 		BBSList = new ArrayList<BBSBoard>();
-		dao = new BoardDao(mContext);
 		options = new DisplayImageOptions.Builder()
-		.showImageOnLoading(R.drawable.avatar_default)
-		.showImageForEmptyUri(R.drawable.avatar_default)
-		.showImageOnFail(R.drawable.avatar_default).cacheInMemory(true)
-		.cacheOnDisc(true).considerExifParams(true)
-		.displayer(new RoundedBitmapDisplayer(20)).build();
+				.showImageOnLoading(R.drawable.avatar_default)
+				.showImageForEmptyUri(R.drawable.avatar_default)
+				.showImageOnFail(R.drawable.avatar_default).cacheInMemory(true)
+				.cacheOnDisc(true).considerExifParams(true)
+				.displayer(new RoundedBitmapDisplayer(20)).build();
 		initSlidingMenu();
 		setContentView(R.layout.above_slidingmenu);
 		initControl();
@@ -117,9 +115,8 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 
 	@Override
 	public void onDestroy() {
-		if (dao != null)
-			dao = null;
 		super.onDestroy();
+		SerializeUtils.serialization(app.cache.getAbsolutePath(), app.dataGroupList);
 	}
 
 	// [start]初始化函数
@@ -178,8 +175,8 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		});
 		aboveLoadLayout.setVisibility(View.VISIBLE);
 		getNewBoard(Type, "date", page);
-		classAdapter = new ClassAdapter(mContext, list);
-		
+		classAdapter = new ClassAdapter(mContext, subscriboList);
+
 		lvTitle.setAdapter(classAdapter);
 		lvTitle.setOnItemClickListener(new OnItemClickListener() {
 
@@ -219,7 +216,8 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		executeRequest(new StringRequest(Method.GET, Api.List(boardID, page),
 				BBSResponseListener(), errorListener()));
 	}
-	// 
+
+	//
 	private void getNewBoard(String Type, String Sort, int Page) {
 		executeRequest(new StringRequest(Method.GET, Api.NewBoard(Type, Sort,
 				Page), BBSResponseListener(), errorListener()));
@@ -272,7 +270,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			UmengUpdateAgent.forceUpdate(mContext);
 			break;
 		case R.id.umeng_feedback:
-		 agent.startFeedbackActivity();
+			agent.startFeedbackActivity();
 			break;
 		default:
 			break;
@@ -341,7 +339,9 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	protected void onResume() {
 		super.onResume();
 		if (((MyApplication) getApplication()).loginInfo != null) {
-			ImageLoader.getInstance().displayImage(Api.Avatar(((MyApplication) getApplication()).loginInfo.getId()), user_avatar, options);
+			ImageLoader.getInstance().displayImage(
+					Api.Avatar(((MyApplication) getApplication()).loginInfo
+							.getId()), user_avatar, options);
 		}
 		keyBackClickCount = 0;
 		classAdapter.notifyDataSetChanged();

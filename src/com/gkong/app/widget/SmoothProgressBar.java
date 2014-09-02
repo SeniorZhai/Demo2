@@ -1,4 +1,4 @@
-package SmoothProgressBar;
+package com.gkong.app.widget;
 
 import android.content.Context;
 import android.content.res.Resources;
