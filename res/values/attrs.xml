@@ -46,7 +46,7 @@
     <attr name="strokeWidth" format="dimension" />
     <attr name="unselectedColor" format="color" />
 	<!-- SmoothProgressBar -->
-    <declare-styleable name="SmoothProgressBar">
+   <declare-styleable name="SmoothProgressBar">
         <attr name="spbStyle" format="reference" />
         <attr name="spb_color" format="color" />
         <attr name="spb_stroke_width" format="dimension" />

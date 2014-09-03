@@ -1,5 +1,6 @@
 package com.gkong.app.utils;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -21,19 +22,15 @@ public class SerializeUtils {
      * @return
      * @throws RuntimeException if an error occurs
      */
-    public static Object deserialization(String filePath) {
+    public static Object deserialization(String filePath) throws Exception {
         ObjectInputStream in = null;
         try {
             in = new ObjectInputStream(new FileInputStream(filePath));
             Object o = in.readObject();
             in.close();
             return o;
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("FileNotFoundException occurred. ", e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException("ClassNotFoundException occurred. ", e);
-        } catch (IOException e) {
-            throw new RuntimeException("IOException occurred. ", e);
+        } catch (EOFException e) {
+            throw new RuntimeException("EOFException occurred. ", e);
         } finally {
             if (in != null) {
                 try {

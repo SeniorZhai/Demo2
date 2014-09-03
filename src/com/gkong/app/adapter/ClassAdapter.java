@@ -24,7 +24,7 @@ public class ClassAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		return mList.size();
+		return mList.size() + 2;
 	}
 
 	@Override
@@ -43,10 +43,20 @@ public class ClassAdapter extends BaseAdapter {
 			convertView = LayoutInflater.from(context).inflate(
 					R.layout.behind_list_show, null);
 		}
+
 		TextView titleView = (TextView) convertView
 				.findViewById(R.id.textview_behind_title);
-		Item obj = mList.get(position);
-		titleView.setText(obj.getBoardName());
+		if (position < 2) {
+			if (position == 0) {
+				titleView.setText("技术区最新回帖");
+			}else {
+				titleView.setText("非技术区最新回帖");
+			}
+		}else{
+			Item obj = mList.get(position);
+			titleView.setText(obj.getBoardName());
+		}
+		
 		return convertView;
 	}
 

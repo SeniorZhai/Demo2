@@ -40,7 +40,6 @@ import com.gkong.app.model.BBSBoard;
 import com.gkong.app.model.ClassBoardSrc.Item;
 import com.gkong.app.slidingmenu.SlidingMenu;
 import com.gkong.app.ui.base.BaseSlidingFragmentActivity;
-import com.gkong.app.utils.SerializeUtils;
 import com.gkong.app.utils.ToastUtil;
 import com.gkong.app.widget.CircularImage;
 import com.gkong.app.widget.XListView;
@@ -62,7 +61,6 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	private Context mContext = MainActivity.this;
 	private MyApplication app;
 	// Value
-	private int mTag = 0;
 	private int page = 1;
 	private String boardID;
 	private boolean flag = false;
@@ -98,7 +96,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		UmengUpdateAgent.setUpdateOnlyWifi(false);
 		UmengUpdateAgent.update(this);
 		agent = new FeedbackAgent(mContext);
-		app = (MyApplication)getApplication();
+		app = (MyApplication) getApplication();
 		subscriboList = app.subscriboList;
 		BBSList = new ArrayList<BBSBoard>();
 		options = new DisplayImageOptions.Builder()
@@ -111,12 +109,12 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		setContentView(R.layout.above_slidingmenu);
 		initControl();
 		initListView();
+
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		SerializeUtils.serialization(app.cache.getAbsolutePath(), app.dataGroupList);
 	}
 
 	// [start]初始化函数
@@ -185,7 +183,6 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 					int position, long id) {
 				// 点击事件处理
 				aboveLoadLayout.setVisibility(View.VISIBLE);
-
 				switch (position) {
 				case 0:
 					flag = false;
@@ -201,7 +198,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 					break;
 				default:
 					flag = true;
-					getList(boardID, page);
+					getList(subscriboList.get(position).getBoardID() + "", page);
 					aboveImgMore.setVisibility(View.VISIBLE);
 					break;
 				}

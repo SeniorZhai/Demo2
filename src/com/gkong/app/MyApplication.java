@@ -64,25 +64,27 @@ public class MyApplication extends Application {
 			});
 		}
 
-		File cacheDir = CacheUtils.getCacheDirectory(getApplicationContext(),false,"gkong");
+		File cacheDir = CacheUtils.getCacheDirectory(getApplicationContext(),
+				true, "gkong");
 		cache = new File(cacheDir, "DataList");
 		if (!cache.exists()) {
+			Log.d("---", cache.getAbsolutePath());
 			try {
 				cache.createNewFile();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		} else if (cache.length() > 0) {
-			SerializeUtils
-					.deserialization(cache.getAbsolutePath());
 		}
-		
 		// 从文件中获取
-		if (dataList == null) {
+		if (cache.length() > 0) {
+			getList();
+		}
+
+		if (dataGroupList == null) {
 			// 从网络获取数据
 			executeRequest(new StringRequest(Method.GET, Api.Board,
 					ClassResponseListener(), errorListener()));
-		}else {
+		} else {
 			subscriboList = new ArrayList<ClassBoardSrc.Item>();
 			for (int i = 0; i < dataGroupList.size(); i++) {
 				for (Item item : dataGroupList.get(i).getItems()) {
@@ -97,7 +99,6 @@ public class MyApplication extends Application {
 
 	@Override
 	public void onTerminate() {
-		saveList();
 		super.onTerminate();
 	}
 
@@ -132,11 +133,26 @@ public class MyApplication extends Application {
 		};
 	}
 
-	public void saveList(){
-		SerializeUtils.serialization(cache.getAbsolutePath(),
-				dataGroupList);
+	public void saveList() {
+		try {
+			cache.delete();
+			cache.createNewFile();
+			SerializeUtils.serialization(cache.getAbsolutePath(), dataGroupList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
-	
+
+	public void getList() {
+		try {
+			dataGroupList = (ArrayList<GroupItem>) SerializeUtils
+					.deserialization(cache.getAbsolutePath());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	private Response.Listener<String> responseListener() {
 		return new Response.Listener<String>() {
 			@Override

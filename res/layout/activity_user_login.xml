@@ -14,52 +14,62 @@
         android:layout_marginRight="30dp"
         android:src="@drawable/dis_logo" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/edit_linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="@dimen/title_height"
-        android:orientation="vertical"
         android:paddingTop="10dp" >
 
-        <EditText
+        <com.gkong.app.view.DeletableEditText
             android:id="@+id/edittext_user_username"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/back_textview_style"
-            android:hint="@string/user_username"
-            android:paddingLeft="5dp"
-            android:singleLine="true"
-            android:textColor="#000"
-            android:textCursorDrawable="@color/black"
-            android:textSize="15sp" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/selector_edittext_account"
+            android:drawableLeft="@drawable/user_account"
+            android:drawableRight="@drawable/user_delete"
+            android:ems="10"
+            android:hint="请输入帐号名"
+            android:paddingLeft="4dip"
+            android:paddingRight="4dip"
+            android:singleLine="true" />
 
-        <EditText
+        <com.gkong.app.view.DeletableEditText
             android:id="@+id/edittext_user_pwd"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/back_textview_style"
-            android:hint="@string/user_pwd"
+            android:layout_alignLeft="@id/edittext_user_username"
+            android:layout_alignRight="@id/edittext_user_username"
+            android:layout_below="@+id/user_name_input"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/selector_edittext_account"
+            android:drawableLeft="@drawable/user_password"
+            android:drawableRight="@drawable/user_delete"
+            android:ems="10"
+            android:hint="请输入密码"
             android:inputType="textPassword"
-            android:paddingLeft="5dp"
-            android:singleLine="true"
-            android:textColor="#000"
-            android:textCursorDrawable="@color/black"
-            android:textSize="15sp" />
+            android:paddingLeft="4dip"
+            android:paddingRight="4dip"
+            android:singleLine="true" />
 
         <Button
             android:id="@+id/button_user_login"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/back_submit_style"
-            android:text="@string/user_enter"
-            android:textColor="#fff" />
-    </LinearLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/user_name_input"
+            android:layout_alignRight="@+id/user_name_input"
+            android:layout_below="@+id/user_name_input"
+            android:background="@drawable/selector_logout"
+            android:text="登录"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/unlogin_linear"
