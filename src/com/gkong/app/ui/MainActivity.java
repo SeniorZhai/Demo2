@@ -15,10 +15,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -33,7 +36,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.gkong.app.MyApplication;
 import com.gkong.app.R;
-import com.gkong.app.adapter.ClassAdapter;
 import com.gkong.app.adapter.MyArrayAdapter;
 import com.gkong.app.config.Api;
 import com.gkong.app.model.BBSBoard;
@@ -65,6 +67,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 	private String boardID;
 	private boolean flag = false;
 	private String Type = "tech";
+	private int cur_pos = 0;
 	// Data
 	private List<Item> subscriboList;
 	private List<BBSBoard> BBSList;
@@ -173,7 +176,7 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		});
 		aboveLoadLayout.setVisibility(View.VISIBLE);
 		getNewBoard(Type, "date", page);
-		classAdapter = new ClassAdapter(mContext, subscriboList);
+		classAdapter = new ClassAdapter(mContext);
 
 		lvTitle.setAdapter(classAdapter);
 		lvTitle.setOnItemClickListener(new OnItemClickListener() {
@@ -182,26 +185,35 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// 点击事件处理
+				cur_pos = position;// 更新当前行
+				classAdapter.notifyDataSetChanged();
+
 				aboveLoadLayout.setVisibility(View.VISIBLE);
 				switch (position) {
 				case 0:
 					flag = false;
 					Type = "tech";
+					aboveTitle.setText("技术区最新动态");
 					getNewBoard("tech", "date", 1);
 					aboveImgMore.setVisibility(View.GONE);
 					break;
 				case 1:
 					flag = false;
 					Type = "notech";
+					aboveTitle.setText("非技术区最新动态");
 					getNewBoard("notech", "date", 1);
 					aboveImgMore.setVisibility(View.GONE);
 					break;
 				default:
 					flag = true;
-					getList(subscriboList.get(position).getBoardID() + "", page);
+					aboveTitle.setText(subscriboList.get(position - 2)
+							.getBoardName());
+					getList(subscriboList.get(position - 2).getBoardID() + "",
+							page);
 					aboveImgMore.setVisibility(View.VISIBLE);
 					break;
 				}
+				showContent();
 			}
 		});
 	}
@@ -397,6 +409,56 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 		}
 	}
 
-	// [start]XList监听
+	// [end]XList监听
+	class ClassAdapter extends BaseAdapter {
 
+		private Context context;
+
+		public ClassAdapter(Context context) {
+			this.context = context;
+		}
+
+		@Override
+		public int getCount() {
+			return subscriboList.size() + 2;
+		}
+
+		@Override
+		public Object getItem(int position) {
+			return position;
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			if (convertView == null) {
+				convertView = LayoutInflater.from(context).inflate(
+						R.layout.behind_list_show, null);
+			}
+
+			TextView titleView = (TextView) convertView
+					.findViewById(R.id.textview_behind_title);
+			if (position < 2) {
+				if (position == 0) {
+					titleView.setText("技术区最新动态");
+				} else {
+					titleView.setText("非技术区最新动态");
+				}
+			} else {
+				Item obj = subscriboList.get(position - 2);
+				titleView.setText(obj.getBoardName());
+			}
+			if (position == cur_pos) {// 如果当前的行就是ListView中选中的一行，就更改显示样式
+				convertView
+						.setBackgroundResource(R.drawable.back_behind_list_select);// 更改整行的背景色
+			} else {
+				convertView.setBackgroundResource(R.drawable.back_behind_list);
+			}
+			return convertView;
+		}
+	}
 }

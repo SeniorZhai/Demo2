@@ -1,0 +1,160 @@
+接口数据交换格式为JSON
+
+
+
+本地地址 192.168.0.13
+http://api.local.gkong.com/
+http://m.local.gkong.com/
+
+
+一、登录接口
+http://www.gkong.com/passport/login.ashx
+输入
+{
+    "username": "yang",
+    "password": "gkong26585268"
+}
+输出
+{
+    "data": "B3C8B5F958170249856E99064C41DE6161B16E1EC52B543A96D3DC29576657382F2B72AC551992E7E5567EC62DF418326AA20797340101DFE52D714EED458647687989BA9986E7E13D19B5C13D796C0C0A4B165A12BA1D30039C42917BEB3A9D95C7F56A30D5B67A7376639936ABE033F0A835EA08CC5BE99806BD26DD1196E3634015504709C790D5BCFC5305DC6E4FD54E564B7405B954C2552B98AB2CD5BA",
+    "id": 2,
+    "msg": "验证通过！",
+    "name": "yang",
+    "success": "True"
+}
+Parameters
+data: 登录验证票
+id: 用户ID
+msg: 提示信息
+name: 用户名
+success: 是否成功
+
+
+
+二、获取论坛版块
+http://api.gkong.com/serviceapi.svc/GetBBSClassBoard
+无输入参数
+
+
+
+三、获取帖子列表
+http://api.gkong.com/serviceapi.svc/GetBBSListByBoardID
+输入
+{
+    "BoardID": "12",
+    "Page": "1"
+}
+Parameters:
+BoardID 论坛版块 ID
+Page 页码
+
+
+
+四、获取帖子内容
+http://api.gkong.com/serviceapi.svc/GetArchive
+输入
+{
+    "TopicID": "386417",
+    "Page": "1"
+}
+
+
+五、上传文件
+http://filestools.gkong.com/bbs/appcan_upload.ashx?auth=登录验证票
+
+
+六、发帖
+http://m.gkong.com/API/BBS_New_Topic.ashx
+输入
+{
+  UID: 登录验证票,
+  Title: 帖子标题,
+  Body: 帖子内容,
+  BoardId: 版块ID
+}
+
+
+七、回帖
+http://m.gkong.com//API/BBS_Repay_Topic.ashx
+输入
+{
+  UID: 登录验证票,
+  AnnounceId: ID,
+  Body: 帖子内容,
+  IsIncRepay: bool是否为引用
+}
+
+
+
+八、最新回帖列表，最新发帖列表
+ht://api.gkong.com/serviceapi.svc/GetBBSListNew
+输入JSON格式  Type, Sort, Page
+{
+  Type: "tech"                    // "tech" 技术区帖子   "notech" 非技术区帖子
+  Sort: "date",                   // "date" 按最后回复时间排序  "id" 按发帖时间排序
+  Page: "1"                       // 页码
+}
+九、工控搜索接口
+http://s.gkong.com/Service/wcfSearch.svc/Search
+
+输入JSON格式  
+{
+  name: "搜索论坛",                //固定值
+  query: "变频器",                 //关键词
+  page: 1                          //页码
+}
+输出JSON格式
+{
+  PageInfo: Object,               //页码信息
+  SearchList: Object              //搜索结果列表
+}
+
+十、我的发帖，参与帖子
+
+我的发帖
+http://api.gkong.com/serviceapi.svc/GetBBSListMy
+输入JSON格式
+{
+  UID: 登录验证票,
+  Page: "1"                // 页码
+}
+
+参与帖子 
+(返回最近参与的60条帖子)
+http://api.gkong.com/serviceapi.svc/GetBBSListMyRe
+输入JSON格式
+{
+  UID: 登录验证票
+}
+
+
+App SVN 服务器地址 
+https://192.168.0.13/svn/GKongAPP/
+用户名密码一样
+luo\yang\zhai\deng
+
+十一、个人信息
+http://api.gkong.com/serviceapi.svc/GetUserInfo
+输入JSON格式
+{
+  UID: 登录验证票
+}
+返回
+{
+    
+    "UserBBSRepayCount": 回帖数,
+
+    "UserBBSTopicCount": 发帖数,
+
+    "UserID": 用户ID,
+
+    "UserName": 用户名,
+
+    "UserScore": 积分
+}
+
+
+//html
+http://api.gkong.com/Client/bbs/archive.html?id=391125&page=1
+//头像
+http://filestools.gkong.com/thumbnail/face/用户id
