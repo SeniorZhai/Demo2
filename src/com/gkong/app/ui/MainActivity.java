@@ -351,6 +351,10 @@ public class MainActivity extends BaseSlidingFragmentActivity implements
 			ImageLoader.getInstance().displayImage(
 					Api.Avatar(((MyApplication) getApplication()).loginInfo
 							.getId()), user_avatar, options);
+		} else {
+			ImageLoader.getInstance().displayImage(
+					"drawable://" + R.drawable.avatar_default, user_avatar,
+					options);
 		}
 		keyBackClickCount = 0;
 		classAdapter.notifyDataSetChanged();

@@ -5,138 +5,102 @@
     android:background="#FFFFFF" >
 
     <ImageView
-        android:id="@+id/background_img"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="-100dp"
-        android:contentDescription="@null"
-        android:scaleType="fitXY"
-        android:src="@drawable/scrollview_header" />
+        android:id="@+id/user_avatar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp" />
 
-    <com.gkong.app.view.PullScrollView
-        android:id="@+id/scroll_view"
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:layout_alignTop="@id/user_avatar"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="30dp"
+        android:layout_toRightOf="@id/user_avatar"
+        android:text="Name"
+        android:textSize="35sp" />
+
+    <TextView
+        android:id="@+id/user_id"
+        android:textColor="#000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_name"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/user_avatar"
+        android:text="ID" />
+
+    <TextView
+        android:id="@+id/user_score"
+        android:textColor="#000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_avatar"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:maxLines="2"
+        android:text="积分\n0" />
+
+    <TextView
+        android:id="@+id/user_repay"
+        android:textColor="#000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_avatar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:maxLines="2"
+        android:text="回复\n0" />
+
+    <TextView
+        android:id="@+id/user_topic"
+        android:textColor="#000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_avatar"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        android:maxLines="2"
+        android:text="发帖\n0" />
+
+    <Button
+        android:id="@+id/user_unlogin"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/selector_logout"
+        android:text="注销"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/user_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        app:headerHeight="300dp"
-        app:headerVisibleHeight="100dp" >
+        android:layout_above="@id/user_unlogin"
+        android:layout_below="@id/user_topic"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/transparent"
-            android:orientation="vertical" >
-
-            <RelativeLayout
-                android:id="@+id/scroll_view_head"
-                android:layout_width="match_parent"
-                android:layout_height="112dp"
-                android:layout_marginTop="100dp"
-                android:background="@color/transparent"
-                android:orientation="vertical" >
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="85dp"
-                    android:layout_marginTop="27dp"
-                    android:background="@drawable/avatar_default" >
-
-                    <TextView
-                        android:id="@+id/user_post"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="103dp"
-                        android:layout_marginTop="4dp"
-                        android:ellipsize="end"
-                        android:singleLine="true"
-                        android:text="@string/app_name"
-                        android:textColor="#A1A1A1"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/user_book"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/user_post"
-                        android:layout_marginLeft="103dp"
-                        android:layout_marginTop="4dp"
-                        android:ellipsize="end"
-                        android:singleLine="true"
-                        android:text="@string/app_name"
-                        android:textColor="#A1A1A1"
-                        android:textSize="12sp" />
-                </RelativeLayout>
-
-                <ImageView
-                    android:id="@+id/user_avatar"
-                    android:layout_width="68dp"
-                    android:layout_height="68dp"
-                    android:layout_marginLeft="21dp"
-                    android:background="@android:color/white"
-                    android:contentDescription="@null"
-                    android:padding="1px"
-                    android:src="@drawable/avatar_default" />
-
-                <TextView
-                    android:id="@+id/user_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="13dp"
-                    android:layout_toRightOf="@id/user_avatar"
-                    android:ellipsize="end"
-                    android:shadowColor="@android:color/black"
-                    android:shadowDx="3.0"
-                    android:shadowDy="3.0"
-                    android:shadowRadius="5.0"
-                    android:singleLine="true"
-                    android:text="@string/app_name"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/user_des"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/user_avatar"
-                    android:layout_marginLeft="21dp"
-                    android:layout_marginRight="21dp"
-                    android:layout_marginTop="8dp"
-                    android:ellipsize="end"
-                    android:singleLine="true"
-                    android:text="@string/app_name"
-                    android:textColor="#B1B1B1"
-                    android:textSize="12sp" />
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-1dp"
-                android:background="#F7F4F0"
-                android:orientation="vertical"
-                android:paddingBottom="8dp" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="13dp"
-                    android:layout_marginTop="13dp"
-                    android:ellipsize="end"
-                    android:singleLine="true"
-                    android:text="@string/app_name"
-                    android:textColor="#A1A1A1"
-                    android:textSize="12sp" />
-
-                <TableLayout
-                    android:id="@+id/table_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/card_whole" />
-            </LinearLayout>
-        </LinearLayout>
-    </com.gkong.app.view.PullScrollView>
+        <android.support.v4.view.PagerTabStrip
+            android:id="@+id/user_pagertab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top" />
+    </android.support.v4.view.ViewPager>
 
 </RelativeLayout>

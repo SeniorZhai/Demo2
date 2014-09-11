@@ -1,6 +1,5 @@
 package com.gkong.app.config;
 
-
 //public class Api {
 //	/*
 //	 * 登入 post请求 请求参数 username、password 返回 data、id、msg、name、sucess
@@ -88,11 +87,23 @@ public class Api {
 		return "http://s.gkong.com/Service/wcfSearch.svc/Search?name=搜索论坛"
 				+ "&query=" + query + "&page=" + page;
 	}
-	
-	// 
+
+	//
 	public static final String Avatar(int id) {
-		return "http://filestools.gkong.com/thumbnail/face/"+id;
+		return "http://filestools.gkong.com/thumbnail/face/" + id;
 	}
-	// post UID 
-	public static final String UserInfo =	"http://api.gkong.com/serviceapi.svc/GetUserInfo";
+	// 发帖
+	public static final String MyBBS(String data, int page) {
+		return "http://api.gkong.com/serviceapi.svc/GetBBSListMy?uid=" + data
+				+ "&page=" + page;
+	}
+
+	public static final String MyBBSRe(String data) {
+		return "http://api.gkong.com/serviceapi.svc/GetBBSListMyRe?uid=" + data;
+	}
+
+	public static final String UserInfo(String data) {
+		return "http://api.gkong.com/serviceapi.svc/GetUserInfo?uid=" + data;
+	}
+
 }
