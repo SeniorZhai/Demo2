@@ -16,12 +16,12 @@
         android:background="@drawable/selector_edittext_account"
         android:drawableLeft="@drawable/user_account"
         android:drawableRight="@drawable/user_delete"
-        android:ems="10"
         android:hint="请输入帐号名"
         android:paddingLeft="4dip"
         android:paddingRight="4dip"
         android:singleLine="true"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textCursorDrawable="@android:color/black" />
 
     <com.gkong.app.view.DeletableEditText
         android:id="@+id/login_user_password"
@@ -35,13 +35,13 @@
         android:background="@drawable/selector_edittext_account"
         android:drawableLeft="@drawable/user_password"
         android:drawableRight="@drawable/user_delete"
-        android:ems="10"
         android:hint="请输入密码"
         android:inputType="textPassword"
         android:paddingLeft="4dip"
         android:paddingRight="4dip"
         android:singleLine="true"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textCursorDrawable="@android:color/black" />
 
     <Button
         android:id="@+id/login_button"
@@ -69,10 +69,12 @@
         android:paddingLeft="1dip"
         android:paddingRight="1dip"
         android:visibility="gone" />
-	<ImageView
-	    android:layout_alignParentBottom="true"
-	    android:layout_alignParentRight="true"
-	    android:layout_width="200dp"
-	    android:layout_height="120dp"
-	    android:src="@drawable/dis_logo"/>
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/dis_logo" />
+
 </RelativeLayout>

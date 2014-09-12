@@ -141,7 +141,7 @@ public class UnLoginFragment extends Fragment {
 		});
 		
 		TextView id = (TextView) view.findViewById(R.id.user_id);
-		id.setText(application.loginInfo.getId() + "");
+		id.setText("ID:"+application.loginInfo.getId());
 		TextView name = (TextView) view.findViewById(R.id.user_name);
 		name.setText(application.loginInfo.getName());
 		ImageView avatar = (ImageView) view.findViewById(R.id.user_avatar);
